@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grevia Admin – Thực đơn</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Be Vietnam Pro', sans-serif; background: #f4f6f4; color: #111827; font-size: 14px; min-height: 100vh; }
+a { text-decoration: none; color: inherit; }
+
+/* ===== COLOR TOKENS ===== */
+:root {
+  --green-50:#f0faf4; --green-100:#d5f0e0; --green-200:#a6ddb9;
+  --green-400:#4caf78; --green-600:#2e7d52; --green-700:#1e5c3a; --green-800:#144029;
+  --amber-50:#fffbeb; --amber-400:#f59e0b; --amber-600:#d97706;
+  --red-50:#fef2f2; --red-400:#f87171; --red-600:#dc2626;
+  --blue-50:#eff6ff; --blue-400:#60a5fa; --blue-600:#2563eb;
+  --gray-50:#f9fafb; --gray-100:#f3f4f6; --gray-200:#e5e7eb;
+  --gray-300:#d1d5db; --gray-400:#9ca3af; --gray-500:#6b7280;
+  --gray-600:#4b5563; --gray-700:#374151; --gray-900:#111827;
+  --sidebar-w:240px; --header-h:60px;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  position: fixed; top: 0; left: 0; width: var(--sidebar-w); height: 100vh;
+  background: var(--green-800); display: flex; flex-direction: column;
+  z-index: 100; transition: transform 0.3s ease; overflow-y: auto;
+}
+.sidebar-logo { padding: 18px 16px 14px; border-bottom: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; }
+.logo-mark { display: flex; align-items: center; gap: 10px; }
+.logo-icon {
+  width:38px; height:38px; border-radius:10px; overflow:hidden; flex-shrink:0;
+  background:#fff; display:flex; align-items:center; justify-content:center;
+}
+.logo-icon img { width:100%; height:100%; object-fit:cover; display:block; }
+.logo-text .brand { font-size: 17px; font-weight: 700; color: #fff; }
+.logo-text .sub   { font-size: 11px; color: rgba(255,255,255,0.45); }
+.nav-section { padding: 10px 10px 6px; flex: 1; }
+.nav-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.3); padding: 12px 8px 5px; }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 8px; color: rgba(255,255,255,0.62); font-size: 13.5px; font-weight: 400; transition: all 0.18s; margin-bottom: 2px; cursor: pointer; }
+.nav-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.nav-item.active { background: var(--green-600); color: #fff; font-weight: 500; }
+.nav-item i { font-size: 17px; flex-shrink: 0; }
+.nav-badge { margin-left: auto; background: var(--amber-400); color: #fff; font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 10px; min-width: 18px; text-align: center; }
+.sidebar-footer { padding: 10px; border-top: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; }
+.admin-card { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; background: rgba(255,255,255,0.07); }
+.admin-avatar { width: 32px; height: 32px; background: var(--green-400); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: #fff; flex-shrink: 0; }
+.admin-info .name { font-size: 12px; font-weight: 500; color: #fff; }
+.admin-info .role { font-size: 11px; color: rgba(255,255,255,0.4); }
+.logout-btn { margin-left: auto; background: none; border: none; color: rgba(255,255,255,0.35); cursor: pointer; font-size: 16px; display: flex; align-items: center; transition: color 0.15s; }
+.logout-btn:hover { color: rgba(255,255,255,0.8); }
+
+/* ===== HEADER ===== */
+.header { position: fixed; top: 0; left: var(--sidebar-w); right: 0; height: var(--header-h); background: #fff; border-bottom: 1px solid var(--gray-200); display: flex; align-items: center; padding: 0 24px; gap: 14px; z-index: 90; transition: left 0.3s ease; }
+.hamburger { display: none; background: none; border: none; cursor: pointer; font-size: 22px; color: var(--gray-600); padding: 4px; }
+.breadcrumb { display: flex; align-items: center; gap: 6px; color: var(--gray-400); font-size: 13px; }
+.breadcrumb .sep { font-size: 11px; }
+.breadcrumb .current { color: var(--gray-900); font-weight: 600; }
+.header-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.icon-btn { width: 36px; height: 36px; border-radius: 8px; background: none; border: 1px solid var(--gray-200); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--gray-500); font-size: 17px; transition: all 0.15s; position: relative; }
+.icon-btn:hover { background: var(--gray-50); color: var(--gray-700); }
+.notif-dot { position: absolute; top: 7px; right: 7px; width: 6px; height: 6px; background: var(--red-600); border-radius: 50%; border: 1.5px solid #fff; }
+.header-avatar { width: 34px; height: 34px; background: var(--green-600); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: #fff; cursor: pointer; }
+
+/* ===== MAIN ===== */
+.main { margin-left: var(--sidebar-w); margin-top: var(--header-h); padding: 26px 24px; }
+.page-header { margin-bottom: 22px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.page-header-left h1 { font-size: 20px; font-weight: 700; color: var(--gray-900); }
+.page-header-left p  { font-size: 13px; color: var(--gray-400); margin-top: 3px; }
+
+/* ===== STAT STRIP ===== */
+.stat-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap: 14px; margin-bottom: 22px; }
+.stat-mini { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
+.stat-mini-icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+.smi-total   .stat-mini-icon { background: var(--green-50);  color: var(--green-600); }
+.smi-active  .stat-mini-icon { background: var(--blue-50);   color: var(--blue-600);  }
+.smi-hidden  .stat-mini-icon { background: var(--amber-50);  color: var(--amber-600); }
+.smi-cat     .stat-mini-icon { background: var(--red-50);    color: var(--red-600);   }
+.stat-mini-val  { font-size: 20px; font-weight: 700; color: var(--gray-900); line-height: 1; }
+.stat-mini-lbl  { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
+
+/* ===== LAYOUT ===== */
+.menu-layout { display: grid; grid-template-columns: 220px 1fr; gap: 20px; align-items: start; }
+
+/* ===== CATEGORY PANEL ===== */
+.cat-panel { background: #fff; border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden; position: sticky; top: calc(var(--header-h) + 26px); }
+.cat-panel-header { padding: 14px 16px; border-bottom: 1px solid var(--gray-100); display: flex; align-items: center; justify-content: space-between; }
+.cat-panel-title { font-size: 13px; font-weight: 600; color: var(--gray-900); }
+.cat-add-btn { width: 26px; height: 26px; background: var(--green-50); border: 1px solid var(--green-200); border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--green-600); font-size: 15px; transition: all 0.15s; }
+.cat-add-btn:hover { background: var(--green-100); }
+
+.cat-list { padding: 8px; }
+.cat-item {
+  display: flex; align-items: center; gap: 8px; padding: 8px 10px;
+  border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 400;
+  color: var(--gray-700); transition: all 0.15s; margin-bottom: 2px;
+  user-select: none;
+}
+.cat-item:hover { background: var(--gray-50); }
+.cat-item.active { background: var(--green-50); color: var(--green-700); font-weight: 500; }
+.cat-item i { font-size: 15px; color: var(--gray-400); flex-shrink: 0; }
+.cat-item.active i { color: var(--green-500); }
+.cat-item .cat-count { margin-left: auto; font-size: 11px; background: var(--gray-100); color: var(--gray-500); padding: 1px 7px; border-radius: 10px; }
+.cat-item.active .cat-count { background: var(--green-100); color: var(--green-700); }
+.cat-drag-handle { color: var(--gray-300); font-size: 13px; cursor: grab; flex-shrink: 0; }
+.cat-drag-handle:active { cursor: grabbing; }
+.cat-item.dragging { opacity: 0.4; background: var(--green-50); }
+.cat-item.drag-over { border: 2px dashed var(--green-400); }
+
+/* ===== CARD ===== */
+.card { background: #fff; border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden; }
+
+/* ===== TOOLBAR ===== */
+.toolbar { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--gray-100); flex-wrap: wrap; }
+.search-box { display: flex; align-items: center; gap: 8px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 8px; padding: 7px 12px; flex: 1; min-width: 180px; }
+.search-box i { color: var(--gray-400); font-size: 16px; flex-shrink: 0; }
+.search-box input { border: none; outline: none; font-size: 13px; font-family: inherit; background: transparent; color: var(--gray-900); width: 100%; }
+.form-select { padding: 8px 12px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 13px; font-family: inherit; color: var(--gray-700); background: #fff; outline: none; cursor: pointer; }
+.form-select:focus { border-color: var(--green-400); }
+
+/* ===== VIEW TOGGLE ===== */
+.view-toggle { display: flex; border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; }
+.view-btn { width: 34px; height: 34px; background: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--gray-400); font-size: 16px; transition: all 0.15s; }
+.view-btn.active { background: var(--green-600); color: #fff; }
+.view-btn + .view-btn { border-left: 1px solid var(--gray-200); }
+
+/* ===== FILTER TABS ===== */
+.filter-tabs { display: flex; gap: 6px; padding: 14px 18px; border-bottom: 1px solid var(--gray-100); overflow-x: auto; }
+.filter-tab { padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; border: 1px solid var(--gray-200); background: #fff; color: var(--gray-600); white-space: nowrap; transition: all 0.15s; font-family: inherit; }
+.filter-tab:hover:not(.active) { border-color: var(--green-400); color: var(--green-600); }
+.filter-tab.active { background: var(--green-600); border-color: var(--green-600); color: #fff; }
+
+/* ===== TABLE VIEW ===== */
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th { font-size: 11px; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.5px; text-align: left; padding: 9px 18px; background: var(--gray-50); border-bottom: 1px solid var(--gray-100); white-space: nowrap; }
+.data-table td { padding: 12px 18px; border-bottom: 1px solid var(--gray-100); font-size: 13px; color: var(--gray-700); vertical-align: middle; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tbody tr:hover { background: var(--gray-50); }
+.dish-thumb { width: 44px; height: 44px; border-radius: 8px; object-fit: cover; background: var(--gray-100); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; overflow: hidden; }
+.dish-info { display: flex; align-items: center; gap: 10px; }
+.dish-name { font-weight: 600; color: var(--gray-900); }
+.dish-desc { font-size: 11px; color: var(--gray-400); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
+
+/* ===== GRID VIEW ===== */
+.grid-view { display: none; }
+.dish-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; padding: 18px; }
+.dish-card {
+  border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden;
+  background: #fff; transition: box-shadow 0.2s, transform 0.2s; cursor: pointer;
+}
+.dish-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); transform: translateY(-2px); }
+.dish-card-img { width: 100%; height: 120px; background: var(--green-50); display: flex; align-items: center; justify-content: center; font-size: 42px; position: relative; overflow: hidden; }
+.dish-card-img img { width: 100%; height: 100%; object-fit: cover; }
+.dish-card-body { padding: 10px 12px 12px; }
+.dish-card-name { font-size: 13px; font-weight: 600; color: var(--gray-900); margin-bottom: 3px; }
+.dish-card-cat  { font-size: 11px; color: var(--gray-400); margin-bottom: 6px; }
+.dish-card-price { font-size: 14px; font-weight: 700; color: var(--green-600); }
+.dish-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+.dish-card-actions { display: flex; gap: 4px; }
+
+/* ===== BADGES ===== */
+.badge { display: inline-flex; align-items: center; font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
+.badge-success { background: var(--green-100); color: var(--green-700); }
+.badge-warning { background: var(--amber-50);  color: var(--amber-600); }
+.badge-gray    { background: var(--gray-100);  color: var(--gray-500);  }
+.badge-blue    { background: var(--blue-50);   color: var(--blue-600);  }
+
+/* ===== BUTTONS ===== */
+.btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; border-radius: 8px; border: none; cursor: pointer; font-size: 13px; font-weight: 500; font-family: inherit; transition: all 0.15s; }
+.btn-primary { background: var(--green-600); color: #fff; }
+.btn-primary:hover { background: var(--green-700); }
+.btn-outline { background: #fff; color: var(--gray-700); border: 1px solid var(--gray-200); }
+.btn-outline:hover { background: var(--gray-50); }
+.btn-xs { font-size: 11px; padding: 4px 10px; border-radius: 6px; border: 1px solid; cursor: pointer; font-family: inherit; font-weight: 500; transition: all 0.15s; white-space: nowrap; }
+.btn-green { background: var(--green-50);  border-color: var(--green-200); color: var(--green-700); }
+.btn-green:hover { background: var(--green-100); }
+.btn-red   { background: var(--red-50);    border-color: #fca5a5; color: var(--red-600); }
+.btn-red:hover   { background: #fee2e2; }
+.btn-gray  { background: var(--gray-50);   border-color: var(--gray-200); color: var(--gray-600); }
+.btn-gray:hover  { background: var(--gray-100); }
+.action-btns { display: flex; gap: 5px; flex-wrap: wrap; }
+
+/* ===== PAGINATION ===== */
+.pagination { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; border-top: 1px solid var(--gray-100); flex-wrap: wrap; gap: 10px; }
+.pagination-info { font-size: 12px; color: var(--gray-400); }
+.pagination-btns { display: flex; gap: 5px; }
+.page-btn { width: 30px; height: 30px; border-radius: 6px; border: 1px solid var(--gray-200); background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px; font-weight: 500; color: var(--gray-600); transition: all 0.15s; font-family: inherit; }
+.page-btn:hover { background: var(--gray-50); }
+.page-btn.active { background: var(--green-600); border-color: var(--green-600); color: #fff; }
+.page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ===== MODAL ===== */
+.modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; overflow-y: auto; }
+.modal-backdrop.open { display: flex; }
+.modal { background: #fff; border-radius: 14px; width: 100%; max-width: 540px; margin: auto; }
+.modal-lg { max-width: 640px; }
+.modal-header { padding: 16px 20px; border-bottom: 1px solid var(--gray-100); display: flex; align-items: center; justify-content: space-between; }
+.modal-title { font-size: 15px; font-weight: 600; color: var(--gray-900); display: flex; align-items: center; gap: 8px; }
+.modal-title i { color: var(--green-600); }
+.modal-close { width: 28px; height: 28px; border-radius: 6px; background: var(--gray-100); border: none; cursor: pointer; font-size: 14px; color: var(--gray-500); display: flex; align-items: center; justify-content: center; }
+.modal-body { padding: 20px; max-height: 70vh; overflow-y: auto; }
+.modal-footer { padding: 14px 20px; border-top: 1px solid var(--gray-100); display: flex; justify-content: flex-end; gap: 10px; }
+
+/* ===== FORM ===== */
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-group { margin-bottom: 14px; }
+.form-label { display: block; font-size: 12px; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 5px; }
+.form-control { width: 100%; padding: 9px 12px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 13px; color: var(--gray-900); background: #fff; font-family: inherit; outline: none; transition: border-color 0.15s; }
+.form-control:focus { border-color: var(--green-400); }
+textarea.form-control { resize: vertical; min-height: 80px; }
+.form-select-ctrl { width: 100%; padding: 9px 12px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 13px; font-family: inherit; color: var(--gray-900); background: #fff; outline: none; transition: border-color 0.15s; cursor: pointer; }
+.form-select-ctrl:focus { border-color: var(--green-400); }
+
+/* ===== IMAGE UPLOAD ===== */
+.img-upload-area {
+  border: 2px dashed var(--gray-200); border-radius: 10px;
+  padding: 24px; text-align: center; cursor: pointer; transition: all 0.15s;
+  background: var(--gray-50);
+}
+.img-upload-area:hover { border-color: var(--green-400); background: var(--green-50); }
+.img-upload-area.drag-active { border-color: var(--green-400); background: var(--green-50); }
+.img-upload-icon { font-size: 32px; color: var(--gray-300); margin-bottom: 8px; }
+.img-upload-text { font-size: 13px; color: var(--gray-400); }
+.img-upload-text strong { color: var(--green-600); }
+.img-preview { width: 100%; height: 140px; object-fit: cover; border-radius: 8px; display: none; }
+
+/* ===== TOGGLE SWITCH ===== */
+.toggle-wrap { display: flex; align-items: center; gap: 10px; }
+.toggle { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle-slider { position: absolute; inset: 0; background: var(--gray-200); border-radius: 22px; cursor: pointer; transition: 0.2s; }
+.toggle-slider::before { content: ''; position: absolute; width: 16px; height: 16px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+.toggle input:checked + .toggle-slider { background: var(--green-600); }
+.toggle input:checked + .toggle-slider::before { transform: translateX(18px); }
+.toggle-label { font-size: 13px; color: var(--gray-600); }
+
+/* ===== EMPTY STATE ===== */
+.empty-state { padding: 40px 20px; text-align: center; color: var(--gray-400); }
+.empty-state i { font-size: 36px; display: block; margin-bottom: 10px; }
+.empty-state p { font-size: 13px; }
+
+/* ===== OVERLAY & TOAST ===== */
+.sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 99; }
+.sidebar-overlay.open { display: block; }
+.toast { position: fixed; bottom: 24px; right: 24px; background: var(--green-800); color: #fff; padding: 11px 16px; border-radius: 10px; font-size: 13px; display: flex; align-items: center; gap: 9px; z-index: 999; opacity: 0; transform: translateY(10px); transition: all 0.3s; pointer-events: none; max-width: 300px; }
+.toast.show { opacity: 1; transform: translateY(0); }
+.toast i { font-size: 16px; color: var(--green-200); }
+
+/* ===== PRICE FORMAT ===== */
+.price { font-weight: 600; color: var(--green-700); white-space: nowrap; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .menu-layout { grid-template-columns: 1fr; }
+  .cat-panel { position: static; }
+  .cat-list { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 6px; padding: 10px; }
+  .cat-item { flex-shrink: 0; padding: 7px 12px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 20px; }
+  .cat-item.active { background: var(--green-50); border-color: var(--green-200); }
+  .cat-drag-handle { display: none; }
+  .cat-panel-header { padding: 12px 14px; }
+}
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .hamburger { display: flex; }
+  .header { left: 0; }
+  .main { margin-left: 0; padding: 16px; }
+  .stat-strip { grid-template-columns: 1fr 1fr; }
+  .hide-mobile { display: none; }
+  .form-row { grid-template-columns: 1fr; }
+  .dish-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; padding: 14px; }
+  .dish-card-img { height: 100px; font-size: 34px; }
+}
+@media (max-width: 480px) {
+  .stat-strip { grid-template-columns: 1fr 1fr; }
+  .dish-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- ===== SIDEBAR ===== -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">
+      <div class="logo-icon">
+        <img src="logoGrevia.png" alt="Logo">
+      </div>
+      <div class="logo-text">
+        <div class="brand">Grevia</div>
+        <div class="sub">Nhà hàng chay</div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Tổng quan</div>
+    <a href="index.html" class="nav-item"><i class="ti ti-layout-dashboard"></i> Dashboard</a>
+    <div class="nav-label">Nội dung</div>
+    <a href="datban.html" class="nav-item"><i class="ti ti-calendar-event"></i> Đặt bàn <span class="nav-badge">5</span></a>
+    <a href="thucdon.html" class="nav-item active"><i class="ti ti-tools-kitchen-2"></i> Thực đơn</a>
+    <a href="tintuc.html" class="nav-item"><i class="ti ti-news"></i> Tin tức</a>
+    <a href="uudai.html" class="nav-item"><i class="ti ti-tag"></i> Ưu đãi</a>
+    <a href="gioithieu.html" class="nav-item"><i class="ti ti-info-circle"></i> Giới thiệu</a>
+    <a href="lienhe.html" class="nav-item"><i class="ti ti-map-pin"></i> Liên hệ</a>
+    <div class="nav-label">Hệ thống</div>
+    <a href="caidat.html" class="nav-item"><i class="ti ti-settings"></i> Cài đặt</a>
+  </div>
+  <div class="sidebar-footer">
+    <div class="admin-card">
+      <div class="admin-avatar">AD</div>
+      <div class="admin-info">
+        <div class="name">Admin Grevia</div>
+        <div class="role">Quản trị viên</div>
+      </div>
+      <button class="logout-btn" onclick="showToast('Đã đăng xuất!')" title="Đăng xuất"><i class="ti ti-logout"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <button class="hamburger" onclick="toggleSidebar()"><i class="ti ti-menu-2"></i></button>
+  <div class="breadcrumb">
+    <a href="index.html">Grevia Admin</a>
+    <i class="ti ti-chevron-right sep"></i>
+    <span class="current">Thực đơn</span>
+  </div>
+  <div class="header-right">
+    <a href="datban.html" class="icon-btn" title="Đặt bàn chờ xử lý">
+      <i class="ti ti-bell"></i><span class="notif-dot"></span>
+    </a>
+    <a href="caidat.html" class="icon-btn" title="Cài đặt"><i class="ti ti-settings"></i></a>
+    <a href="caidat.html" class="header-avatar" title="Tài khoản">AD</a>
+  </div>
+</header>
+
+<!-- ===== MAIN ===== -->
+<main class="main">
+  <div class="page-header">
+    <div class="page-header-left">
+      <h1>Quản lý thực đơn</h1>
+      <p>Thêm, chỉnh sửa và quản lý các món ăn trong thực đơn.</p>
+    </div>
+    <button class="btn btn-primary" onclick="openAddModal()">
+      <i class="ti ti-plus"></i> Thêm món mới
+    </button>
+  </div>
+
+  <!-- Stat strip -->
+  <div class="stat-strip">
+    <div class="stat-mini smi-total">
+      <div class="stat-mini-icon"><i class="ti ti-tools-kitchen-2"></i></div>
+      <div><div class="stat-mini-val" id="statTotal">48</div><div class="stat-mini-lbl">Tổng số món</div></div>
+    </div>
+    <div class="stat-mini smi-active">
+      <div class="stat-mini-icon"><i class="ti ti-eye"></i></div>
+      <div><div class="stat-mini-val" id="statActive">42</div><div class="stat-mini-lbl">Đang hiển thị</div></div>
+    </div>
+    <div class="stat-mini smi-hidden">
+      <div class="stat-mini-icon"><i class="ti ti-eye-off"></i></div>
+      <div><div class="stat-mini-val" id="statHidden">6</div><div class="stat-mini-lbl">Đã ẩn</div></div>
+    </div>
+    <div class="stat-mini smi-cat">
+      <div class="stat-mini-icon"><i class="ti ti-category"></i></div>
+      <div><div class="stat-mini-val" id="statCat">6</div><div class="stat-mini-lbl">Danh mục</div></div>
+    </div>
+  </div>
+
+  <!-- Layout -->
+  <div class="menu-layout">
+
+    <!-- Category Panel -->
+    <div class="cat-panel">
+      <div class="cat-panel-header">
+        <span class="cat-panel-title">Danh mục</span>
+        <button class="cat-add-btn" onclick="openCatModal()" title="Thêm danh mục"><i class="ti ti-plus"></i></button>
+      </div>
+      <div class="cat-list" id="catList">
+        <!-- rendered by JS -->
+      </div>
+    </div>
+
+    <!-- Dish Content -->
+    <div class="card">
+      <!-- Filter tabs -->
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="setStatusFilter('all',this)">Tất cả (<span id="cntAll">0</span>)</button>
+        <button class="filter-tab" onclick="setStatusFilter('active',this)">Đang hiển thị (<span id="cntActive">0</span>)</button>
+        <button class="filter-tab" onclick="setStatusFilter('hidden',this)">Đã ẩn (<span id="cntHidden">0</span>)</button>
+        <button class="filter-tab" onclick="setStatusFilter('featured',this)">Nổi bật (<span id="cntFeatured">0</span>)</button>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <div class="search-box">
+          <i class="ti ti-search"></i>
+          <input type="text" id="searchInput" placeholder="Tìm tên món, mô tả..." oninput="renderDishes()">
+        </div>
+        <select class="form-select" id="sortSelect" onchange="renderDishes()">
+          <option value="default">Sắp xếp mặc định</option>
+          <option value="name-asc">Tên A → Z</option>
+          <option value="name-desc">Tên Z → A</option>
+          <option value="price-asc">Giá thấp → cao</option>
+          <option value="price-desc">Giá cao → thấp</option>
+        </select>
+        <button class="btn-xs btn-gray" onclick="clearFilters()"><i class="ti ti-refresh" style="font-size:13px"></i> Xóa lọc</button>
+        <div class="view-toggle">
+          <button class="view-btn active" id="viewTableBtn" onclick="setView('table')" title="Dạng bảng"><i class="ti ti-list"></i></button>
+          <button class="view-btn" id="viewGridBtn" onclick="setView('grid')" title="Dạng lưới"><i class="ti ti-layout-grid"></i></button>
+        </div>
+      </div>
+
+      <!-- Table View -->
+      <div id="tableView">
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Món ăn</th>
+                <th class="hide-mobile">Danh mục</th>
+                <th>Giá</th>
+                <th class="hide-mobile">Trạng thái</th>
+                <th class="hide-mobile">Nổi bật</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <div class="pagination-info" id="pageInfo">Hiển thị 0–0 / 0</div>
+          <div class="pagination-btns" id="pageBtns"></div>
+        </div>
+      </div>
+
+      <!-- Grid View -->
+      <div id="gridView" style="display:none">
+        <div class="dish-grid" id="gridBody"></div>
+        <div class="pagination">
+          <div class="pagination-info" id="pageInfoGrid">Hiển thị 0–0 / 0</div>
+          <div class="pagination-btns" id="pageBtnsGrid"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ===== MODAL: THÊM / SỬA MÓN ===== -->
+<div class="modal-backdrop" id="dishModal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <div class="modal-title"><i class="ti ti-tools-kitchen-2"></i> <span id="modalDishTitle">Thêm món mới</span></div>
+      <button class="modal-close" onclick="closeModal('dishModal')"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <!-- Image upload -->
+      <div class="form-group">
+        <label class="form-label">Hình ảnh</label>
+        <div class="img-upload-area" id="uploadArea" onclick="document.getElementById('imgInput').click()" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)">
+          <img id="imgPreview" class="img-preview" alt="Preview">
+          <div id="uploadPlaceholder">
+            <div class="img-upload-icon"><i class="ti ti-photo-up"></i></div>
+            <div class="img-upload-text"><strong>Nhấp để chọn</strong> hoặc kéo thả ảnh vào đây<br><span style="font-size:11px;color:var(--gray-300)">PNG, JPG, WEBP – tối đa 5MB</span></div>
+          </div>
+        </div>
+        <input type="file" id="imgInput" accept="image/*" style="display:none" onchange="previewImage(event)">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Tên món <span style="color:var(--red-600)">*</span></label>
+          <input type="text" class="form-control" id="dishName" placeholder="VD: Cơm chay đặc biệt">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Danh mục <span style="color:var(--red-600)">*</span></label>
+          <select class="form-select-ctrl" id="dishCat"></select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Giá (VNĐ) <span style="color:var(--red-600)">*</span></label>
+          <input type="number" class="form-control" id="dishPrice" placeholder="VD: 75000" min="0" step="1000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Giá khuyến mãi (VNĐ)</label>
+          <input type="number" class="form-control" id="dishSalePrice" placeholder="Để trống nếu không giảm" min="0" step="1000">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Mô tả</label>
+        <textarea class="form-control" id="dishDesc" placeholder="Mô tả ngắn về món ăn..."></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Trạng thái</label>
+          <div class="toggle-wrap" style="margin-top:8px">
+            <label class="toggle"><input type="checkbox" id="dishActive" checked><span class="toggle-slider"></span></label>
+            <span class="toggle-label">Hiển thị trên menu</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nổi bật</label>
+          <div class="toggle-wrap" style="margin-top:8px">
+            <label class="toggle"><input type="checkbox" id="dishFeatured"><span class="toggle-slider"></span></label>
+            <span class="toggle-label">Gắn nhãn nổi bật</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('dishModal')">Hủy</button>
+      <button class="btn btn-primary" onclick="saveDish()"><i class="ti ti-check"></i> <span id="saveBtnText">Lưu món</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL: XÓA MÓN ===== -->
+<div class="modal-backdrop" id="deleteModal">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-header">
+      <div class="modal-title"><i class="ti ti-trash" style="color:var(--red-600)"></i> Xóa món ăn</div>
+      <button class="modal-close" onclick="closeModal('deleteModal')"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:13px;color:var(--gray-600)">Bạn có chắc muốn xóa món <strong id="deleteDishName"></strong>? Hành động này không thể hoàn tác.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('deleteModal')">Hủy</button>
+      <button class="btn" style="background:var(--red-600);color:#fff" onclick="confirmDelete()"><i class="ti ti-trash"></i> Xóa</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL: DANH MỤC ===== -->
+<div class="modal-backdrop" id="catModal">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-header">
+      <div class="modal-title"><i class="ti ti-category"></i> Thêm danh mục</div>
+      <button class="modal-close" onclick="closeModal('catModal')"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Tên danh mục</label>
+        <input type="text" class="form-control" id="catNameInput" placeholder="VD: Món chính, Tráng miệng...">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Biểu tượng (emoji)</label>
+        <input type="text" class="form-control" id="catIconInput" placeholder="VD: 🍜" maxlength="4">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('catModal')">Hủy</button>
+      <button class="btn btn-primary" onclick="saveCategory()"><i class="ti ti-plus"></i> Thêm danh mục</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toastEl"><i class="ti ti-circle-check"></i><span id="toastMsg">Thành công!</span></div>
+
+<script>
+/* ===== DATA ===== */
+let categories = [
+  { id: 'all',      name: 'Tất cả',     icon: '🍽️' },
+  { id: 'mainDish', name: 'Món chính',  icon: '🍲' },
+  { id: 'soup',     name: 'Canh & Súp', icon: '🥣' },
+  { id: 'noodle',   name: 'Bún & Phở',  icon: '🍜' },
+  { id: 'rice',     name: 'Cơm',        icon: '🍚' },
+  { id: 'dessert',  name: 'Tráng miệng',icon: '🍮' },
+  { id: 'drink',    name: 'Đồ uống',    icon: '🥤' },
+];
+
+let dishes = [
+  { id:1,  name:'Cơm chay đặc biệt',      cat:'rice',     price:75000, salePrice:null,  desc:'Cơm gạo lứt với các loại rau củ theo mùa', active:true,  featured:true,  emoji:'🍚' },
+  { id:2,  name:'Phở chay thượng hạng',   cat:'noodle',   price:65000, salePrice:55000, desc:'Phở với nước dùng thanh ngọt từ rau củ',   active:true,  featured:true,  emoji:'🍜' },
+  { id:3,  name:'Bún bò chay',            cat:'noodle',   price:60000, salePrice:null,  desc:'Bún với sả và nước dùng đậm vị chay',       active:true,  featured:false, emoji:'🍜' },
+  { id:4,  name:'Canh rau đặc biệt',      cat:'soup',     price:35000, salePrice:null,  desc:'Canh rau củ theo mùa thanh mát',             active:true,  featured:false, emoji:'🥣' },
+  { id:5,  name:'Súp nấm cream',          cat:'soup',     price:45000, salePrice:40000, desc:'Súp nấm béo ngậy theo phong cách Á',        active:true,  featured:true,  emoji:'🥣' },
+  { id:6,  name:'Đậu hũ chiên sả ớt',    cat:'mainDish', price:55000, salePrice:null,  desc:'Đậu hũ giòn chiên với sả ớt thơm lừng',    active:true,  featured:false, emoji:'🍲' },
+  { id:7,  name:'Nấm xào tỏi bơ',        cat:'mainDish', price:60000, salePrice:null,  desc:'Các loại nấm tươi xào tỏi bơ thơm',         active:true,  featured:true,  emoji:'🍲' },
+  { id:8,  name:'Cơm chiên dương châu chay',cat:'rice',   price:70000, salePrice:65000, desc:'Cơm chiên rau củ theo phong cách Hong Kong', active:true,  featured:false, emoji:'🍚' },
+  { id:9,  name:'Chè đậu xanh cốt dừa',  cat:'dessert',  price:30000, salePrice:null,  desc:'Chè truyền thống thơm béo',                 active:true,  featured:false, emoji:'🍮' },
+  { id:10, name:'Bánh flan caramel',      cat:'dessert',  price:28000, salePrice:25000, desc:'Flan mềm mịn với caramel đắng ngọt',        active:true,  featured:false, emoji:'🍮' },
+  { id:11, name:'Nước ép cà rốt táo',    cat:'drink',    price:35000, salePrice:null,  desc:'Ép lạnh 100% không đường',                  active:true,  featured:false, emoji:'🥤' },
+  { id:12, name:'Trà hoa cúc mật ong',   cat:'drink',    price:30000, salePrice:null,  desc:'Trà hoa thư giãn với mật ong nguyên chất',  active:true,  featured:false, emoji:'🥤' },
+  { id:13, name:'Bánh bao chay',         cat:'mainDish', price:20000, salePrice:null,  desc:'Bánh bao nhân nấm và rau củ',               active:false, featured:false, emoji:'🍲' },
+  { id:14, name:'Gỏi cuốn chay',        cat:'mainDish', price:40000, salePrice:null,  desc:'Gỏi cuốn tươi với rau và đậu hũ',           active:true,  featured:false, emoji:'🍲' },
+  { id:15, name:'Bún bì chay',           cat:'noodle',   price:55000, salePrice:50000, desc:'Bún bì đặc trưng với các nguyên liệu chay',  active:false, featured:false, emoji:'🍜' },
+  { id:16, name:'Sinh tố bơ',           cat:'drink',    price:40000, salePrice:null,  desc:'Sinh tố bơ béo ngậy thêm sữa tươi',         active:true,  featured:true,  emoji:'🥤' },
+  { id:17, name:'Kem đậu đỏ',           cat:'dessert',  price:25000, salePrice:null,  desc:'Kem tươi từ đậu đỏ Nhật',                   active:true,  featured:false, emoji:'🍮' },
+  { id:18, name:'Lẩu nấm chay',         cat:'mainDish', price:150000,salePrice:130000,desc:'Lẩu nấm với nước dùng thanh ngọt',           active:false, featured:false, emoji:'🍲' },
+];
+
+let nextId     = 19;
+let currentCat = 'all';
+let currentStatusFilter = 'all';
+let currentPage = 1;
+let currentView = 'table';
+const perPage   = 8;
+let editingId   = null;
+let deleteTargetId = null;
+
+/* ===== DRAG STATE ===== */
+let dragSrcIdx = null;
+
+/* ===== CATEGORY RENDER ===== */
+function renderCategories() {
+  const list = document.getElementById('catList');
+  const isMobile = window.innerWidth <= 900;
+
+  list.innerHTML = categories.map((c, idx) => {
+    const count = c.id === 'all' ? dishes.length : dishes.filter(d => d.cat === c.id).length;
+    const active = currentCat === c.id ? ' active' : '';
+    if (isMobile) {
+      return `<div class="cat-item${active}" onclick="setCat('${c.id}')">
+        <span>${c.icon}</span> ${c.name}
+        <span class="cat-count">${count}</span>
+      </div>`;
+    }
+    return `<div class="cat-item${active}" draggable="true"
+        onclick="setCat('${c.id}')"
+        ondragstart="catDragStart(event,${idx})"
+        ondragover="catDragOver(event,${idx})"
+        ondragleave="catDragLeave(event)"
+        ondrop="catDrop(event,${idx})"
+        ondragend="catDragEnd(event)"
+        data-idx="${idx}">
+      <i class="ti ti-grip-vertical cat-drag-handle"></i>
+      <span style="font-size:16px">${c.icon}</span>
+      <span>${c.name}</span>
+      <span class="cat-count">${count}</span>
+    </div>`;
+  }).join('');
+}
+
+function setCat(id) {
+  currentCat = id;
+  currentPage = 1;
+  renderCategories();
+  renderDishes();
+}
+
+/* ===== DRAG & DROP (categories) ===== */
+function catDragStart(e, idx) {
+  dragSrcIdx = idx;
+  e.target.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+}
+function catDragOver(e, idx) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  document.querySelectorAll('.cat-item').forEach((el, i) => {
+    el.classList.toggle('drag-over', i === idx && idx !== dragSrcIdx);
+  });
+}
+function catDragLeave(e) {
+  e.currentTarget.classList.remove('drag-over');
+}
+function catDrop(e, idx) {
+  e.preventDefault();
+  if (dragSrcIdx === null || dragSrcIdx === idx) return;
+  const moved = categories.splice(dragSrcIdx, 1)[0];
+  categories.splice(idx, 0, moved);
+  dragSrcIdx = null;
+  renderCategories();
+  renderDishes();
+}
+function catDragEnd(e) {
+  document.querySelectorAll('.cat-item').forEach(el => {
+    el.classList.remove('dragging', 'drag-over');
+  });
+  dragSrcIdx = null;
+}
+
+/* ===== FILTER ===== */
+function setStatusFilter(f, btn) {
+  currentStatusFilter = f;
+  currentPage = 1;
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderDishes();
+}
+
+function clearFilters() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('sortSelect').value = 'default';
+  currentStatusFilter = 'all';
+  currentPage = 1;
+  document.querySelectorAll('.filter-tab').forEach((t,i) => t.classList.toggle('active', i===0));
+  renderDishes();
+}
+
+function getFiltered() {
+  let data = dishes;
+  if (currentCat !== 'all') data = data.filter(d => d.cat === currentCat);
+  const search = document.getElementById('searchInput').value.trim().toLowerCase();
+  if (search) data = data.filter(d => d.name.toLowerCase().includes(search) || (d.desc||'').toLowerCase().includes(search));
+  if (currentStatusFilter === 'active')   data = data.filter(d => d.active);
+  if (currentStatusFilter === 'hidden')   data = data.filter(d => !d.active);
+  if (currentStatusFilter === 'featured') data = data.filter(d => d.featured);
+  const sort = document.getElementById('sortSelect').value;
+  if (sort === 'name-asc')   data = [...data].sort((a,b) => a.name.localeCompare(b.name,'vi'));
+  if (sort === 'name-desc')  data = [...data].sort((a,b) => b.name.localeCompare(a.name,'vi'));
+  if (sort === 'price-asc')  data = [...data].sort((a,b) => a.price - b.price);
+  if (sort === 'price-desc') data = [...data].sort((a,b) => b.price - a.price);
+  return data;
+}
+
+function fmtPrice(p) {
+  return p.toLocaleString('vi-VN') + 'đ';
+}
+
+function catName(id) {
+  const c = categories.find(c => c.id === id);
+  return c ? c.name : id;
+}
+
+/* ===== RENDER ===== */
+function renderDishes() {
+  const data  = getFiltered();
+  const total = data.length;
+  const pages = Math.max(1, Math.ceil(total / perPage));
+  if (currentPage > pages) currentPage = pages;
+  const slice = data.slice((currentPage-1)*perPage, currentPage*perPage);
+
+  // Update counts
+  const all     = dishes.length;
+  const active  = dishes.filter(d => d.active).length;
+  const hidden  = dishes.filter(d => !d.active).length;
+  const feat    = dishes.filter(d => d.featured).length;
+  document.getElementById('cntAll').textContent      = currentCat==='all' ? all     : dishes.filter(d=>d.cat===currentCat).length;
+  document.getElementById('cntActive').textContent   = getFilteredWith('active').length;
+  document.getElementById('cntHidden').textContent   = getFilteredWith('hidden').length;
+  document.getElementById('cntFeatured').textContent = getFilteredWith('featured').length;
+  document.getElementById('statTotal').textContent   = all;
+  document.getElementById('statActive').textContent  = active;
+  document.getElementById('statHidden').textContent  = hidden;
+  document.getElementById('statCat').textContent     = categories.filter(c=>c.id!=='all').length;
+
+  if (currentView === 'table') renderTable(slice, total, pages);
+  else renderGrid(slice, total, pages);
+}
+
+function getFilteredWith(statusF) {
+  let data = dishes;
+  if (currentCat !== 'all') data = data.filter(d => d.cat === currentCat);
+  const search = document.getElementById('searchInput').value.trim().toLowerCase();
+  if (search) data = data.filter(d => d.name.toLowerCase().includes(search));
+  if (statusF === 'active')   data = data.filter(d => d.active);
+  if (statusF === 'hidden')   data = data.filter(d => !d.active);
+  if (statusF === 'featured') data = data.filter(d => d.featured);
+  return data;
+}
+
+function renderTable(slice, total, pages) {
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = slice.length === 0
+    ? `<tr><td colspan="6"><div class="empty-state"><i class="ti ti-bowl"></i><p>Không tìm thấy món ăn nào</p></div></td></tr>`
+    : slice.map(d => `
+      <tr>
+        <td>
+          <div class="dish-info">
+            <div class="dish-thumb" style="font-size:22px">${d.emoji}</div>
+            <div>
+              <div class="dish-name">${d.name}${d.featured?' <span style="color:var(--amber-500);font-size:11px">★ Nổi bật</span>':''}</div>
+              <div class="dish-desc">${d.desc}</div>
+            </div>
+          </div>
+        </td>
+        <td class="hide-mobile"><span style="font-size:12px;color:var(--gray-500)">${catName(d.cat)}</span></td>
+        <td>
+          <div class="price">${fmtPrice(d.price)}</div>
+          ${d.salePrice ? `<div style="font-size:11px;color:var(--gray-400);text-decoration:line-through">${fmtPrice(d.salePrice)}</div>` : ''}
+        </td>
+        <td class="hide-mobile">
+          ${d.active
+            ? '<span class="badge badge-success">Hiển thị</span>'
+            : '<span class="badge badge-gray">Đã ẩn</span>'}
+        </td>
+        <td class="hide-mobile">
+          ${d.featured ? '<span class="badge badge-warning">★ Nổi bật</span>' : '<span style="color:var(--gray-300);font-size:12px">—</span>'}
+        </td>
+        <td>
+          <div class="action-btns">
+            <button class="btn-xs btn-green" onclick="openEditModal(${d.id})"><i class="ti ti-edit" style="font-size:12px"></i></button>
+            <button class="btn-xs btn-gray"  onclick="toggleActive(${d.id})">${d.active?'<i class="ti ti-eye-off" style="font-size:12px"></i>':'<i class="ti ti-eye" style="font-size:12px"></i>'}</button>
+            <button class="btn-xs btn-red"   onclick="openDeleteModal(${d.id})"><i class="ti ti-trash" style="font-size:12px"></i></button>
+          </div>
+        </td>
+      </tr>`).join('');
+
+  renderPagination(total, pages, 'pageInfo', 'pageBtns');
+}
+
+function renderGrid(slice, total, pages) {
+  const grid = document.getElementById('gridBody');
+  grid.innerHTML = slice.length === 0
+    ? `<div class="empty-state" style="grid-column:1/-1"><i class="ti ti-bowl"></i><p>Không tìm thấy món ăn nào</p></div>`
+    : slice.map(d => `
+      <div class="dish-card">
+        <div class="dish-card-img">${d.emoji}
+          ${d.featured ? '<span style="position:absolute;top:8px;right:8px;background:var(--amber-400);color:#fff;font-size:10px;padding:2px 7px;border-radius:20px;font-weight:600">★ Nổi bật</span>' : ''}
+          ${!d.active ? '<span style="position:absolute;top:8px;left:8px;background:var(--gray-500);color:#fff;font-size:10px;padding:2px 7px;border-radius:20px">Đã ẩn</span>' : ''}
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-card-name">${d.name}</div>
+          <div class="dish-card-cat">${catName(d.cat)}</div>
+          <div class="dish-card-footer">
+            <div class="dish-card-price">${fmtPrice(d.price)}</div>
+            <div class="dish-card-actions">
+              <button class="btn-xs btn-green" onclick="openEditModal(${d.id})" title="Sửa"><i class="ti ti-edit" style="font-size:12px"></i></button>
+              <button class="btn-xs btn-red"   onclick="openDeleteModal(${d.id})" title="Xóa"><i class="ti ti-trash" style="font-size:12px"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>`).join('');
+
+  renderPagination(total, pages, 'pageInfoGrid', 'pageBtnsGrid');
+}
+
+function renderPagination(total, pages, infoId, btnsId) {
+  const from = total===0 ? 0 : (currentPage-1)*perPage+1;
+  const to   = Math.min(currentPage*perPage, total);
+  document.getElementById(infoId).textContent = `Hiển thị ${from}–${to} / ${total} kết quả`;
+
+  const pb = document.getElementById(btnsId);
+  pb.innerHTML = '';
+
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'page-btn';
+  prevBtn.innerHTML = '<i class="ti ti-chevron-left" style="font-size:13px"></i>';
+  prevBtn.disabled = currentPage === 1;
+  prevBtn.onclick = () => { currentPage--; renderDishes(); };
+  pb.appendChild(prevBtn);
+
+  for (let i = 1; i <= pages; i++) {
+    if (pages > 5 && i > 2 && i < pages-1 && Math.abs(i-currentPage) > 1) {
+      if (i===3) { const d=document.createElement('span'); d.textContent='…'; d.style.cssText='padding:0 4px;color:var(--gray-400);font-size:13px;align-self:center'; pb.appendChild(d); }
+      continue;
+    }
+    const btn = document.createElement('button');
+    btn.className = 'page-btn' + (i===currentPage?' active':'');
+    btn.textContent = i;
+    btn.onclick = ((p) => () => { currentPage=p; renderDishes(); })(i);
+    pb.appendChild(btn);
+  }
+
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'page-btn';
+  nextBtn.innerHTML = '<i class="ti ti-chevron-right" style="font-size:13px"></i>';
+  nextBtn.disabled = currentPage === pages;
+  nextBtn.onclick = () => { currentPage++; renderDishes(); };
+  pb.appendChild(nextBtn);
+}
+
+/* ===== VIEW TOGGLE ===== */
+function setView(v) {
+  currentView = v;
+  currentPage = 1;
+  document.getElementById('tableView').style.display = v==='table' ? '' : 'none';
+  document.getElementById('gridView').style.display  = v==='grid'  ? '' : 'none';
+  document.getElementById('viewTableBtn').classList.toggle('active', v==='table');
+  document.getElementById('viewGridBtn').classList.toggle('active', v==='grid');
+  renderDishes();
+}
+
+/* ===== ACTIONS ===== */
+function toggleActive(id) {
+  const d = dishes.find(x => x.id===id);
+  if (!d) return;
+  d.active = !d.active;
+  renderDishes();
+  showToast(d.active ? `Đã hiển thị "${d.name}"` : `Đã ẩn "${d.name}"`);
+}
+
+function openDeleteModal(id) {
+  deleteTargetId = id;
+  const d = dishes.find(x => x.id===id);
+  document.getElementById('deleteDishName').textContent = d?.name || '';
+  openModal('deleteModal');
+}
+
+function confirmDelete() {
+  const d = dishes.find(x => x.id===deleteTargetId);
+  dishes = dishes.filter(x => x.id!==deleteTargetId);
+  closeModal('deleteModal');
+  renderCategories();
+  renderDishes();
+  showToast(`Đã xóa "${d?.name}"`);
+}
+
+/* ===== MODAL: ADD/EDIT ===== */
+function populateCatSelect() {
+  const sel = document.getElementById('dishCat');
+  sel.innerHTML = categories.filter(c=>c.id!=='all').map(c =>
+    `<option value="${c.id}">${c.icon} ${c.name}</option>`
+  ).join('');
+}
+
+function openAddModal() {
+  editingId = null;
+  document.getElementById('modalDishTitle').textContent = 'Thêm món mới';
+  document.getElementById('saveBtnText').textContent = 'Lưu món';
+  document.getElementById('dishName').value = '';
+  document.getElementById('dishPrice').value = '';
+  document.getElementById('dishSalePrice').value = '';
+  document.getElementById('dishDesc').value = '';
+  document.getElementById('dishActive').checked = true;
+  document.getElementById('dishFeatured').checked = false;
+  document.getElementById('imgPreview').style.display = 'none';
+  document.getElementById('uploadPlaceholder').style.display = '';
+  populateCatSelect();
+  openModal('dishModal');
+}
+
+function openEditModal(id) {
+  const d = dishes.find(x => x.id===id);
+  if (!d) return;
+  editingId = id;
+  document.getElementById('modalDishTitle').textContent = 'Chỉnh sửa món';
+  document.getElementById('saveBtnText').textContent = 'Cập nhật';
+  populateCatSelect();
+  document.getElementById('dishName').value = d.name;
+  document.getElementById('dishCat').value  = d.cat;
+  document.getElementById('dishPrice').value = d.price;
+  document.getElementById('dishSalePrice').value = d.salePrice || '';
+  document.getElementById('dishDesc').value  = d.desc || '';
+  document.getElementById('dishActive').checked   = d.active;
+  document.getElementById('dishFeatured').checked = d.featured;
+  document.getElementById('imgPreview').style.display = 'none';
+  document.getElementById('uploadPlaceholder').style.display = '';
+  openModal('dishModal');
+}
+
+function saveDish() {
+  const name  = document.getElementById('dishName').value.trim();
+  const cat   = document.getElementById('dishCat').value;
+  const price = parseInt(document.getElementById('dishPrice').value);
+  const sale  = parseInt(document.getElementById('dishSalePrice').value) || null;
+  const desc  = document.getElementById('dishDesc').value.trim();
+  const active   = document.getElementById('dishActive').checked;
+  const featured = document.getElementById('dishFeatured').checked;
+
+  if (!name) { document.getElementById('dishName').focus(); showToast('Vui lòng nhập tên món!'); return; }
+  if (!price || price <= 0) { document.getElementById('dishPrice').focus(); showToast('Vui lòng nhập giá hợp lệ!'); return; }
+
+  const catObj = categories.find(c=>c.id===cat);
+  const emoji  = catObj?.icon || '🍽️';
+
+  if (editingId) {
+    const d = dishes.find(x=>x.id===editingId);
+    Object.assign(d, { name, cat, price, salePrice: sale, desc, active, featured, emoji });
+    showToast(`Đã cập nhật "${name}"`);
+  } else {
+    dishes.push({ id: nextId++, name, cat, price, salePrice: sale, desc, active, featured, emoji });
+    showToast(`Đã thêm "${name}" vào thực đơn!`);
+  }
+
+  closeModal('dishModal');
+  renderCategories();
+  renderDishes();
+}
+
+/* ===== IMAGE UPLOAD ===== */
+function previewImage(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    document.getElementById('imgPreview').src = ev.target.result;
+    document.getElementById('imgPreview').style.display = 'block';
+    document.getElementById('uploadPlaceholder').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+
+function onDragOver(e) {
+  e.preventDefault();
+  document.getElementById('uploadArea').classList.add('drag-active');
+}
+function onDragLeave(e) {
+  document.getElementById('uploadArea').classList.remove('drag-active');
+}
+function onDrop(e) {
+  e.preventDefault();
+  document.getElementById('uploadArea').classList.remove('drag-active');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      document.getElementById('imgPreview').src = ev.target.result;
+      document.getElementById('imgPreview').style.display = 'block';
+      document.getElementById('uploadPlaceholder').style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+/* ===== CATEGORY MODAL ===== */
+function openCatModal() { openModal('catModal'); }
+function saveCategory() {
+  const name = document.getElementById('catNameInput').value.trim();
+  const icon = document.getElementById('catIconInput').value.trim() || '📋';
+  if (!name) { document.getElementById('catNameInput').focus(); return; }
+  const id = 'cat_' + Date.now();
+  categories.push({ id, name, icon });
+  document.getElementById('catNameInput').value = '';
+  document.getElementById('catIconInput').value  = '';
+  closeModal('catModal');
+  renderCategories();
+  renderDishes();
+  showToast(`Đã thêm danh mục "${name}"`);
+}
+
+/* ===== MODAL UTILS ===== */
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-backdrop').forEach(m => {
+  m.addEventListener('click', e => { if (e.target===m) m.classList.remove('open'); });
+});
+
+/* ===== SIDEBAR ===== */
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+
+/* ===== TOAST ===== */
+function showToast(msg) {
+  const el = document.getElementById('toastEl');
+  document.getElementById('toastMsg').textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2800);
+}
+
+/* ===== RESPONSIVE ===== */
+window.addEventListener('resize', () => renderCategories());
+
+/* ===== INIT ===== */
+renderCategories();
+renderDishes();
+</script>
+</body>
+</html>
