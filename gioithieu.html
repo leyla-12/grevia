@@ -8,320 +8,254 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
 /* ===== RESET & BASE ===== */
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Be Vietnam Pro',sans-serif;background:#f9fafb;color:#111827;font-size:14px;min-height:100vh;}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Be Vietnam Pro', sans-serif; background: #f4f6f4; color: #111827; font-size: 14px; min-height: 100vh; }
+a { text-decoration: none; color: inherit; }
 
-/* ===== CSS VARIABLES ===== */
-:root{
-  --green-50:#f0faf4;--green-100:#d5f0e0;--green-200:#a6ddb9;
-  --green-400:#4caf78;--green-600:#2e7d52;--green-700:#1e5c3a;--green-800:#144029;
-  --amber-50:#fffbeb;--amber-400:#f59e0b;--amber-600:#d97706;
-  --red-50:#fef2f2;--red-400:#f87171;--red-600:#dc2626;
-  --blue-50:#eff6ff;--blue-400:#60a5fa;--blue-600:#2563eb;
-  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;
-  --gray-300:#d1d5db;--gray-400:#9ca3af;--gray-500:#6b7280;
-  --gray-600:#4b5563;--gray-700:#374151;--gray-900:#111827;
-  --sidebar-w:240px;--header-h:60px;
+/* ===== COLOR TOKENS ===== */
+:root {
+  --green-50:#f0faf4; --green-100:#d5f0e0; --green-200:#a6ddb9;
+  --green-400:#4caf78; --green-600:#2e7d52; --green-700:#1e5c3a; --green-800:#144029;
+  --amber-50:#fffbeb; --amber-400:#f59e0b; --amber-600:#d97706;
+  --red-50:#fef2f2; --red-400:#f87171; --red-600:#dc2626;
+  --blue-50:#eff6ff; --blue-400:#60a5fa; --blue-600:#2563eb;
+  --gray-50:#f9fafb; --gray-100:#f3f4f6; --gray-200:#e5e7eb;
+  --gray-300:#d1d5db; --gray-400:#9ca3af; --gray-500:#6b7280;
+  --gray-600:#4b5563; --gray-700:#374151; --gray-900:#111827;
+  --sidebar-w:240px; --header-h:60px;
 }
 
 /* ===== SIDEBAR ===== */
-.sidebar{
-  position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;
-  background:var(--green-800);display:flex;flex-direction:column;z-index:100;
-  transition:transform .3s ease;
+.sidebar {
+  position: fixed; top: 0; left: 0; width: var(--sidebar-w); height: 100vh;
+  background: var(--green-800); display: flex; flex-direction: column;
+  z-index: 100; transition: transform 0.3s ease; overflow-y: auto;
 }
-.sidebar-logo{padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.1);}
-.logo-mark{display:flex;align-items:center;gap:10px;}
-.logo-icon{
-  width:38px;
-  height:38px;
-  border-radius:10px;
-  overflow:hidden;
-  flex-shrink:0;
-  background:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.logo-icon img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-.logo-icon img{width:100%;height:100%;object-fit:cover;border-radius:10px;}
-.logo-text .brand{font-size:18px;font-weight:700;color:#fff;letter-spacing:.5px;}
-.logo-text .sub{font-size:11px;color:rgba(255,255,255,.5);}
-.nav-section{padding:12px 12px 6px;overflow-y:auto;flex:1;}
-.nav-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.35);padding:12px 8px 6px;}
-.nav-item{
-  display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;
-  cursor:pointer;color:rgba(255,255,255,.65);font-size:13.5px;font-weight:400;
-  transition:all .18s;text-decoration:none;margin-bottom:2px;
-}
-.nav-item:hover{background:rgba(255,255,255,.08);color:#fff;}
-.nav-item.active{background:var(--green-600);color:#fff;font-weight:500;}
-.nav-item i{font-size:17px;flex-shrink:0;opacity:.85;}
-.nav-item.active i{opacity:1;}
-.nav-badge{
-  margin-left:auto;background:var(--amber-400);color:#fff;
-  font-size:10px;font-weight:600;padding:2px 6px;border-radius:10px;min-width:18px;text-align:center;
-}
-.sidebar-footer{padding:12px;border-top:1px solid rgba(255,255,255,.1);}
-.admin-card{display:flex;align-items:center;gap:10px;padding:10px;border-radius:8px;background:rgba(255,255,255,.07);}
-.admin-avatar{
-  width:34px;height:34px;background:var(--green-400);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:600;color:#fff;flex-shrink:0;
-}
-.admin-info .name{font-size:13px;font-weight:500;color:#fff;}
-.admin-info .role{font-size:11px;color:rgba(255,255,255,.45);}
-.logout-btn{
-  margin-left:auto;background:none;border:none;color:rgba(255,255,255,.4);
-  cursor:pointer;font-size:16px;display:flex;align-items:center;transition:color .15s;
-}
-.logout-btn:hover{color:rgba(255,255,255,.85);}
+.sidebar-logo { padding: 18px 16px 14px; border-bottom: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; }
+.logo-mark { display: flex; align-items: center; gap: 10px; }
+.logo-icon { width:38px; height:38px; border-radius:10px; overflow:hidden; flex-shrink:0; background:#fff; display:flex; align-items:center; justify-content:center; }
+.logo-icon img { width:100%; height:100%; object-fit:cover; display:block; }
+.logo-text .brand { font-size: 17px; font-weight: 700; color: #fff; }
+.logo-text .sub   { font-size: 11px; color: rgba(255,255,255,0.45); }
+.nav-section { padding: 10px 10px 6px; flex: 1; }
+.nav-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.3); padding: 12px 8px 5px; }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 8px; color: rgba(255,255,255,0.62); font-size: 13.5px; font-weight: 400; transition: all 0.18s; margin-bottom: 2px; cursor: pointer; }
+.nav-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.nav-item.active { background: var(--green-600); color: #fff; font-weight: 500; }
+.nav-item i { font-size: 17px; flex-shrink: 0; }
+.nav-badge { margin-left: auto; background: var(--amber-400); color: #fff; font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 10px; min-width: 18px; text-align: center; }
+.sidebar-footer { padding: 10px; border-top: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; }
+.admin-card { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; background: rgba(255,255,255,0.07); }
+.admin-avatar { width: 32px; height: 32px; background: var(--green-400); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: #fff; flex-shrink: 0; }
+.admin-info .name { font-size: 12px; font-weight: 500; color: #fff; }
+.admin-info .role { font-size: 11px; color: rgba(255,255,255,0.4); }
+.logout-btn { margin-left: auto; background: none; border: none; color: rgba(255,255,255,0.35); cursor: pointer; font-size: 16px; display: flex; align-items: center; transition: color 0.15s; }
+.logout-btn:hover { color: rgba(255,255,255,0.8); }
 
 /* ===== HEADER ===== */
-.header{
-  position:fixed;top:0;left:var(--sidebar-w);right:0;height:var(--header-h);
-  background:#fff;border-bottom:1px solid var(--gray-200);
-  display:flex;align-items:center;padding:0 24px;gap:16px;z-index:90;
-  transition:left .3s ease;
-}
-.hamburger{display:none;background:none;border:none;cursor:pointer;font-size:22px;color:var(--gray-600);padding:4px;}
-.breadcrumb{display:flex;align-items:center;gap:6px;color:var(--gray-500);font-size:13px;}
-.breadcrumb .current{color:var(--gray-900);font-weight:500;}
-.header-actions{margin-left:auto;display:flex;align-items:center;gap:8px;}
-.icon-btn{
-  width:36px;height:36px;border-radius:8px;background:none;border:1px solid var(--gray-200);
-  display:flex;align-items:center;justify-content:center;cursor:pointer;
-  color:var(--gray-500);font-size:17px;transition:all .15s;position:relative;
-}
-.icon-btn:hover{background:var(--gray-50);color:var(--gray-700);}
-.notif-dot{
-  position:absolute;top:6px;right:6px;width:7px;height:7px;
-  background:var(--red-600);border-radius:50%;border:1.5px solid #fff;
-}
+.header { position: fixed; top: 0; left: var(--sidebar-w); right: 0; height: var(--header-h); background: #fff; border-bottom: 1px solid var(--gray-200); display: flex; align-items: center; padding: 0 24px; gap: 14px; z-index: 90; transition: left 0.3s ease; }
+.hamburger { display: none; background: none; border: none; cursor: pointer; font-size: 22px; color: var(--gray-600); padding: 4px; }
+.breadcrumb { display: flex; align-items: center; gap: 6px; color: var(--gray-400); font-size: 13px; }
+.breadcrumb .sep { font-size: 11px; }
+.breadcrumb .current { color: var(--gray-900); font-weight: 600; }
+.header-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.icon-btn { width: 36px; height: 36px; border-radius: 8px; background: none; border: 1px solid var(--gray-200); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--gray-500); font-size: 17px; transition: all 0.15s; position: relative; }
+.icon-btn:hover { background: var(--gray-50); color: var(--gray-700); }
+.notif-dot { position: absolute; top: 7px; right: 7px; width: 6px; height: 6px; background: var(--red-600); border-radius: 50%; border: 1.5px solid #fff; }
+.header-avatar { width: 34px; height: 34px; background: var(--green-600); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: #fff; cursor: pointer; }
 
 /* ===== MAIN ===== */
-.main{margin-left:var(--sidebar-w);margin-top:var(--header-h);padding:24px;min-height:calc(100vh - var(--header-h));}
+.main { margin-left: var(--sidebar-w); margin-top: var(--header-h); padding: 26px 24px; }
+.page-header { margin-bottom: 22px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.page-header-left h1 { font-size: 20px; font-weight: 700; color: var(--gray-900); }
+.page-header-left p  { font-size: 13px; color: var(--gray-400); margin-top: 3px; }
 
-/* ===== PAGE HEADER ===== */
-.page-header{margin-bottom:24px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;}
-.page-header h1{font-size:20px;font-weight:600;color:var(--gray-900);}
-.page-header p{font-size:13px;color:var(--gray-500);margin-top:3px;}
-.btn-primary{
-  display:inline-flex;align-items:center;gap:6px;padding:9px 16px;
-  background:var(--green-600);color:#fff;border:none;border-radius:8px;
-  font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;
-  transition:background .15s;white-space:nowrap;text-decoration:none;
-}
-.btn-primary:hover{background:var(--green-700);}
-.btn-secondary{
-  display:inline-flex;align-items:center;gap:6px;padding:9px 16px;
-  background:#fff;color:var(--gray-700);border:1px solid var(--gray-200);border-radius:8px;
-  font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;
-  transition:all .15s;white-space:nowrap;
-}
-.btn-secondary:hover{background:var(--gray-50);}
+/* ===== BUTTONS ===== */
+.btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; border-radius: 8px; border: none; cursor: pointer; font-size: 13px; font-weight: 500; font-family: inherit; transition: all 0.15s; }
+.btn-primary { background: var(--green-600); color: #fff; }
+.btn-primary:hover { background: var(--green-700); }
+.btn-outline { background: #fff; color: var(--gray-700); border: 1px solid var(--gray-200); }
+.btn-outline:hover { background: var(--gray-50); }
+.btn-xs { font-size: 11px; padding: 4px 10px; border-radius: 6px; border: 1px solid; cursor: pointer; font-family: inherit; font-weight: 500; transition: all 0.15s; white-space: nowrap; }
+.btn-green { background: var(--green-50); border-color: var(--green-200); color: var(--green-700); }
+.btn-green:hover { background: var(--green-100); }
+.btn-red   { background: var(--red-50); border-color: #fca5a5; color: var(--red-600); }
+.btn-red:hover { background: #fee2e2; }
+.btn-gray  { background: var(--gray-50); border-color: var(--gray-200); color: var(--gray-600); }
+.btn-gray:hover { background: var(--gray-100); }
+
+/* ===== STAT STRIP ===== */
+.stat-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap: 14px; margin-bottom: 22px; }
+.stat-mini { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
+.stat-mini-icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+.smi-a .stat-mini-icon { background: var(--green-50); color: var(--green-600); }
+.smi-b .stat-mini-icon { background: var(--blue-50);  color: var(--blue-600); }
+.smi-c .stat-mini-icon { background: var(--amber-50); color: var(--amber-600); }
+.smi-d .stat-mini-icon { background: var(--red-50);   color: var(--red-600); }
+.stat-mini-val { font-size: 20px; font-weight: 700; color: var(--gray-900); line-height: 1; }
+.stat-mini-lbl { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
 
 /* ===== CARD ===== */
-.card{background:#fff;border:1px solid var(--gray-200);border-radius:12px;overflow:hidden;margin-bottom:20px;}
-.card-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:16px 18px;border-bottom:1px solid var(--gray-100);
-}
-.card-title{font-size:14px;font-weight:600;color:var(--gray-900);display:flex;align-items:center;gap:8px;}
-.card-title i{font-size:16px;color:var(--green-600);}
-.card-body{padding:20px 18px;}
-
-/* ===== FORM ===== */
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.form-group{display:flex;flex-direction:column;gap:6px;}
-.form-group.full{grid-column:1/-1;}
-.form-label{font-size:12px;font-weight:600;color:var(--gray-700);text-transform:uppercase;letter-spacing:.4px;}
-.form-input,.form-textarea,.form-select{
-  width:100%;padding:9px 12px;border:1px solid var(--gray-200);border-radius:8px;
-  font-family:inherit;font-size:13.5px;color:var(--gray-900);background:#fff;
-  transition:border-color .15s,box-shadow .15s;outline:none;
-}
-.form-input:focus,.form-textarea:focus,.form-select:focus{
-  border-color:var(--green-400);box-shadow:0 0 0 3px rgba(76,175,120,.1);
-}
-.form-textarea{resize:vertical;min-height:100px;line-height:1.6;}
-.form-hint{font-size:11px;color:var(--gray-400);}
-
-/* ===== IMAGE UPLOAD ===== */
-.img-upload-wrap{
-  border:2px dashed var(--gray-200);border-radius:10px;
-  padding:20px;text-align:center;cursor:pointer;transition:all .2s;
-  background:var(--gray-50);
-}
-.img-upload-wrap:hover{border-color:var(--green-400);background:var(--green-50);}
-.img-upload-wrap.has-img{border-style:solid;border-color:var(--green-200);background:#fff;padding:0;overflow:hidden;}
-.img-upload-wrap img{width:100%;max-height:200px;object-fit:cover;border-radius:8px;}
-.img-upload-placeholder{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--gray-400);}
-.img-upload-placeholder i{font-size:28px;}
-.img-upload-placeholder span{font-size:12px;}
-
-/* ===== RICH TEXT TOOLBAR ===== */
-.rte-toolbar{
-  display:flex;align-items:center;gap:2px;padding:8px 10px;
-  border:1px solid var(--gray-200);border-bottom:none;border-radius:8px 8px 0 0;
-  background:var(--gray-50);flex-wrap:wrap;
-}
-.rte-btn{
-  width:30px;height:30px;border:none;background:none;border-radius:5px;
-  cursor:pointer;font-size:14px;color:var(--gray-600);
-  display:flex;align-items:center;justify-content:center;transition:all .15s;
-}
-.rte-btn:hover{background:var(--gray-200);color:var(--gray-900);}
-.rte-btn.active{background:var(--green-100);color:var(--green-700);}
-.rte-divider{width:1px;height:20px;background:var(--gray-200);margin:0 4px;}
-.rte-editor{
-  width:100%;min-height:160px;padding:12px;
-  border:1px solid var(--gray-200);border-radius:0 0 8px 8px;
-  font-family:inherit;font-size:13.5px;color:var(--gray-900);
-  outline:none;line-height:1.7;
-  transition:border-color .15s,box-shadow .15s;
-}
-.rte-editor:focus{border-color:var(--green-400);box-shadow:0 0 0 3px rgba(76,175,120,.1);}
+.card { background: #fff; border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+.card-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--gray-100); }
+.card-title { font-size: 14px; font-weight: 600; color: var(--gray-900); display: flex; align-items: center; gap: 8px; }
+.card-title i { font-size: 16px; color: var(--green-600); }
+.card-body { padding: 20px 18px; }
 
 /* ===== SECTION TABS ===== */
-.section-tabs{display:flex;gap:4px;padding:4px;background:var(--gray-100);border-radius:10px;margin-bottom:20px;}
-.section-tab{
-  flex:1;padding:8px 12px;border:none;background:none;border-radius:8px;
-  font-family:inherit;font-size:13px;font-weight:500;color:var(--gray-500);
-  cursor:pointer;transition:all .18s;text-align:center;
-}
-.section-tab.active{background:#fff;color:var(--green-700);box-shadow:0 1px 3px rgba(0,0,0,.1);}
-.section-tab:hover:not(.active){color:var(--gray-700);}
+.section-tabs { display: flex; gap: 6px; padding: 14px 18px; border-bottom: 1px solid var(--gray-100); overflow-x: auto; }
+.section-tab { padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; border: 1px solid var(--gray-200); background: #fff; color: var(--gray-600); white-space: nowrap; transition: all 0.15s; font-family: inherit; }
+.section-tab:hover:not(.active) { border-color: var(--green-400); color: var(--green-600); }
+.section-tab.active { background: var(--green-600); border-color: var(--green-600); color: #fff; }
 
 /* ===== SECTION PANELS ===== */
-.section-panel{display:none;}
-.section-panel.active{display:block;}
+.section-panel { display: none; padding: 20px 18px; }
+.section-panel.active { display: block; }
 
-/* ===== GALLERY GRID ===== */
-.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;}
-.gallery-item{
-  position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;
-  background:var(--gray-100);border:1px solid var(--gray-200);
-}
-.gallery-item img{width:100%;height:100%;object-fit:cover;}
-.gallery-item .remove-btn{
-  position:absolute;top:5px;right:5px;width:22px;height:22px;
-  background:rgba(0,0,0,.55);border:none;border-radius:50%;
-  color:#fff;font-size:11px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;transition:opacity .15s;
-}
-.gallery-item:hover .remove-btn{opacity:1;}
-.gallery-add{
-  aspect-ratio:1;border:2px dashed var(--gray-200);border-radius:8px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:4px;cursor:pointer;background:var(--gray-50);color:var(--gray-400);
-  font-size:12px;transition:all .2s;
-}
-.gallery-add:hover{border-color:var(--green-400);background:var(--green-50);color:var(--green-600);}
-.gallery-add i{font-size:22px;}
+/* ===== FORM ===== */
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-group { margin-bottom: 14px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-label { display: block; font-size: 12px; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 5px; }
+.form-control { width: 100%; padding: 9px 12px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 13px; color: var(--gray-900); background: #fff; font-family: inherit; outline: none; transition: border-color 0.15s; }
+.form-control:focus { border-color: var(--green-400); }
+textarea.form-control { resize: vertical; min-height: 90px; line-height: 1.65; }
+.form-select-ctrl { width: 100%; padding: 9px 12px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 13px; font-family: inherit; color: var(--gray-900); background: #fff; outline: none; transition: border-color 0.15s; cursor: pointer; }
+.form-select-ctrl:focus { border-color: var(--green-400); }
+.form-hint { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+.char-count { font-size: 11px; color: var(--gray-400); text-align: right; margin-top: 3px; }
+.char-count.warn { color: var(--amber-600); }
 
-/* ===== STAT ROW ===== */
-.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
-.stat-mini{
-  background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px;
-  padding:12px 14px;display:flex;flex-direction:column;gap:2px;
+/* ===== IMAGE UPLOAD ===== */
+.img-upload-area {
+  border: 2px dashed var(--gray-200); border-radius: 10px;
+  padding: 24px; text-align: center; cursor: pointer; transition: all 0.15s;
+  background: var(--gray-50);
 }
-.stat-mini .val{font-size:22px;font-weight:700;color:var(--gray-900);}
-.stat-mini .lbl{font-size:11px;color:var(--gray-400);}
+.img-upload-area:hover { border-color: var(--green-400); background: var(--green-50); }
+.img-upload-icon { font-size: 32px; color: var(--gray-300); margin-bottom: 8px; }
+.img-upload-text { font-size: 13px; color: var(--gray-400); }
+.img-upload-text strong { color: var(--green-600); }
+.img-preview-wrap { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--gray-200); cursor: pointer; }
+.img-preview-wrap img { width: 100%; max-height: 200px; object-fit: cover; display: block; }
+.img-preview-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; gap: 8px; opacity: 0; transition: opacity 0.15s; }
+.img-preview-wrap:hover .img-preview-overlay { opacity: 1; }
+.img-preview-overlay span { color: #fff; font-size: 12px; font-weight: 500; }
 
-/* ===== TOAST ===== */
-.toast{
-  position:fixed;bottom:24px;right:24px;background:var(--green-800);color:#fff;
-  padding:12px 18px;border-radius:10px;font-size:13px;display:flex;align-items:center;gap:10px;
-  z-index:999;opacity:0;transform:translateY(12px);transition:all .3s;pointer-events:none;max-width:300px;
-}
-.toast.show{opacity:1;transform:translateY(0);}
-.toast i{font-size:16px;color:var(--green-200);}
+/* ===== RICH TEXT TOOLBAR ===== */
+.rte-wrap { border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; transition: border-color 0.15s; }
+.rte-wrap:focus-within { border-color: var(--green-400); }
+.rte-toolbar { display: flex; align-items: center; gap: 2px; padding: 7px 10px; background: var(--gray-50); border-bottom: 1px solid var(--gray-200); flex-wrap: wrap; }
+.rte-btn { width: 28px; height: 28px; border: none; background: none; border-radius: 5px; cursor: pointer; font-size: 14px; color: var(--gray-600); display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+.rte-btn:hover { background: var(--gray-200); color: var(--gray-900); }
+.rte-divider { width: 1px; height: 18px; background: var(--gray-200); margin: 0 3px; }
+.rte-editor { width: 100%; min-height: 150px; padding: 12px; font-family: inherit; font-size: 13.5px; color: var(--gray-900); outline: none; line-height: 1.7; background: #fff; }
 
-/* ===== SIDEBAR OVERLAY ===== */
-.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:99;}
+/* ===== TOGGLE SWITCH ===== */
+.toggle-wrap { display: flex; align-items: center; gap: 10px; }
+.toggle { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle-slider { position: absolute; inset: 0; background: var(--gray-200); border-radius: 22px; cursor: pointer; transition: 0.2s; }
+.toggle-slider::before { content: ''; position: absolute; width: 16px; height: 16px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+.toggle input:checked + .toggle-slider { background: var(--green-600); }
+.toggle input:checked + .toggle-slider::before { transform: translateX(18px); }
+.toggle-label { font-size: 13px; color: var(--gray-600); }
 
-/* ===== BADGE ===== */
-.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;}
-.badge-success{background:var(--green-100);color:var(--green-700);}
-.badge-warning{background:var(--amber-50);color:var(--amber-600);}
+/* ===== BADGES ===== */
+.badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
+.badge-success { background: var(--green-100); color: var(--green-700); }
+.badge-warning { background: var(--amber-50); color: var(--amber-600); }
+.badge-gray    { background: var(--gray-100); color: var(--gray-500); }
 
-/* ===== CHAR COUNT ===== */
-.char-count{font-size:11px;color:var(--gray-400);text-align:right;margin-top:3px;}
-.char-count.warn{color:var(--amber-600);}
+/* ===== GALLERY ===== */
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px,1fr)); gap: 10px; }
+.gallery-item { position: relative; aspect-ratio: 1; border-radius: 8px; overflow: hidden; border: 1px solid var(--gray-200); background: var(--gray-100); }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gallery-item-remove { position: absolute; top: 5px; right: 5px; width: 22px; height: 22px; background: rgba(0,0,0,0.55); border: none; border-radius: 50%; color: #fff; font-size: 11px; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.15s; }
+.gallery-item:hover .gallery-item-remove { opacity: 1; }
+.gallery-add { aspect-ratio: 1; border: 2px dashed var(--gray-200); border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; cursor: pointer; color: var(--gray-400); font-size: 12px; transition: all 0.2s; background: var(--gray-50); }
+.gallery-add:hover { border-color: var(--green-400); background: var(--green-50); color: var(--green-600); }
+.gallery-add i { font-size: 22px; }
 
-/* ===== PREVIEW PANEL ===== */
-.preview-card{
-  background:#fff;border:1px solid var(--gray-200);border-radius:12px;overflow:hidden;
-}
-.preview-banner{
-  width:100%;height:140px;background:linear-gradient(135deg,var(--green-800),var(--green-600));
-  display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
-}
-.preview-banner-img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
-.preview-banner-overlay{position:absolute;inset:0;background:rgba(20,64,41,.55);}
-.preview-banner-text{position:relative;z-index:1;text-align:center;color:#fff;}
-.preview-banner-text h3{font-size:18px;font-weight:700;}
-.preview-banner-text p{font-size:12px;opacity:.8;margin-top:3px;}
-.preview-body{padding:14px;}
-.preview-body p{font-size:12.5px;color:var(--gray-600);line-height:1.65;}
-.preview-meta{display:flex;gap:12px;margin-top:10px;flex-wrap:wrap;}
-.preview-meta-item{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--gray-500);}
-.preview-meta-item i{font-size:14px;color:var(--green-600);}
+/* ===== VALUES LIST ===== */
+.value-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid var(--gray-200); border-radius: 10px; background: #fff; margin-bottom: 10px; transition: box-shadow 0.15s; }
+.value-item:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.value-icon-box { width: 38px; height: 38px; background: var(--green-50); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 18px; }
+.value-inputs { flex: 1; display: grid; grid-template-columns: 1fr 2fr; gap: 8px; }
+
+/* ===== STATS ITEMS ===== */
+.stats-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: 12px; }
+.stats-item { border: 1px solid var(--gray-200); border-radius: 10px; padding: 12px 14px; background: var(--gray-50); display: flex; align-items: center; gap: 10px; }
+.stats-item-fields { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+
+/* ===== PREVIEW SIDE ===== */
+.tab1-layout { display: grid; grid-template-columns: 1fr 290px; gap: 20px; align-items: start; }
+.preview-sticky { position: sticky; top: calc(var(--header-h) + 26px); }
+.preview-card { border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden; background: #fff; }
+.preview-banner { width: 100%; height: 130px; background: linear-gradient(135deg, var(--green-800), var(--green-600)); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.preview-banner-img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.preview-banner-overlay { position: absolute; inset: 0; background: rgba(20,64,41,0.55); }
+.preview-banner-text { position: relative; z-index: 1; text-align: center; color: #fff; padding: 0 12px; }
+.preview-banner-text h3 { font-size: 15px; font-weight: 700; }
+.preview-banner-text p  { font-size: 11px; opacity: 0.8; margin-top: 3px; }
+.preview-body { padding: 12px 14px; }
+.preview-body p { font-size: 12px; color: var(--gray-600); line-height: 1.6; }
+.preview-meta { display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
+.preview-meta-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--gray-500); }
+.preview-meta-item i { font-size: 13px; color: var(--green-600); }
+
+/* ===== OVERLAY & TOAST ===== */
+.sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 99; }
+.sidebar-overlay.open { display: block; }
+.toast { position: fixed; bottom: 24px; right: 24px; background: var(--green-800); color: #fff; padding: 11px 16px; border-radius: 10px; font-size: 13px; display: flex; align-items: center; gap: 9px; z-index: 999; opacity: 0; transform: translateY(10px); transition: all 0.3s; pointer-events: none; max-width: 300px; }
+.toast.show { opacity: 1; transform: translateY(0); }
+.toast i { font-size: 16px; color: var(--green-200); }
 
 /* ===== RESPONSIVE ===== */
-@media(max-width:1024px){.form-grid{grid-template-columns:1fr;}}
-@media(max-width:768px){
-  .sidebar{transform:translateX(-100%);}
-  .sidebar.open{transform:translateX(0);}
-  .sidebar-overlay.open{display:block;}
-  .hamburger{display:flex;}
-  .header{left:0;}
-  .main{margin-left:0;padding:16px;}
-  .form-grid{grid-template-columns:1fr;}
-  .stat-row{grid-template-columns:1fr 1fr;}
-  .section-tab{font-size:12px;padding:7px 8px;}
+@media (max-width: 1100px) { .tab1-layout { grid-template-columns: 1fr; } .preview-sticky { position: static; } }
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .hamburger { display: flex; }
+  .header { left: 0; }
+  .main { margin-left: 0; padding: 16px; }
+  .stat-strip { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .value-inputs { grid-template-columns: 1fr; }
 }
-@media(max-width:480px){
-  .stat-row{grid-template-columns:1fr;}
-  .page-header{flex-direction:column;align-items:flex-start;}
+@media (max-width: 480px) {
+  .stat-strip { grid-template-columns: 1fr 1fr; }
+  .page-header { flex-direction: column; align-items: flex-start; }
 }
 </style>
 </head>
 <body>
 
-<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
 
-<!-- SIDEBAR -->
+<!-- ===== SIDEBAR ===== -->
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-logo">
     <div class="logo-mark">
       <div class="logo-icon">
-        <img src=".png" alt="Logo">
+        <img src="logoGrevia.png" alt="Logo">
       </div>
       <div class="logo-text">
         <div class="brand">Grevia</div>
-        <div class="sub">Quản trị viên</div>
+        <div class="sub">Nhà hàng chay</div>
       </div>
     </div>
   </div>
   <div class="nav-section">
     <div class="nav-label">Tổng quan</div>
     <a href="index.html" class="nav-item"><i class="ti ti-layout-dashboard"></i> Dashboard</a>
-    <div class="nav-label">Quản lý nội dung</div>
+    <div class="nav-label">Nội dung</div>
     <a href="datban.html" class="nav-item"><i class="ti ti-calendar-event"></i> Đặt bàn <span class="nav-badge">5</span></a>
     <a href="thucdon.html" class="nav-item"><i class="ti ti-tools-kitchen-2"></i> Thực đơn</a>
     <a href="tintuc.html" class="nav-item"><i class="ti ti-news"></i> Tin tức</a>
     <a href="uudai.html" class="nav-item"><i class="ti ti-tag"></i> Ưu đãi</a>
     <a href="gioithieu.html" class="nav-item active"><i class="ti ti-info-circle"></i> Giới thiệu</a>
-    <a href="lienhe.html" class="nav-item"><i class="ti ti-phone"></i> Liên hệ</a>
+    <a href="lienhe.html" class="nav-item"><i class="ti ti-map-pin"></i> Liên hệ</a>
     <div class="nav-label">Hệ thống</div>
     <a href="caidat.html" class="nav-item"><i class="ti ti-settings"></i> Cài đặt</a>
   </div>
@@ -337,437 +271,396 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:#f9fafb;color:#111827;fo
   </div>
 </nav>
 
-<!-- HEADER -->
+<!-- ===== HEADER ===== -->
 <header class="header">
   <button class="hamburger" onclick="toggleSidebar()"><i class="ti ti-menu-2"></i></button>
   <div class="breadcrumb">
-    <span>Grevia Admin</span>
-    <i class="ti ti-chevron-right"></i>
-    <span>Quản lý nội dung</span>
-    <i class="ti ti-chevron-right"></i>
+    <a href="index.html">Grevia Admin</a>
+    <i class="ti ti-chevron-right sep"></i>
     <span class="current">Giới thiệu</span>
   </div>
-  <div class="header-actions">
-    <a href="datban.html" class="icon-btn" title="Thông báo">
-      <i class="ti ti-bell"></i>
-      <span class="notif-dot"></span>
+  <div class="header-right">
+    <a href="datban.html" class="icon-btn" title="Đặt bàn chờ xử lý">
+      <i class="ti ti-bell"></i><span class="notif-dot"></span>
     </a>
     <a href="caidat.html" class="icon-btn" title="Cài đặt"><i class="ti ti-settings"></i></a>
-    <a href="caidat.html" class="admin-avatar" style="width:34px;height:34px;font-size:12px;flex-shrink:0;cursor:pointer;text-decoration:none;">AD</a>
+    <a href="caidat.html" class="header-avatar" title="Tài khoản">AD</a>
   </div>
 </header>
 
-<!-- MAIN -->
+<!-- ===== MAIN ===== -->
 <main class="main">
+
+  <!-- Page header -->
   <div class="page-header">
-    <div>
+    <div class="page-header-left">
       <h1>Quản lý trang Giới thiệu</h1>
-      <p>Chỉnh sửa nội dung, hình ảnh và thông tin hiển thị trên trang giới thiệu nhà hàng.</p>
+      <p>Chỉnh sửa nội dung, hình ảnh và thông tin hiển thị trên trang giới thiệu.</p>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;">
-      <button class="btn-secondary" onclick="previewPage()"><i class="ti ti-eye"></i> Xem trước</button>
-      <button class="btn-primary" onclick="savePage()"><i class="ti ti-device-floppy"></i> Lưu thay đổi</button>
+      <button class="btn btn-outline" onclick="showToast('Đang mở xem trước...')"><i class="ti ti-eye"></i> Xem trước</button>
+      <button class="btn btn-primary" onclick="savePage()"><i class="ti ti-device-floppy"></i> Lưu thay đổi</button>
     </div>
   </div>
 
-  <!-- THỐNG KÊ NHANH -->
-  <div class="stat-row">
-    <div class="stat-mini">
-      <div class="val" id="statWords">320</div>
-      <div class="lbl">Từ nội dung</div>
+  <!-- Stat strip -->
+  <div class="stat-strip">
+    <div class="stat-mini smi-a">
+      <div class="stat-mini-icon"><i class="ti ti-file-text"></i></div>
+      <div><div class="stat-mini-val" id="statWords">320</div><div class="stat-mini-lbl">Từ nội dung</div></div>
     </div>
-    <div class="stat-mini">
-      <div class="val">6</div>
-      <div class="lbl">Ảnh gallery</div>
+    <div class="stat-mini smi-b">
+      <div class="stat-mini-icon"><i class="ti ti-photo"></i></div>
+      <div><div class="stat-mini-val" id="statImgs">6</div><div class="stat-mini-lbl">Ảnh gallery</div></div>
     </div>
-    <div class="stat-mini">
-      <div class="val" id="statUpdated">Hôm nay</div>
-      <div class="lbl">Cập nhật lần cuối</div>
+    <div class="stat-mini smi-c">
+      <div class="stat-mini-icon"><i class="ti ti-star"></i></div>
+      <div><div class="stat-mini-val" id="statValues">4</div><div class="stat-mini-lbl">Giá trị cốt lõi</div></div>
+    </div>
+    <div class="stat-mini smi-d">
+      <div class="stat-mini-icon"><i class="ti ti-clock"></i></div>
+      <div><div class="stat-mini-val" id="statUpdated">Hôm nay</div><div class="stat-mini-lbl">Cập nhật lần cuối</div></div>
     </div>
   </div>
 
-  <!-- TABS -->
-  <div class="section-tabs" role="tablist">
-    <button class="section-tab active" onclick="switchTab(this,'tab-basic')"><i class="ti ti-file-text" style="font-size:13px;margin-right:4px"></i>Thông tin chung</button>
-    <button class="section-tab" onclick="switchTab(this,'tab-story')"><i class="ti ti-book" style="font-size:13px;margin-right:4px"></i>Câu chuyện</button>
-    <button class="section-tab" onclick="switchTab(this,'tab-values')"><i class="ti ti-star" style="font-size:13px;margin-right:4px"></i>Giá trị cốt lõi</button>
-    <button class="section-tab" onclick="switchTab(this,'tab-gallery')"><i class="ti ti-photo" style="font-size:13px;margin-right:4px"></i>Hình ảnh</button>
-  </div>
+  <!-- Main card with tabs -->
+  <div class="card">
+    <!-- Tabs -->
+    <div class="section-tabs">
+      <button class="section-tab active" onclick="switchTab(this,'tab-basic')">
+        <i class="ti ti-file-text" style="font-size:13px;vertical-align:-2px;margin-right:4px"></i>Thông tin chung
+      </button>
+      <button class="section-tab" onclick="switchTab(this,'tab-story')">
+        <i class="ti ti-book" style="font-size:13px;vertical-align:-2px;margin-right:4px"></i>Câu chuyện
+      </button>
+      <button class="section-tab" onclick="switchTab(this,'tab-values')">
+        <i class="ti ti-star" style="font-size:13px;vertical-align:-2px;margin-right:4px"></i>Giá trị cốt lõi
+      </button>
+      <button class="section-tab" onclick="switchTab(this,'tab-gallery')">
+        <i class="ti ti-photo" style="font-size:13px;vertical-align:-2px;margin-right:4px"></i>Hình ảnh
+      </button>
+    </div>
 
-  <!-- TAB 1: THÔNG TIN CHUNG -->
-  <div class="section-panel active" id="tab-basic">
-    <div style="display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start;">
-      <div>
-        <!-- Thông tin cơ bản -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title"><i class="ti ti-building-store"></i> Thông tin nhà hàng</div>
-            <span class="badge badge-success"><i class="ti ti-circle-check" style="font-size:12px"></i> Đang hiển thị</span>
-          </div>
-          <div class="card-body">
-            <div class="form-grid">
-              <div class="form-group full">
-                <label class="form-label">Tên nhà hàng</label>
-                <input type="text" class="form-input" id="restaurantName" value="Grevia – Nhà hàng chay" placeholder="Tên hiển thị trên trang giới thiệu">
-              </div>
-              <div class="form-group full">
-                <label class="form-label">Slogan / Tagline</label>
-                <input type="text" class="form-input" id="slogan" value="Sống xanh – Ăn lành – Thăng bằng tâm hồn" placeholder="Câu khẩu hiệu ngắn gọn">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Năm thành lập</label>
-                <input type="number" class="form-input" id="foundYear" value="2018" min="1900" max="2099">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Số chi nhánh</label>
-                <input type="number" class="form-input" id="branches" value="3" min="1">
-              </div>
-              <div class="form-group full">
-                <label class="form-label">Mô tả ngắn <span style="text-transform:none;font-weight:400;color:var(--gray-400)">(hiển thị trên đầu trang)</span></label>
-                <textarea class="form-textarea" id="shortDesc" rows="3" oninput="countChars(this,'cntShort',160)" style="min-height:75px">Grevia là nhà hàng chay hiện đại tại Hà Nội, mang đến những trải nghiệm ẩm thực thuần chay tinh tế, lành mạnh và đầy cảm xúc trong không gian xanh mát, ấm cúng.</textarea>
-                <div class="char-count" id="cntShort">183/160 ký tự</div>
+    <!-- TAB 1: THÔNG TIN CHUNG -->
+    <div class="section-panel active" id="tab-basic">
+      <div class="tab1-layout">
+        <!-- Left: form -->
+        <div>
+          <div class="form-row">
+            <div class="form-group full">
+              <label class="form-label">Tên nhà hàng</label>
+              <input type="text" class="form-control" id="inpName" value="Grevia – Nhà hàng chay" oninput="syncPreview()">
+            </div>
+            <div class="form-group full">
+              <label class="form-label">Slogan / Tagline</label>
+              <input type="text" class="form-control" id="inpSlogan" value="Sống xanh – Ăn lành – Thăng bằng tâm hồn" oninput="syncPreview()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Năm thành lập</label>
+              <input type="number" class="form-control" id="inpYear" value="2018" min="1900" max="2099" oninput="syncPreview()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Số chi nhánh</label>
+              <input type="number" class="form-control" id="inpBranch" value="3" min="1" oninput="syncPreview()">
+            </div>
+            <div class="form-group full">
+              <label class="form-label">Mô tả ngắn <span style="text-transform:none;font-weight:400;color:var(--gray-300)">(hiển thị đầu trang)</span></label>
+              <textarea class="form-control" id="inpDesc" rows="3" oninput="syncPreview();countChars(this,'cntDesc',160)">Grevia là nhà hàng chay hiện đại tại Hà Nội, mang đến những trải nghiệm ẩm thực thuần chay tinh tế, lành mạnh và đầy cảm xúc trong không gian xanh mát, ấm cúng.</textarea>
+              <div class="char-count" id="cntDesc">0/160</div>
+            </div>
+            <div class="form-group full">
+              <label class="form-label">Trạng thái hiển thị</label>
+              <div class="toggle-wrap" style="margin-top:4px">
+                <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                <span class="toggle-label">Hiển thị trang giới thiệu trên website</span>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Banner ảnh -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title"><i class="ti ti-photo"></i> Ảnh banner trang giới thiệu</div>
-          </div>
-          <div class="card-body">
-            <div class="img-upload-wrap has-img" id="bannerWrap" onclick="triggerUpload('bannerFile')">
-              <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800&q=80" alt="Banner" id="bannerPreview">
-            </div>
-            <input type="file" id="bannerFile" accept="image/*" style="display:none" onchange="previewImage(this,'bannerPreview','bannerWrap')">
-            <p class="form-hint" style="margin-top:8px"><i class="ti ti-info-circle" style="font-size:12px"></i> Khuyến nghị: 1200×400px, JPG/PNG, tối đa 2MB. Nhấp vào ảnh để thay đổi.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- PREVIEW CARD -->
-      <div style="position:sticky;top:80px;">
-        <div class="card" style="margin-bottom:0">
-          <div class="card-header">
-            <div class="card-title"><i class="ti ti-device-mobile"></i> Xem trước</div>
-          </div>
-          <div style="padding:14px;">
-            <div class="preview-card">
-              <div class="preview-banner">
-                <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800&q=80" alt="" class="preview-banner-img" id="previewBannerMini">
-                <div class="preview-banner-overlay"></div>
-                <div class="preview-banner-text">
-                  <h3 id="previewName">Grevia – Nhà hàng chay</h3>
-                  <p id="previewSlogan">Sống xanh – Ăn lành – Thăng bằng tâm hồn</p>
-                </div>
-              </div>
-              <div class="preview-body">
-                <p id="previewDesc">Grevia là nhà hàng chay hiện đại tại Hà Nội, mang đến những trải nghiệm ẩm thực thuần chay tinh tế, lành mạnh và đầy cảm xúc trong không gian xanh mát, ấm cúng.</p>
-                <div class="preview-meta">
-                  <div class="preview-meta-item"><i class="ti ti-calendar"></i> <span id="previewYear">Từ năm 2018</span></div>
-                  <div class="preview-meta-item"><i class="ti ti-map-pin"></i> <span id="previewBranch">3 chi nhánh</span></div>
+          <!-- Banner upload -->
+          <div style="margin-top:4px">
+            <label class="form-label">Ảnh banner trang giới thiệu</label>
+            <div id="bannerWrap">
+              <div class="img-preview-wrap" onclick="document.getElementById('bannerFile').click()">
+                <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800&q=80" alt="Banner" id="bannerPreviewImg">
+                <div class="img-preview-overlay">
+                  <i class="ti ti-photo-up" style="color:#fff;font-size:20px"></i>
+                  <span>Thay ảnh</span>
                 </div>
               </div>
             </div>
-            <p style="font-size:11px;color:var(--gray-400);margin-top:10px;text-align:center">Bản xem trước rút gọn</p>
+            <input type="file" id="bannerFile" accept="image/*" style="display:none" onchange="handleBannerUpload(this)">
+            <p class="form-hint"><i class="ti ti-info-circle" style="font-size:12px;vertical-align:-1px"></i> Khuyến nghị: 1200×400px, JPG/PNG, tối đa 2MB</p>
           </div>
+        </div>
+
+        <!-- Right: preview -->
+        <div class="preview-sticky">
+          <p style="font-size:11px;font-weight:600;color:var(--gray-400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Xem trước</p>
+          <div class="preview-card">
+            <div class="preview-banner">
+              <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800&q=80" alt="" class="preview-banner-img" id="previewBannerMini">
+              <div class="preview-banner-overlay"></div>
+              <div class="preview-banner-text">
+                <h3 id="previewName">Grevia – Nhà hàng chay</h3>
+                <p id="previewSlogan">Sống xanh – Ăn lành – Thăng bằng tâm hồn</p>
+              </div>
+            </div>
+            <div class="preview-body">
+              <p id="previewDesc">Grevia là nhà hàng chay hiện đại tại Hà Nội, mang đến những trải nghiệm ẩm thực thuần chay tinh tế, lành mạnh và đầy cảm xúc trong không gian xanh mát, ấm cúng.</p>
+              <div class="preview-meta">
+                <div class="preview-meta-item"><i class="ti ti-calendar"></i><span id="previewYear">Từ năm 2018</span></div>
+                <div class="preview-meta-item"><i class="ti ti-map-pin"></i><span id="previewBranch">3 chi nhánh</span></div>
+              </div>
+            </div>
+          </div>
+          <p style="font-size:11px;color:var(--gray-300);margin-top:8px;text-align:center">Bản xem trước rút gọn – cập nhật realtime</p>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- TAB 2: CÂU CHUYỆN -->
-  <div class="section-panel" id="tab-story">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title"><i class="ti ti-book-2"></i> Câu chuyện thương hiệu</div>
+    <!-- TAB 2: CÂU CHUYỆN -->
+    <div class="section-panel" id="tab-story">
+      <div class="form-row" style="margin-bottom:14px">
+        <div class="form-group full">
+          <label class="form-label">Tiêu đề phần câu chuyện</label>
+          <input type="text" class="form-control" value="Hành trình của Grevia">
+        </div>
       </div>
-      <div class="card-body">
-        <div class="form-grid">
-          <div class="form-group full">
-            <label class="form-label">Tiêu đề phần câu chuyện</label>
-            <input type="text" class="form-input" value="Hành trình của Grevia" placeholder="Tiêu đề hiển thị">
+      <div class="form-group">
+        <label class="form-label">Nội dung câu chuyện</label>
+        <div class="rte-wrap">
+          <div class="rte-toolbar">
+            <button class="rte-btn" onclick="fmt('bold')" title="In đậm"><i class="ti ti-bold"></i></button>
+            <button class="rte-btn" onclick="fmt('italic')" title="In nghiêng"><i class="ti ti-italic"></i></button>
+            <button class="rte-btn" onclick="fmt('underline')" title="Gạch chân"><i class="ti ti-underline"></i></button>
+            <div class="rte-divider"></div>
+            <button class="rte-btn" onclick="fmt('insertUnorderedList')" title="Danh sách"><i class="ti ti-list"></i></button>
+            <button class="rte-btn" onclick="fmt('insertOrderedList')" title="Danh sách số"><i class="ti ti-list-numbers"></i></button>
+            <div class="rte-divider"></div>
+            <button class="rte-btn" onclick="fmt('justifyLeft')"><i class="ti ti-align-left"></i></button>
+            <button class="rte-btn" onclick="fmt('justifyCenter')"><i class="ti ti-align-center"></i></button>
+            <button class="rte-btn" onclick="fmt('justifyRight')"><i class="ti ti-align-right"></i></button>
+            <div class="rte-divider"></div>
+            <button class="rte-btn" onclick="fmt('undo')"><i class="ti ti-arrow-back-up"></i></button>
+            <button class="rte-btn" onclick="fmt('redo')"><i class="ti ti-arrow-forward-up"></i></button>
           </div>
-          <div class="form-group full">
-            <label class="form-label">Nội dung câu chuyện</label>
-            <div class="rte-toolbar">
-              <button class="rte-btn" onclick="fmt('bold')" title="In đậm"><i class="ti ti-bold"></i></button>
-              <button class="rte-btn" onclick="fmt('italic')" title="In nghiêng"><i class="ti ti-italic"></i></button>
-              <button class="rte-btn" onclick="fmt('underline')" title="Gạch chân"><i class="ti ti-underline"></i></button>
-              <div class="rte-divider"></div>
-              <button class="rte-btn" onclick="fmt('insertUnorderedList')" title="Danh sách"><i class="ti ti-list"></i></button>
-              <button class="rte-btn" onclick="fmt('insertOrderedList')" title="Danh sách số"><i class="ti ti-list-numbers"></i></button>
-              <div class="rte-divider"></div>
-              <button class="rte-btn" onclick="fmt('justifyLeft')" title="Trái"><i class="ti ti-align-left"></i></button>
-              <button class="rte-btn" onclick="fmt('justifyCenter')" title="Giữa"><i class="ti ti-align-center"></i></button>
-              <button class="rte-btn" onclick="fmt('justifyRight')" title="Phải"><i class="ti ti-align-right"></i></button>
-              <div class="rte-divider"></div>
-              <button class="rte-btn" onclick="fmt('undo')" title="Hoàn tác"><i class="ti ti-arrow-back-up"></i></button>
-              <button class="rte-btn" onclick="fmt('redo')" title="Làm lại"><i class="ti ti-arrow-forward-up"></i></button>
-            </div>
-            <div class="rte-editor" contenteditable="true" id="storyEditor">
-              <p>Grevia ra đời năm 2018 từ một ước mơ giản dị: mang ẩm thực thuần chay đến gần hơn với cuộc sống hiện đại. Người sáng lập – chị Minh Anh – sau nhiều năm theo đuổi lối sống lành mạnh, nhận ra rằng đồ chay không nhất thiết phải đạm bạc hay kém hấp dẫn.</p>
-              <p>Từ một căn bếp nhỏ ở phố cổ Hà Nội, Grevia từng bước xây dựng thực đơn với hơn 60 món chay sáng tạo, kết hợp hương vị truyền thống và phong cách ẩm thực hiện đại. Mỗi món ăn đều được chăm chút từ nguyên liệu đến cách chế biến, đảm bảo dinh dưỡng và thuần khiết.</p>
-              <p>Đến nay, Grevia đã có 3 chi nhánh tại Hà Nội, phục vụ hàng nghìn thực khách mỗi tháng – những người tìm kiếm không chỉ một bữa ăn ngon mà còn là trải nghiệm sống xanh trọn vẹn.</p>
-            </div>
+          <div class="rte-editor" contenteditable="true" id="storyEditor">
+            <p>Grevia ra đời năm 2018 từ một ước mơ giản dị: mang ẩm thực thuần chay đến gần hơn với cuộc sống hiện đại. Người sáng lập – chị Minh Anh – sau nhiều năm theo đuổi lối sống lành mạnh, nhận ra rằng đồ chay không nhất thiết phải đạm bạc hay kém hấp dẫn.</p>
+            <p>Từ một căn bếp nhỏ ở phố cổ Hà Nội, Grevia từng bước xây dựng thực đơn với hơn 60 món chay sáng tạo, kết hợp hương vị truyền thống và phong cách ẩm thực hiện đại.</p>
+            <p>Đến nay, Grevia đã có 3 chi nhánh tại Hà Nội, phục vụ hàng nghìn thực khách mỗi tháng – những người tìm kiếm không chỉ một bữa ăn ngon mà còn là trải nghiệm sống xanh trọn vẹn.</p>
           </div>
-          <div class="form-group">
-            <label class="form-label">Ảnh minh họa câu chuyện</label>
-            <div class="img-upload-wrap has-img" onclick="triggerUpload('storyFile')">
-              <img src="https://images.unsplash.com/photo-1543352634-99a5d50ae78e?w=600&q=80" alt="Story" id="storyPreview" style="max-height:160px">
-            </div>
-            <input type="file" id="storyFile" accept="image/*" style="display:none" onchange="previewImage(this,'storyPreview')">
+        </div>
+      </div>
+      <div class="form-row" style="margin-top:14px">
+        <div class="form-group">
+          <label class="form-label">Ảnh minh họa câu chuyện</label>
+          <div class="img-preview-wrap" onclick="document.getElementById('storyFile').click()">
+            <img src="https://images.unsplash.com/photo-1543352634-99a5d50ae78e?w=600&q=80" alt="Story" id="storyImg" style="max-height:160px">
+            <div class="img-preview-overlay"><i class="ti ti-photo-up" style="color:#fff;font-size:20px"></i><span>Thay ảnh</span></div>
           </div>
+          <input type="file" id="storyFile" accept="image/*" style="display:none" onchange="swapImg(this,'storyImg')">
+        </div>
+        <div>
           <div class="form-group">
             <label class="form-label">Video giới thiệu (URL)</label>
-            <input type="url" class="form-input" placeholder="https://youtube.com/..." style="margin-bottom:8px">
-            <label class="form-label" style="margin-top:8px">Trích dẫn nổi bật</label>
-            <textarea class="form-textarea" rows="3" placeholder="Câu trích dẫn từ người sáng lập hoặc đánh giá nổi bật...">"Ăn chay không phải từ bỏ – đó là lựa chọn yêu thương bản thân và thế giới."</textarea>
-            <label class="form-label" style="margin-top:8px">Tác giả trích dẫn</label>
-            <input type="text" class="form-input" value="Nguyễn Minh Anh – Người sáng lập Grevia">
+            <input type="url" class="form-control" placeholder="https://youtube.com/...">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Trích dẫn nổi bật</label>
+            <textarea class="form-control" rows="3">"Ăn chay không phải từ bỏ – đó là lựa chọn yêu thương bản thân và thế giới."</textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tác giả trích dẫn</label>
+            <input type="text" class="form-control" value="Nguyễn Minh Anh – Người sáng lập Grevia">
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- TAB 3: GIÁ TRỊ CỐT LÕI -->
-  <div class="section-panel" id="tab-values">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title"><i class="ti ti-star"></i> Giá trị cốt lõi</div>
-        <button class="btn-primary" style="padding:6px 12px;font-size:12px" onclick="addValue()"><i class="ti ti-plus"></i> Thêm giá trị</button>
+    <!-- TAB 3: GIÁ TRỊ CỐT LÕI -->
+    <div class="section-panel" id="tab-values">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+        <p style="font-size:13px;color:var(--gray-500)">Các giá trị hiển thị dạng thẻ trên trang giới thiệu.</p>
+        <button class="btn btn-primary" style="padding:7px 14px;font-size:12px" onclick="addValue()"><i class="ti ti-plus"></i> Thêm giá trị</button>
       </div>
-      <div class="card-body">
-        <p style="font-size:12.5px;color:var(--gray-500);margin-bottom:16px">Các giá trị hiển thị dạng thẻ trên trang giới thiệu. Kéo để sắp xếp thứ tự.</p>
-        <div id="valuesList" style="display:flex;flex-direction:column;gap:12px;">
-          <!-- Value items injected by JS -->
+      <div id="valuesList"></div>
+
+      <div style="border-top:1px solid var(--gray-100);margin-top:20px;padding-top:20px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+          <p style="font-size:13px;font-weight:600;color:var(--gray-700)">Số liệu ấn tượng</p>
+          <button class="btn btn-outline" style="padding:6px 12px;font-size:12px" onclick="addStat()"><i class="ti ti-plus"></i> Thêm số liệu</button>
         </div>
+        <div class="stats-items" id="statsList"></div>
       </div>
     </div>
 
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title"><i class="ti ti-chart-bar"></i> Số liệu ấn tượng</div>
+    <!-- TAB 4: GALLERY -->
+    <div class="section-panel" id="tab-gallery">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+        <p style="font-size:13px;color:var(--gray-500)">Ảnh hiển thị trong thư viện hình ảnh trên trang giới thiệu.</p>
+        <button class="btn btn-primary" style="padding:7px 14px;font-size:12px" onclick="document.getElementById('galleryFile').click()"><i class="ti ti-upload"></i> Tải ảnh lên</button>
       </div>
-      <div class="card-body">
-        <p style="font-size:12.5px;color:var(--gray-500);margin-bottom:16px">Hiển thị dưới dạng banner thống kê trên trang giới thiệu.</p>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px" id="statsGrid">
-          <!-- Stat items -->
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB 4: GALLERY -->
-  <div class="section-panel" id="tab-gallery">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title"><i class="ti ti-photo"></i> Thư viện ảnh giới thiệu</div>
-        <div style="display:flex;gap:8px">
-          <select class="form-select" style="width:auto;padding:6px 10px;font-size:12px">
-            <option>Tất cả ảnh</option>
-            <option>Không gian</option>
-            <option>Món ăn</option>
-            <option>Đội ngũ</option>
-          </select>
-          <button class="btn-primary" style="padding:6px 12px;font-size:12px" onclick="triggerUpload('galleryFile')"><i class="ti ti-upload"></i> Tải ảnh lên</button>
-        </div>
-      </div>
-      <div class="card-body">
-        <input type="file" id="galleryFile" accept="image/*" multiple style="display:none" onchange="addGalleryImages(this)">
-        <div class="gallery-grid" id="galleryGrid">
-          <!-- Gallery items injected by JS -->
-        </div>
-        <p style="font-size:12px;color:var(--gray-400);margin-top:12px"><i class="ti ti-info-circle" style="font-size:12px"></i> Hỗ trợ JPG, PNG, WEBP. Tối đa 5MB/ảnh. Nhấn vào ảnh để xóa.</p>
-      </div>
+      <input type="file" id="galleryFile" accept="image/*" multiple style="display:none" onchange="addGalleryImgs(this)">
+      <div class="gallery-grid" id="galleryGrid"></div>
+      <p class="form-hint" style="margin-top:12px"><i class="ti ti-info-circle" style="font-size:12px;vertical-align:-1px"></i> Hỗ trợ JPG, PNG, WEBP – tối đa 5MB/ảnh. Di chuột vào ảnh để xóa.</p>
     </div>
   </div>
 
 </main>
 
-<!-- TOAST -->
-<div class="toast" id="toast"><i class="ti ti-circle-check"></i><span id="toastMsg">Thao tác thành công!</span></div>
+<div class="toast" id="toastEl"><i class="ti ti-circle-check"></i><span id="toastMsg">Thành công!</span></div>
 
 <script>
-// ===== SIDEBAR =====
-function toggleSidebar(){
+/* ===== SIDEBAR ===== */
+function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('open');
-  document.getElementById('sidebarOverlay').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
 }
-function closeSidebar(){
+function closeSidebar() {
   document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('sidebarOverlay').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
 }
 
-// ===== TOAST =====
-function showToast(msg, type='success'){
-  const t=document.getElementById('toast');
-  document.getElementById('toastMsg').textContent=msg;
-  t.style.background = type==='error' ? '#991b1b' : 'var(--green-800)';
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2800);
+/* ===== TOAST ===== */
+function showToast(msg) {
+  const el = document.getElementById('toastEl');
+  document.getElementById('toastMsg').textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2800);
 }
 
-// ===== TABS =====
-function switchTab(btn, panelId){
-  document.querySelectorAll('.section-tab').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.section-panel').forEach(p=>p.classList.remove('active'));
+/* ===== TABS ===== */
+function switchTab(btn, panelId) {
+  document.querySelectorAll('.section-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById(panelId).classList.add('active');
 }
 
-// ===== LIVE PREVIEW =====
-function setupLivePreview(){
-  const map={
-    'restaurantName':'previewName',
-    'slogan':'previewSlogan',
-    'shortDesc':'previewDesc'
-  };
-  Object.keys(map).forEach(id=>{
-    const el=document.getElementById(id);
-    if(el) el.addEventListener('input',()=>{
-      document.getElementById(map[id]).textContent=el.value;
-    });
-  });
-  document.getElementById('foundYear').addEventListener('input',function(){
-    document.getElementById('previewYear').textContent='Từ năm '+this.value;
-  });
-  document.getElementById('branches').addEventListener('input',function(){
-    document.getElementById('previewBranch').textContent=this.value+' chi nhánh';
-  });
+/* ===== LIVE PREVIEW ===== */
+function syncPreview() {
+  document.getElementById('previewName').textContent   = document.getElementById('inpName').value;
+  document.getElementById('previewSlogan').textContent = document.getElementById('inpSlogan').value;
+  document.getElementById('previewDesc').textContent   = document.getElementById('inpDesc').value;
+  document.getElementById('previewYear').textContent   = 'Từ năm ' + document.getElementById('inpYear').value;
+  document.getElementById('previewBranch').textContent = document.getElementById('inpBranch').value + ' chi nhánh';
 }
 
-// ===== CHAR COUNT =====
-function countChars(el, counterId, max){
-  const len=el.value.length;
-  const counter=document.getElementById(counterId);
-  counter.textContent=len+'/'+max+' ký tự';
-  counter.classList.toggle('warn', len>max);
+/* ===== CHAR COUNT ===== */
+function countChars(el, id, max) {
+  const len = el.value.length;
+  const el2 = document.getElementById(id);
+  el2.textContent = len + '/' + max;
+  el2.classList.toggle('warn', len > max);
 }
 
-// ===== IMAGE UPLOAD =====
-function triggerUpload(id){ document.getElementById(id).click(); }
-function previewImage(input, previewId, wrapId){
-  if(!input.files||!input.files[0]) return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    document.getElementById(previewId).src=e.target.result;
-    if(wrapId){
-      const wrap=document.getElementById(wrapId);
-      wrap.classList.add('has-img');
-      // also update mini preview
-      if(previewId==='bannerPreview') document.getElementById('previewBannerMini').src=e.target.result;
-    }
+/* ===== IMAGE UPLOAD ===== */
+function handleBannerUpload(input) {
+  if (!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('bannerPreviewImg').src = e.target.result;
+    document.getElementById('previewBannerMini').src = e.target.result;
   };
   reader.readAsDataURL(input.files[0]);
 }
-
-// ===== RTE =====
-function fmt(cmd){ document.execCommand(cmd,false,null); }
-
-// ===== WORD COUNT =====
-function updateWordCount(){
-  const editor=document.getElementById('storyEditor');
-  if(!editor) return;
-  const text=editor.innerText||'';
-  const words=text.trim().split(/\s+/).filter(w=>w.length>0).length;
-  document.getElementById('statWords').textContent=words;
+function swapImg(input, imgId) {
+  if (!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = e => { document.getElementById(imgId).src = e.target.result; };
+  reader.readAsDataURL(input.files[0]);
 }
 
-// ===== SAVE =====
-function savePage(){
-  const btn=document.querySelector('.btn-primary[onclick="savePage()"]');
-  const orig=btn.innerHTML;
-  btn.innerHTML='<i class="ti ti-loader-2" style="animation:spin .8s linear infinite"></i> Đang lưu...';
-  btn.disabled=true;
-  setTimeout(()=>{
-    btn.innerHTML=orig;
-    btn.disabled=false;
-    document.getElementById('statUpdated').textContent='Vừa xong';
+/* ===== RTE ===== */
+function fmt(cmd) { document.execCommand(cmd, false, null); }
+
+/* ===== WORD COUNT ===== */
+function updateWordCount() {
+  const editor = document.getElementById('storyEditor');
+  if (!editor) return;
+  const words = (editor.innerText || '').trim().split(/\s+/).filter(w => w).length;
+  document.getElementById('statWords').textContent = words;
+}
+
+/* ===== SAVE ===== */
+function savePage() {
+  const btn = document.querySelector('.btn-primary[onclick="savePage()"]');
+  const orig = btn.innerHTML;
+  btn.innerHTML = '<i class="ti ti-loader-2" style="animation:spin .8s linear infinite"></i> Đang lưu...';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.innerHTML = orig;
+    btn.disabled = false;
+    document.getElementById('statUpdated').textContent = 'Vừa xong';
     showToast('Đã lưu thay đổi thành công!');
-  },1200);
+  }, 1100);
 }
 
-function previewPage(){
-  showToast('Đang mở xem trước trang...');
-}
-
-// ===== VALUES LIST =====
-const defaultValues=[
-  {icon:'ti-leaf',title:'Thuần Chay',desc:'Toàn bộ nguyên liệu 100% thực vật, không sử dụng bất kỳ sản phẩm động vật nào.',color:'green'},
-  {icon:'ti-heart',title:'Lành Mạnh',desc:'Chế biến theo tiêu chuẩn dinh dưỡng, không chất bảo quản, không hương liệu nhân tạo.',color:'red'},
-  {icon:'ti-world',title:'Bền Vững',desc:'Sử dụng bao bì thân thiện môi trường, ưu tiên nguyên liệu địa phương theo mùa.',color:'blue'},
-  {icon:'ti-users',title:'Cộng Đồng',desc:'Chia sẻ lối sống xanh, kết nối những người yêu ẩm thực lành mạnh và thiên nhiên.',color:'amber'},
+/* ===== VALUES ===== */
+let values = [
+  { icon: '🌿', title: 'Thuần Chay',  desc: 'Toàn bộ nguyên liệu 100% thực vật, không sử dụng bất kỳ sản phẩm động vật nào.' },
+  { icon: '💚', title: 'Lành Mạnh',   desc: 'Chế biến theo tiêu chuẩn dinh dưỡng, không chất bảo quản, không hương liệu nhân tạo.' },
+  { icon: '🌍', title: 'Bền Vững',    desc: 'Sử dụng bao bì thân thiện môi trường, ưu tiên nguyên liệu địa phương theo mùa.' },
+  { icon: '🤝', title: 'Cộng Đồng',  desc: 'Chia sẻ lối sống xanh, kết nối những người yêu ẩm thực lành mạnh và thiên nhiên.' },
 ];
 
-function renderValues(){
-  const list=document.getElementById('valuesList');
-  list.innerHTML='';
-  defaultValues.forEach((v,i)=>{
-    list.innerHTML+=`
-    <div style="display:flex;align-items:flex-start;gap:14px;padding:14px;border:1px solid var(--gray-200);border-radius:10px;background:#fff;transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.06)'" onmouseout="this.style.boxShadow='none'">
-      <div style="width:40px;height:40px;background:var(--green-50);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer" onclick="changeIcon(${i})" title="Đổi icon">
-        <i class="ti ${v.icon}" style="font-size:20px;color:var(--green-600)"></i>
+function renderValues() {
+  const el = document.getElementById('valuesList');
+  el.innerHTML = values.map((v, i) => `
+    <div class="value-item">
+      <div class="value-icon-box" title="Emoji">${v.icon}</div>
+      <div class="value-inputs">
+        <input type="text" class="form-control" value="${v.title}" placeholder="Tiêu đề" oninput="values[${i}].title=this.value">
+        <input type="text" class="form-control" value="${v.desc}" placeholder="Mô tả" oninput="values[${i}].desc=this.value">
       </div>
-      <div style="flex:1;display:grid;grid-template-columns:1fr 2fr;gap:10px;align-items:center">
-        <input type="text" class="form-input" value="${v.title}" placeholder="Tiêu đề" oninput="defaultValues[${i}].title=this.value">
-        <input type="text" class="form-input" value="${v.desc}" placeholder="Mô tả ngắn" oninput="defaultValues[${i}].desc=this.value">
-      </div>
-      <button style="background:none;border:none;cursor:pointer;color:var(--gray-300);font-size:16px;flex-shrink:0;transition:color .15s" onmouseover="this.style.color='var(--red-400)'" onmouseout="this.style.color='var(--gray-300)'" onclick="removeValue(${i})" title="Xóa">
-        <i class="ti ti-trash"></i>
-      </button>
-    </div>`;
-  });
+      <button class="btn-xs btn-red" onclick="removeValue(${i})" title="Xóa"><i class="ti ti-trash" style="font-size:12px"></i></button>
+    </div>`).join('');
+  document.getElementById('statValues').textContent = values.length;
 }
 
-function addValue(){
-  defaultValues.push({icon:'ti-star',title:'Giá trị mới',desc:'Mô tả giá trị...',color:'green'});
+function addValue() {
+  values.push({ icon: '⭐', title: 'Giá trị mới', desc: 'Mô tả giá trị...' });
   renderValues();
 }
-
-function removeValue(i){
-  if(defaultValues.length<=1){showToast('Cần có ít nhất 1 giá trị!','error');return;}
-  defaultValues.splice(i,1);
+function removeValue(i) {
+  if (values.length <= 1) { showToast('Cần có ít nhất 1 giá trị!'); return; }
+  values.splice(i, 1);
   renderValues();
   showToast('Đã xóa giá trị.');
 }
 
-// ===== STATS GRID =====
-const defaultStats=[
-  {num:'2018',label:'Năm thành lập'},
-  {num:'60+',label:'Món ăn chay'},
-  {num:'3',label:'Chi nhánh'},
-  {num:'5000+',label:'Thực khách/tháng'},
+/* ===== STATS ===== */
+let stats = [
+  { num: '2018', label: 'Năm thành lập' },
+  { num: '60+',  label: 'Món ăn chay' },
+  { num: '3',    label: 'Chi nhánh' },
+  { num: '5000+',label: 'Thực khách/tháng' },
 ];
-function renderStats(){
-  const grid=document.getElementById('statsGrid');
-  grid.innerHTML='';
-  defaultStats.forEach((s,i)=>{
-    grid.innerHTML+=`
-    <div style="border:1px solid var(--gray-200);border-radius:10px;padding:14px;background:var(--gray-50);display:flex;gap:10px;align-items:center">
-      <div style="flex:1">
-        <input type="text" class="form-input" value="${s.num}" placeholder="Số liệu" style="font-weight:700;font-size:16px;margin-bottom:6px" oninput="defaultStats[${i}].num=this.value">
-        <input type="text" class="form-input" value="${s.label}" placeholder="Nhãn" style="font-size:12px" oninput="defaultStats[${i}].label=this.value">
+
+function renderStats() {
+  const el = document.getElementById('statsList');
+  el.innerHTML = stats.map((s, i) => `
+    <div class="stats-item">
+      <div class="stats-item-fields">
+        <input type="text" class="form-control" value="${s.num}" placeholder="Số liệu" style="font-weight:700" oninput="stats[${i}].num=this.value">
+        <input type="text" class="form-control" value="${s.label}" placeholder="Nhãn" style="font-size:12px" oninput="stats[${i}].label=this.value">
       </div>
-      <button style="background:none;border:none;cursor:pointer;color:var(--gray-300);font-size:15px;transition:color .15s" onmouseover="this.style.color='var(--red-400)'" onmouseout="this.style.color='var(--gray-300)'" onclick="removeStat(${i})"><i class="ti ti-x"></i></button>
-    </div>`;
-  });
-  grid.innerHTML+=`<div style="border:2px dashed var(--gray-200);border-radius:10px;padding:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--gray-400);font-size:13px;gap:6px;transition:all .2s" onclick="addStat()" onmouseover="this.style.borderColor='var(--green-400)';this.style.color='var(--green-600)'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.color='var(--gray-400)'"><i class="ti ti-plus" style="font-size:18px"></i> Thêm số liệu</div>`;
+      <button class="btn-xs btn-red" onclick="removeStat(${i})" title="Xóa"><i class="ti ti-trash" style="font-size:12px"></i></button>
+    </div>`).join('');
 }
 
-function addStat(){
-  defaultStats.push({num:'0',label:'Nhãn mới'});
+function addStat() {
+  stats.push({ num: '0', label: 'Nhãn mới' });
   renderStats();
 }
-function removeStat(i){
-  defaultStats.splice(i,1);
+function removeStat(i) {
+  stats.splice(i, 1);
   renderStats();
 }
 
-// ===== GALLERY =====
-const galleryImages=[
+/* ===== GALLERY ===== */
+let gallery = [
   'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=300&q=70',
   'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&q=70',
   'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=300&q=70',
@@ -776,51 +669,46 @@ const galleryImages=[
   'https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=300&q=70',
 ];
 
-function renderGallery(){
-  const grid=document.getElementById('galleryGrid');
-  grid.innerHTML='';
-  galleryImages.forEach((src,i)=>{
-    grid.innerHTML+=`
+function renderGallery() {
+  const el = document.getElementById('galleryGrid');
+  el.innerHTML = gallery.map((src, i) => `
     <div class="gallery-item">
       <img src="${src}" alt="Gallery ${i+1}" loading="lazy">
-      <button class="remove-btn" onclick="removeGalleryImg(${i})" title="Xóa ảnh"><i class="ti ti-x" style="font-size:10px"></i></button>
-    </div>`;
-  });
-  grid.innerHTML+=`<div class="gallery-add" onclick="triggerUpload('galleryFile')"><i class="ti ti-plus"></i><span>Thêm ảnh</span></div>`;
+      <button class="gallery-item-remove" onclick="removeGalleryImg(${i})" title="Xóa ảnh"><i class="ti ti-x" style="font-size:10px"></i></button>
+    </div>`).join('');
+  el.innerHTML += `<div class="gallery-add" onclick="document.getElementById('galleryFile').click()"><i class="ti ti-plus"></i><span>Thêm ảnh</span></div>`;
+  document.getElementById('statImgs').textContent = gallery.length;
 }
 
-function removeGalleryImg(i){
-  galleryImages.splice(i,1);
+function removeGalleryImg(i) {
+  gallery.splice(i, 1);
   renderGallery();
-  document.getElementById('statUpdated').textContent='Vừa xong';
   showToast('Đã xóa ảnh khỏi gallery.');
 }
 
-function addGalleryImages(input){
-  if(!input.files) return;
-  Array.from(input.files).forEach(file=>{
-    const reader=new FileReader();
-    reader.onload=e=>{
-      galleryImages.push(e.target.result);
-      renderGallery();
-    };
+function addGalleryImgs(input) {
+  if (!input.files) return;
+  let count = 0;
+  Array.from(input.files).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => { gallery.push(e.target.result); count++; if (count === input.files.length) renderGallery(); };
     reader.readAsDataURL(file);
   });
-  showToast(`Đã thêm ${input.files.length} ảnh vào gallery.`);
-  input.value='';
+  showToast('Đã thêm ' + input.files.length + ' ảnh vào gallery.');
+  input.value = '';
 }
 
-// ===== SPIN ANIM =====
-const style=document.createElement('style');
-style.textContent='@keyframes spin{to{transform:rotate(360deg)}}';
+/* ===== SPIN ANIM ===== */
+const style = document.createElement('style');
+style.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
 document.head.appendChild(style);
 
-// ===== INIT =====
-setupLivePreview();
+/* ===== INIT ===== */
+syncPreview();
+countChars(document.getElementById('inpDesc'), 'cntDesc', 160);
 renderValues();
 renderStats();
 renderGallery();
-countChars(document.getElementById('shortDesc'),'cntShort',160);
 document.getElementById('storyEditor').addEventListener('input', updateWordCount);
 updateWordCount();
 </script>
