@@ -33,18 +33,28 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:#f9fafb;color:#111827;fo
 .sidebar-logo{padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.1);}
 .logo-mark{display:flex;align-items:center;gap:10px;}
 .logo-icon{
-  width:38px;height:38px;background:var(--green-400);border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:18px;font-weight:700;color:#fff;flex-shrink:0;
+  width:38px;
+  height:38px;
+  border-radius:10px;
+  overflow:hidden;
+  flex-shrink:0;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.logo-icon img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
 .logo-icon img{width:100%;height:100%;object-fit:cover;border-radius:10px;}
 .logo-text .brand{font-size:18px;font-weight:700;color:#fff;letter-spacing:.5px;}
 .logo-text .sub{font-size:11px;color:rgba(255,255,255,.5);}
 .nav-section{padding:12px 12px 6px;overflow-y:auto;flex:1;}
-.nav-label{
-  font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;
-  color:rgba(255,255,255,.35);padding:12px 8px 6px;
-}
+.nav-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.35);padding:12px 8px 6px;}
 .nav-item{
   display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;
   cursor:pointer;color:rgba(255,255,255,.65);font-size:13.5px;font-weight:400;
@@ -88,7 +98,6 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:#f9fafb;color:#111827;fo
   width:36px;height:36px;border-radius:8px;background:none;border:1px solid var(--gray-200);
   display:flex;align-items:center;justify-content:center;cursor:pointer;
   color:var(--gray-500);font-size:17px;transition:all .15s;position:relative;
-  text-decoration:none;
 }
 .icon-btn:hover{background:var(--gray-50);color:var(--gray-700);}
 .notif-dot{
@@ -100,29 +109,23 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:#f9fafb;color:#111827;fo
 .main{margin-left:var(--sidebar-w);margin-top:var(--header-h);padding:24px;min-height:calc(100vh - var(--header-h));}
 
 /* ===== PAGE HEADER ===== */
-.page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;}
-.page-header-left h1{font-size:20px;font-weight:600;color:var(--gray-900);}
-.page-header-left p{font-size:13px;color:var(--gray-500);margin-top:3px;}
+.page-header{margin-bottom:24px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.page-header h1{font-size:20px;font-weight:600;color:var(--gray-900);}
+.page-header p{font-size:13px;color:var(--gray-500);margin-top:3px;}
 .btn-primary{
-  display:inline-flex;align-items:center;gap:8px;padding:9px 18px;
+  display:inline-flex;align-items:center;gap:6px;padding:9px 16px;
   background:var(--green-600);color:#fff;border:none;border-radius:8px;
-  font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;
-  transition:background .15s;text-decoration:none;
+  font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;
+  transition:background .15s;white-space:nowrap;text-decoration:none;
 }
 .btn-primary:hover{background:var(--green-700);}
 .btn-secondary{
-  display:inline-flex;align-items:center;gap:8px;padding:8px 16px;
+  display:inline-flex;align-items:center;gap:6px;padding:9px 16px;
   background:#fff;color:var(--gray-700);border:1px solid var(--gray-200);border-radius:8px;
-  font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;
-  transition:all .15s;
+  font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;
+  transition:all .15s;white-space:nowrap;
 }
 .btn-secondary:hover{background:var(--gray-50);}
-.btn-danger{
-  display:inline-flex;align-items:center;gap:6px;padding:7px 14px;
-  background:var(--red-50);color:var(--red-600);border:1px solid #fca5a5;border-radius:7px;
-  font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;transition:all .15s;
-}
-.btn-danger:hover{background:#fee2e2;}
 
 /* ===== CARD ===== */
 .card{background:#fff;border:1px solid var(--gray-200);border-radius:12px;overflow:hidden;margin-bottom:20px;}
@@ -132,122 +135,106 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:#f9fafb;color:#111827;fo
 }
 .card-title{font-size:14px;font-weight:600;color:var(--gray-900);display:flex;align-items:center;gap:8px;}
 .card-title i{font-size:16px;color:var(--green-600);}
-.card-body{padding:20px 22px;}
+.card-body{padding:20px 18px;}
 
 /* ===== FORM ===== */
-.form-grid{display:grid;gap:18px;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .form-group{display:flex;flex-direction:column;gap:6px;}
-.form-group label{font-size:13px;font-weight:500;color:var(--gray-700);}
-.form-group input,.form-group textarea,.form-group select{
-  padding:9px 12px;border:1px solid var(--gray-200);border-radius:8px;
-  font-size:13px;font-family:inherit;color:var(--gray-900);
-  transition:border-color .15s,box-shadow .15s;outline:none;background:#fff;
+.form-group.full{grid-column:1/-1;}
+.form-label{font-size:12px;font-weight:600;color:var(--gray-700);text-transform:uppercase;letter-spacing:.4px;}
+.form-input,.form-textarea,.form-select{
+  width:100%;padding:9px 12px;border:1px solid var(--gray-200);border-radius:8px;
+  font-family:inherit;font-size:13.5px;color:var(--gray-900);background:#fff;
+  transition:border-color .15s,box-shadow .15s;outline:none;
 }
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{
+.form-input:focus,.form-textarea:focus,.form-select:focus{
   border-color:var(--green-400);box-shadow:0 0 0 3px rgba(76,175,120,.1);
 }
-.form-group textarea{resize:vertical;min-height:100px;line-height:1.6;}
-.form-hint{font-size:11px;color:var(--gray-400);margin-top:2px;}
-.form-2col{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
-.char-count{font-size:11px;color:var(--gray-400);text-align:right;margin-top:2px;}
+.form-textarea{resize:vertical;min-height:100px;line-height:1.6;}
+.form-hint{font-size:11px;color:var(--gray-400);}
 
-/* ===== SECTION EDITOR ===== */
-.section-list{display:flex;flex-direction:column;gap:12px;}
-.section-item{
-  border:1px solid var(--gray-200);border-radius:10px;overflow:hidden;
-  transition:box-shadow .2s;
-}
-.section-item:hover{box-shadow:0 2px 8px rgba(0,0,0,.06);}
-.section-item-header{
-  display:flex;align-items:center;gap:10px;padding:12px 16px;
-  background:var(--gray-50);cursor:pointer;user-select:none;
-}
-.section-item-header:hover{background:var(--gray-100);}
-.drag-handle{color:var(--gray-300);font-size:18px;cursor:grab;flex-shrink:0;}
-.drag-handle:active{cursor:grabbing;}
-.section-title-text{flex:1;font-size:13px;font-weight:500;color:var(--gray-700);}
-.section-toggle{
-  background:none;border:none;cursor:pointer;color:var(--gray-400);
-  font-size:16px;transition:transform .2s;
-}
-.section-toggle.open{transform:rotate(180deg);}
-.section-content{padding:16px;border-top:1px solid var(--gray-100);display:none;}
-.section-content.open{display:block;}
-.section-actions{display:flex;gap:8px;margin-top:12px;}
-
-/* ===== PREVIEW PANEL ===== */
-.preview-panel{
-  border:1px solid var(--gray-200);border-radius:10px;overflow:hidden;background:#fff;
-}
-.preview-header{
-  padding:10px 16px;background:var(--gray-50);border-bottom:1px solid var(--gray-200);
-  display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray-500);font-weight:500;
-}
-.preview-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
-.preview-body{padding:20px;background:#fafafa;}
-.preview-restaurant{
-  text-align:center;padding:20px 16px;
-  background:linear-gradient(135deg,var(--green-800) 0%,var(--green-600) 100%);
-  border-radius:8px;color:#fff;margin-bottom:12px;
-}
-.preview-restaurant h2{font-size:18px;font-weight:700;letter-spacing:.5px;}
-.preview-restaurant p{font-size:12px;opacity:.8;margin-top:4px;line-height:1.6;}
-.preview-section-card{
-  background:#fff;border:1px solid var(--gray-200);border-radius:8px;
-  padding:14px;margin-bottom:8px;
-}
-.preview-section-card h4{font-size:13px;font-weight:600;color:var(--green-700);margin-bottom:6px;}
-.preview-section-card p{font-size:12px;color:var(--gray-600);line-height:1.6;}
-
-/* ===== STATUS BADGE ===== */
-.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;}
-.badge-success{background:var(--green-100);color:var(--green-700);}
-.badge-warning{background:var(--amber-50);color:var(--amber-600);}
-.badge-gray{background:var(--gray-100);color:var(--gray-500);}
-
-/* ===== MEDIA UPLOAD ===== */
-.upload-zone{
+/* ===== IMAGE UPLOAD ===== */
+.img-upload-wrap{
   border:2px dashed var(--gray-200);border-radius:10px;
-  padding:28px 20px;text-align:center;transition:all .2s;cursor:pointer;
+  padding:20px;text-align:center;cursor:pointer;transition:all .2s;
   background:var(--gray-50);
 }
-.upload-zone:hover{border-color:var(--green-400);background:var(--green-50);}
-.upload-zone i{font-size:32px;color:var(--gray-300);display:block;margin-bottom:8px;}
-.upload-zone p{font-size:13px;color:var(--gray-500);}
-.upload-zone span{font-size:11px;color:var(--gray-400);}
-.image-preview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;margin-top:12px;}
-.img-thumb{
-  aspect-ratio:1;border-radius:8px;object-fit:cover;
-  border:1px solid var(--gray-200);width:100%;
+.img-upload-wrap:hover{border-color:var(--green-400);background:var(--green-50);}
+.img-upload-wrap.has-img{border-style:solid;border-color:var(--green-200);background:#fff;padding:0;overflow:hidden;}
+.img-upload-wrap img{width:100%;max-height:200px;object-fit:cover;border-radius:8px;}
+.img-upload-placeholder{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--gray-400);}
+.img-upload-placeholder i{font-size:28px;}
+.img-upload-placeholder span{font-size:12px;}
+
+/* ===== RICH TEXT TOOLBAR ===== */
+.rte-toolbar{
+  display:flex;align-items:center;gap:2px;padding:8px 10px;
+  border:1px solid var(--gray-200);border-bottom:none;border-radius:8px 8px 0 0;
+  background:var(--gray-50);flex-wrap:wrap;
 }
-.img-thumb-wrap{position:relative;}
-.img-remove{
-  position:absolute;top:4px;right:4px;width:20px;height:20px;border-radius:50%;
-  background:rgba(0,0,0,.5);border:none;cursor:pointer;color:#fff;font-size:12px;
+.rte-btn{
+  width:30px;height:30px;border:none;background:none;border-radius:5px;
+  cursor:pointer;font-size:14px;color:var(--gray-600);
+  display:flex;align-items:center;justify-content:center;transition:all .15s;
+}
+.rte-btn:hover{background:var(--gray-200);color:var(--gray-900);}
+.rte-btn.active{background:var(--green-100);color:var(--green-700);}
+.rte-divider{width:1px;height:20px;background:var(--gray-200);margin:0 4px;}
+.rte-editor{
+  width:100%;min-height:160px;padding:12px;
+  border:1px solid var(--gray-200);border-radius:0 0 8px 8px;
+  font-family:inherit;font-size:13.5px;color:var(--gray-900);
+  outline:none;line-height:1.7;
+  transition:border-color .15s,box-shadow .15s;
+}
+.rte-editor:focus{border-color:var(--green-400);box-shadow:0 0 0 3px rgba(76,175,120,.1);}
+
+/* ===== SECTION TABS ===== */
+.section-tabs{display:flex;gap:4px;padding:4px;background:var(--gray-100);border-radius:10px;margin-bottom:20px;}
+.section-tab{
+  flex:1;padding:8px 12px;border:none;background:none;border-radius:8px;
+  font-family:inherit;font-size:13px;font-weight:500;color:var(--gray-500);
+  cursor:pointer;transition:all .18s;text-align:center;
+}
+.section-tab.active{background:#fff;color:var(--green-700);box-shadow:0 1px 3px rgba(0,0,0,.1);}
+.section-tab:hover:not(.active){color:var(--gray-700);}
+
+/* ===== SECTION PANELS ===== */
+.section-panel{display:none;}
+.section-panel.active{display:block;}
+
+/* ===== GALLERY GRID ===== */
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;}
+.gallery-item{
+  position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;
+  background:var(--gray-100);border:1px solid var(--gray-200);
+}
+.gallery-item img{width:100%;height:100%;object-fit:cover;}
+.gallery-item .remove-btn{
+  position:absolute;top:5px;right:5px;width:22px;height:22px;
+  background:rgba(0,0,0,.55);border:none;border-radius:50%;
+  color:#fff;font-size:11px;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .15s;
 }
-
-/* ===== TABS ===== */
-.tabs{display:flex;gap:0;border-bottom:1px solid var(--gray-200);margin-bottom:20px;}
-.tab-btn{
-  padding:10px 20px;font-size:13px;font-weight:500;color:var(--gray-500);
-  background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;
-  font-family:inherit;transition:all .15s;margin-bottom:-1px;
+.gallery-item:hover .remove-btn{opacity:1;}
+.gallery-add{
+  aspect-ratio:1;border:2px dashed var(--gray-200);border-radius:8px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;cursor:pointer;background:var(--gray-50);color:var(--gray-400);
+  font-size:12px;transition:all .2s;
 }
-.tab-btn.active{color:var(--green-600);border-bottom-color:var(--green-600);}
-.tab-btn:hover:not(.active){color:var(--gray-700);}
-.tab-panel{display:none;}
-.tab-panel.active{display:block;}
+.gallery-add:hover{border-color:var(--green-400);background:var(--green-50);color:var(--green-600);}
+.gallery-add i{font-size:22px;}
 
-/* ===== LAYOUT GRID ===== */
-.layout-2col{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start;}
-
-/* ===== INFO ROW ===== */
-.info-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--gray-100);}
-.info-row:last-child{border-bottom:none;}
-.info-label{font-size:12px;color:var(--gray-400);font-weight:500;width:120px;flex-shrink:0;}
-.info-value{font-size:13px;color:var(--gray-700);}
-.info-icon{font-size:15px;color:var(--green-600);}
+/* ===== STAT ROW ===== */
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
+.stat-mini{
+  background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px;
+  padding:12px 14px;display:flex;flex-direction:column;gap:2px;
+}
+.stat-mini .val{font-size:22px;font-weight:700;color:var(--gray-900);}
+.stat-mini .lbl{font-size:11px;color:var(--gray-400);}
 
 /* ===== TOAST ===== */
 .toast{
@@ -261,32 +248,36 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:#f9fafb;color:#111827;fo
 /* ===== SIDEBAR OVERLAY ===== */
 .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:99;}
 
-/* ===== MODAL ===== */
-.modal-backdrop{
-  display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:200;
-  align-items:center;justify-content:center;padding:16px;
+/* ===== BADGE ===== */
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;}
+.badge-success{background:var(--green-100);color:var(--green-700);}
+.badge-warning{background:var(--amber-50);color:var(--amber-600);}
+
+/* ===== CHAR COUNT ===== */
+.char-count{font-size:11px;color:var(--gray-400);text-align:right;margin-top:3px;}
+.char-count.warn{color:var(--amber-600);}
+
+/* ===== PREVIEW PANEL ===== */
+.preview-card{
+  background:#fff;border:1px solid var(--gray-200);border-radius:12px;overflow:hidden;
 }
-.modal-backdrop.open{display:flex;}
-.modal{
-  background:#fff;border-radius:14px;width:100%;max-width:540px;
-  box-shadow:0 20px 60px rgba(0,0,0,.15);max-height:90vh;overflow-y:auto;
+.preview-banner{
+  width:100%;height:140px;background:linear-gradient(135deg,var(--green-800),var(--green-600));
+  display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
 }
-.modal-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:18px 22px;border-bottom:1px solid var(--gray-100);
-}
-.modal-title{font-size:15px;font-weight:600;color:var(--gray-900);}
-.modal-close{background:none;border:none;cursor:pointer;font-size:18px;color:var(--gray-400);}
-.modal-close:hover{color:var(--gray-700);}
-.modal-body{padding:22px;}
-.modal-footer{
-  display:flex;justify-content:flex-end;gap:10px;
-  padding:16px 22px;border-top:1px solid var(--gray-100);
-}
+.preview-banner-img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
+.preview-banner-overlay{position:absolute;inset:0;background:rgba(20,64,41,.55);}
+.preview-banner-text{position:relative;z-index:1;text-align:center;color:#fff;}
+.preview-banner-text h3{font-size:18px;font-weight:700;}
+.preview-banner-text p{font-size:12px;opacity:.8;margin-top:3px;}
+.preview-body{padding:14px;}
+.preview-body p{font-size:12.5px;color:var(--gray-600);line-height:1.65;}
+.preview-meta{display:flex;gap:12px;margin-top:10px;flex-wrap:wrap;}
+.preview-meta-item{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--gray-500);}
+.preview-meta-item i{font-size:14px;color:var(--green-600);}
 
 /* ===== RESPONSIVE ===== */
-@media(max-width:1100px){.layout-2col{grid-template-columns:1fr;}}
-@media(max-width:1024px){.form-2col{grid-template-columns:1fr;}}
+@media(max-width:1024px){.form-grid{grid-template-columns:1fr;}}
 @media(max-width:768px){
   .sidebar{transform:translateX(-100%);}
   .sidebar.open{transform:translateX(0);}
@@ -294,11 +285,13 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:#f9fafb;color:#111827;fo
   .hamburger{display:flex;}
   .header{left:0;}
   .main{margin-left:0;padding:16px;}
-  .page-header{flex-direction:column;align-items:flex-start;}
+  .form-grid{grid-template-columns:1fr;}
+  .stat-row{grid-template-columns:1fr 1fr;}
+  .section-tab{font-size:12px;padding:7px 8px;}
 }
 @media(max-width:480px){
-  .tabs{overflow-x:auto;}
-  .tab-btn{white-space:nowrap;}
+  .stat-row{grid-template-columns:1fr;}
+  .page-header{flex-direction:column;align-items:flex-start;}
 }
 </style>
 </head>
@@ -311,7 +304,7 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:#f9fafb;color:#111827;fo
   <div class="sidebar-logo">
     <div class="logo-mark">
       <div class="logo-icon">
-        <img src="logoGrevie.png" alt="Logo">
+        <img src=".png" alt="Logo">
       </div>
       <div class="logo-text">
         <div class="brand">Grevia</div>
@@ -350,6 +343,8 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:#f9fafb;color:#111827;fo
   <div class="breadcrumb">
     <span>Grevia Admin</span>
     <i class="ti ti-chevron-right"></i>
+    <span>Quản lý nội dung</span>
+    <i class="ti ti-chevron-right"></i>
     <span class="current">Giới thiệu</span>
   </div>
   <div class="header-actions">
@@ -365,544 +360,232 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:#f9fafb;color:#111827;fo
 <!-- MAIN -->
 <main class="main">
   <div class="page-header">
-    <div class="page-header-left">
+    <div>
       <h1>Quản lý trang Giới thiệu</h1>
-      <p>Chỉnh sửa nội dung giới thiệu nhà hàng hiển thị trên website.</p>
+      <p>Chỉnh sửa nội dung, hình ảnh và thông tin hiển thị trên trang giới thiệu nhà hàng.</p>
     </div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;">
-      <button class="btn-secondary" onclick="previewPage()"><i class="ti ti-eye" style="font-size:15px"></i> Xem trước</button>
-      <button class="btn-primary" onclick="saveAll()"><i class="ti ti-device-floppy" style="font-size:15px"></i> Lưu thay đổi</button>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn-secondary" onclick="previewPage()"><i class="ti ti-eye"></i> Xem trước</button>
+      <button class="btn-primary" onclick="savePage()"><i class="ti ti-device-floppy"></i> Lưu thay đổi</button>
+    </div>
+  </div>
+
+  <!-- THỐNG KÊ NHANH -->
+  <div class="stat-row">
+    <div class="stat-mini">
+      <div class="val" id="statWords">320</div>
+      <div class="lbl">Từ nội dung</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val">6</div>
+      <div class="lbl">Ảnh gallery</div>
+    </div>
+    <div class="stat-mini">
+      <div class="val" id="statUpdated">Hôm nay</div>
+      <div class="lbl">Cập nhật lần cuối</div>
     </div>
   </div>
 
   <!-- TABS -->
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('thongtin')">Thông tin chính</button>
-    <button class="tab-btn" onclick="switchTab('noidung')">Nội dung chi tiết</button>
-    <button class="tab-btn" onclick="switchTab('hinhanh')">Hình ảnh</button>
-    <button class="tab-btn" onclick="switchTab('xemtruoc')">Xem trước</button>
+  <div class="section-tabs" role="tablist">
+    <button class="section-tab active" onclick="switchTab(this,'tab-basic')"><i class="ti ti-file-text" style="font-size:13px;margin-right:4px"></i>Thông tin chung</button>
+    <button class="section-tab" onclick="switchTab(this,'tab-story')"><i class="ti ti-book" style="font-size:13px;margin-right:4px"></i>Câu chuyện</button>
+    <button class="section-tab" onclick="switchTab(this,'tab-values')"><i class="ti ti-star" style="font-size:13px;margin-right:4px"></i>Giá trị cốt lõi</button>
+    <button class="section-tab" onclick="switchTab(this,'tab-gallery')"><i class="ti ti-photo" style="font-size:13px;margin-right:4px"></i>Hình ảnh</button>
   </div>
 
-  <!-- TAB 1: THÔNG TIN CHÍNH -->
-  <div class="tab-panel active" id="tab-thongtin">
-    <div class="layout-2col">
+  <!-- TAB 1: THÔNG TIN CHUNG -->
+  <div class="section-panel active" id="tab-basic">
+    <div style="display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start;">
       <div>
         <!-- Thông tin cơ bản -->
         <div class="card">
           <div class="card-header">
             <div class="card-title"><i class="ti ti-building-store"></i> Thông tin nhà hàng</div>
-            <span class="badge badge-success"><i class="ti ti-circle-check" style="font-size:11px"></i> Đang hiển thị</span>
+            <span class="badge badge-success"><i class="ti ti-circle-check" style="font-size:12px"></i> Đang hiển thị</span>
           </div>
           <div class="card-body">
             <div class="form-grid">
-              <div class="form-2col">
-                <div class="form-group">
-                  <label>Tên nhà hàng</label>
-                  <input type="text" id="restaurantName" value="Nhà hàng chay Grevia">
-                </div>
-                <div class="form-group">
-                  <label>Slogan / Tagline</label>
-                  <input type="text" id="restaurantSlogan" value="Ẩm thực chay – Sống xanh, sống khỏe">
-                </div>
+              <div class="form-group full">
+                <label class="form-label">Tên nhà hàng</label>
+                <input type="text" class="form-input" id="restaurantName" value="Grevia – Nhà hàng chay" placeholder="Tên hiển thị trên trang giới thiệu">
+              </div>
+              <div class="form-group full">
+                <label class="form-label">Slogan / Tagline</label>
+                <input type="text" class="form-input" id="slogan" value="Sống xanh – Ăn lành – Thăng bằng tâm hồn" placeholder="Câu khẩu hiệu ngắn gọn">
               </div>
               <div class="form-group">
-                <label>Mô tả ngắn (Hiển thị trên đầu trang giới thiệu)</label>
-                <textarea id="shortDesc" rows="3">Grevia là nhà hàng chay theo phong cách hiện đại, mang đến những món ăn thuần chay được chế biến tinh tế từ nguyên liệu tự nhiên, sạch và bền vững. Chúng tôi tin rằng ăn chay không chỉ là lựa chọn dinh dưỡng mà còn là lối sống tích cực cho bản thân và môi trường.</textarea>
-                <div class="form-hint">Tối đa 300 ký tự. Hiển thị nổi bật ở đầu trang Giới thiệu.</div>
-              </div>
-              <div class="form-2col">
-                <div class="form-group">
-                  <label>Năm thành lập</label>
-                  <input type="number" id="foundedYear" value="2018" min="1900" max="2099">
-                </div>
-                <div class="form-group">
-                  <label>Số chi nhánh</label>
-                  <input type="number" id="branchCount" value="3" min="1">
-                </div>
+                <label class="form-label">Năm thành lập</label>
+                <input type="number" class="form-input" id="foundYear" value="2018" min="1900" max="2099">
               </div>
               <div class="form-group">
-                <label>Địa chỉ chính</label>
-                <input type="text" id="address" value="123 Đường Lý Thường Kiệt, Phường 7, Quận 10, TP. Hồ Chí Minh">
+                <label class="form-label">Số chi nhánh</label>
+                <input type="number" class="form-input" id="branches" value="3" min="1">
               </div>
-              <div class="form-2col">
-                <div class="form-group">
-                  <label>Giờ mở cửa</label>
-                  <input type="text" id="openTime" value="10:00 – 22:00 (Tất cả các ngày)">
-                </div>
-                <div class="form-group">
-                  <label>Sức chứa (người)</label>
-                  <input type="number" id="capacity" value="120">
-                </div>
+              <div class="form-group full">
+                <label class="form-label">Mô tả ngắn <span style="text-transform:none;font-weight:400;color:var(--gray-400)">(hiển thị trên đầu trang)</span></label>
+                <textarea class="form-textarea" id="shortDesc" rows="3" oninput="countChars(this,'cntShort',160)" style="min-height:75px">Grevia là nhà hàng chay hiện đại tại Hà Nội, mang đến những trải nghiệm ẩm thực thuần chay tinh tế, lành mạnh và đầy cảm xúc trong không gian xanh mát, ấm cúng.</textarea>
+                <div class="char-count" id="cntShort">183/160 ký tự</div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Câu chuyện thương hiệu -->
+        <!-- Banner ảnh -->
         <div class="card">
           <div class="card-header">
-            <div class="card-title"><i class="ti ti-heart"></i> Câu chuyện thương hiệu</div>
+            <div class="card-title"><i class="ti ti-photo"></i> Ảnh banner trang giới thiệu</div>
           </div>
           <div class="card-body">
-            <div class="form-grid">
-              <div class="form-group">
-                <label>Lịch sử hình thành</label>
-                <textarea id="history" rows="5">Grevia được thành lập năm 2018 bởi đội ngũ những người trẻ yêu ẩm thực và đam mê lối sống xanh. Xuất phát từ mong muốn tạo ra một không gian ẩm thực chay không chỉ ngon miệng mà còn đẹp mắt và tinh tế, chúng tôi đã dày công nghiên cứu và phát triển thực đơn từ hàng trăm nguyên liệu tự nhiên trong nước.</textarea>
-              </div>
-              <div class="form-group">
-                <label>Tầm nhìn</label>
-                <textarea id="vision" rows="3">Trở thành thương hiệu nhà hàng chay hàng đầu Việt Nam, tiên phong trong xu hướng ẩm thực xanh – lành mạnh – bền vững.</textarea>
-              </div>
-              <div class="form-group">
-                <label>Sứ mệnh</label>
-                <textarea id="mission" rows="3">Mang đến những bữa ăn thuần chay ngon lành, an toàn và giàu dinh dưỡng; đồng thời lan tỏa lối sống xanh, thân thiện với môi trường đến cộng đồng.</textarea>
-              </div>
+            <div class="img-upload-wrap has-img" id="bannerWrap" onclick="triggerUpload('bannerFile')">
+              <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800&q=80" alt="Banner" id="bannerPreview">
             </div>
+            <input type="file" id="bannerFile" accept="image/*" style="display:none" onchange="previewImage(this,'bannerPreview','bannerWrap')">
+            <p class="form-hint" style="margin-top:8px"><i class="ti ti-info-circle" style="font-size:12px"></i> Khuyến nghị: 1200×400px, JPG/PNG, tối đa 2MB. Nhấp vào ảnh để thay đổi.</p>
           </div>
         </div>
       </div>
 
-      <!-- Sidebar info -->
-      <div>
-        <!-- Thống kê hiển thị -->
-        <div class="card">
+      <!-- PREVIEW CARD -->
+      <div style="position:sticky;top:80px;">
+        <div class="card" style="margin-bottom:0">
           <div class="card-header">
-            <div class="card-title"><i class="ti ti-chart-pie"></i> Số liệu nổi bật</div>
+            <div class="card-title"><i class="ti ti-device-mobile"></i> Xem trước</div>
           </div>
-          <div class="card-body">
-            <p style="font-size:12px;color:var(--gray-400);margin-bottom:14px">Các con số này sẽ hiển thị dạng infographic trên trang Giới thiệu.</p>
-            <div class="form-grid">
-              <div class="form-group">
-                <label>Số khách hàng phục vụ</label>
-                <input type="text" value="50.000+" id="stat1">
+          <div style="padding:14px;">
+            <div class="preview-card">
+              <div class="preview-banner">
+                <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800&q=80" alt="" class="preview-banner-img" id="previewBannerMini">
+                <div class="preview-banner-overlay"></div>
+                <div class="preview-banner-text">
+                  <h3 id="previewName">Grevia – Nhà hàng chay</h3>
+                  <p id="previewSlogan">Sống xanh – Ăn lành – Thăng bằng tâm hồn</p>
+                </div>
               </div>
-              <div class="form-group">
-                <label>Số món trong thực đơn</label>
-                <input type="text" value="150+" id="stat2">
-              </div>
-              <div class="form-group">
-                <label>Năm kinh nghiệm</label>
-                <input type="text" value="7+" id="stat3">
-              </div>
-              <div class="form-group">
-                <label>Đánh giá trung bình</label>
-                <input type="text" value="4.8/5 ★" id="stat4">
+              <div class="preview-body">
+                <p id="previewDesc">Grevia là nhà hàng chay hiện đại tại Hà Nội, mang đến những trải nghiệm ẩm thực thuần chay tinh tế, lành mạnh và đầy cảm xúc trong không gian xanh mát, ấm cúng.</p>
+                <div class="preview-meta">
+                  <div class="preview-meta-item"><i class="ti ti-calendar"></i> <span id="previewYear">Từ năm 2018</span></div>
+                  <div class="preview-meta-item"><i class="ti ti-map-pin"></i> <span id="previewBranch">3 chi nhánh</span></div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- Thông tin liên kết -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title"><i class="ti ti-share"></i> Mạng xã hội</div>
-          </div>
-          <div class="card-body">
-            <div class="form-grid">
-              <div class="form-group">
-                <label><i class="ti ti-brand-facebook" style="color:#1877f2"></i> Facebook</label>
-                <input type="url" value="https://facebook.com/grevia.vn">
-              </div>
-              <div class="form-group">
-                <label><i class="ti ti-brand-instagram" style="color:#e4405f"></i> Instagram</label>
-                <input type="url" value="https://instagram.com/grevia.vn">
-              </div>
-              <div class="form-group">
-                <label><i class="ti ti-brand-tiktok" style="color:#000"></i> TikTok</label>
-                <input type="url" value="https://tiktok.com/@grevia.vn">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Trạng thái trang -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title"><i class="ti ti-settings-2"></i> Trạng thái</div>
-          </div>
-          <div class="card-body">
-            <div class="info-row">
-              <div class="info-label">Hiển thị</div>
-              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
-                <input type="checkbox" id="pageVisible" checked style="accent-color:var(--green-600);width:16px;height:16px;">
-                <span style="font-size:13px;color:var(--gray-700)">Công khai trên website</span>
-              </label>
-            </div>
-            <div class="info-row">
-              <div class="info-label">Cập nhật lần cuối</div>
-              <div class="info-value" id="lastUpdated">—</div>
-            </div>
-            <div class="info-row">
-              <div class="info-label">Người chỉnh sửa</div>
-              <div class="info-value">Admin Grevia</div>
-            </div>
+            <p style="font-size:11px;color:var(--gray-400);margin-top:10px;text-align:center">Bản xem trước rút gọn</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- TAB 2: NỘI DUNG CHI TIẾT -->
-  <div class="tab-panel" id="tab-noidung">
+  <!-- TAB 2: CÂU CHUYỆN -->
+  <div class="section-panel" id="tab-story">
     <div class="card">
       <div class="card-header">
-        <div class="card-title"><i class="ti ti-list-details"></i> Các phần nội dung trang Giới thiệu</div>
-        <button class="btn-primary" onclick="addSection()"><i class="ti ti-plus" style="font-size:14px"></i> Thêm phần</button>
+        <div class="card-title"><i class="ti ti-book-2"></i> Câu chuyện thương hiệu</div>
       </div>
-      <div class="card-body" style="padding:16px;">
-        <p style="font-size:12px;color:var(--gray-400);margin-bottom:16px;"><i class="ti ti-drag-drop" style="margin-right:4px"></i> Kéo thả để sắp xếp thứ tự hiển thị các phần.</p>
-        <div class="section-list" id="sectionList">
-
-          <!-- Section 1 -->
-          <div class="section-item" draggable="true" data-id="s1">
-            <div class="section-item-header" onclick="toggleSection('s1')">
-              <i class="ti ti-grip-vertical drag-handle"></i>
-              <span class="section-title-text">📖 Về chúng tôi</span>
-              <span class="badge badge-success" style="font-size:10px">Hiển thị</span>
-              <button class="section-toggle" id="toggle-s1"><i class="ti ti-chevron-down"></i></button>
+      <div class="card-body">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label class="form-label">Tiêu đề phần câu chuyện</label>
+            <input type="text" class="form-input" value="Hành trình của Grevia" placeholder="Tiêu đề hiển thị">
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Nội dung câu chuyện</label>
+            <div class="rte-toolbar">
+              <button class="rte-btn" onclick="fmt('bold')" title="In đậm"><i class="ti ti-bold"></i></button>
+              <button class="rte-btn" onclick="fmt('italic')" title="In nghiêng"><i class="ti ti-italic"></i></button>
+              <button class="rte-btn" onclick="fmt('underline')" title="Gạch chân"><i class="ti ti-underline"></i></button>
+              <div class="rte-divider"></div>
+              <button class="rte-btn" onclick="fmt('insertUnorderedList')" title="Danh sách"><i class="ti ti-list"></i></button>
+              <button class="rte-btn" onclick="fmt('insertOrderedList')" title="Danh sách số"><i class="ti ti-list-numbers"></i></button>
+              <div class="rte-divider"></div>
+              <button class="rte-btn" onclick="fmt('justifyLeft')" title="Trái"><i class="ti ti-align-left"></i></button>
+              <button class="rte-btn" onclick="fmt('justifyCenter')" title="Giữa"><i class="ti ti-align-center"></i></button>
+              <button class="rte-btn" onclick="fmt('justifyRight')" title="Phải"><i class="ti ti-align-right"></i></button>
+              <div class="rte-divider"></div>
+              <button class="rte-btn" onclick="fmt('undo')" title="Hoàn tác"><i class="ti ti-arrow-back-up"></i></button>
+              <button class="rte-btn" onclick="fmt('redo')" title="Làm lại"><i class="ti ti-arrow-forward-up"></i></button>
             </div>
-            <div class="section-content" id="content-s1">
-              <div class="form-grid">
-                <div class="form-group">
-                  <label>Tiêu đề phần</label>
-                  <input type="text" value="Về chúng tôi">
-                </div>
-                <div class="form-group">
-                  <label>Nội dung</label>
-                  <textarea rows="5">Grevia là không gian ẩm thực chay hiện đại, nơi mỗi món ăn đều được chế biến từ những nguyên liệu tươi sạch, không hóa chất, hướng đến sức khỏe toàn diện. Chúng tôi mang đến trải nghiệm ẩm thực chay không chỉ lành mạnh mà còn thực sự thú vị và phong phú về hương vị.</textarea>
-                </div>
-              </div>
-              <div class="section-actions">
-                <button class="btn-secondary" onclick="moveSection('s1','up')"><i class="ti ti-arrow-up"></i> Lên</button>
-                <button class="btn-secondary" onclick="moveSection('s1','down')"><i class="ti ti-arrow-down"></i> Xuống</button>
-                <button class="btn-danger" onclick="removeSection('s1')"><i class="ti ti-trash"></i> Xóa</button>
-              </div>
+            <div class="rte-editor" contenteditable="true" id="storyEditor">
+              <p>Grevia ra đời năm 2018 từ một ước mơ giản dị: mang ẩm thực thuần chay đến gần hơn với cuộc sống hiện đại. Người sáng lập – chị Minh Anh – sau nhiều năm theo đuổi lối sống lành mạnh, nhận ra rằng đồ chay không nhất thiết phải đạm bạc hay kém hấp dẫn.</p>
+              <p>Từ một căn bếp nhỏ ở phố cổ Hà Nội, Grevia từng bước xây dựng thực đơn với hơn 60 món chay sáng tạo, kết hợp hương vị truyền thống và phong cách ẩm thực hiện đại. Mỗi món ăn đều được chăm chút từ nguyên liệu đến cách chế biến, đảm bảo dinh dưỡng và thuần khiết.</p>
+              <p>Đến nay, Grevia đã có 3 chi nhánh tại Hà Nội, phục vụ hàng nghìn thực khách mỗi tháng – những người tìm kiếm không chỉ một bữa ăn ngon mà còn là trải nghiệm sống xanh trọn vẹn.</p>
             </div>
           </div>
-
-          <!-- Section 2 -->
-          <div class="section-item" draggable="true" data-id="s2">
-            <div class="section-item-header" onclick="toggleSection('s2')">
-              <i class="ti ti-grip-vertical drag-handle"></i>
-              <span class="section-title-text">🌱 Triết lý ẩm thực</span>
-              <span class="badge badge-success" style="font-size:10px">Hiển thị</span>
-              <button class="section-toggle" id="toggle-s2"><i class="ti ti-chevron-down"></i></button>
+          <div class="form-group">
+            <label class="form-label">Ảnh minh họa câu chuyện</label>
+            <div class="img-upload-wrap has-img" onclick="triggerUpload('storyFile')">
+              <img src="https://images.unsplash.com/photo-1543352634-99a5d50ae78e?w=600&q=80" alt="Story" id="storyPreview" style="max-height:160px">
             </div>
-            <div class="section-content" id="content-s2">
-              <div class="form-grid">
-                <div class="form-group">
-                  <label>Tiêu đề phần</label>
-                  <input type="text" value="Triết lý ẩm thực">
-                </div>
-                <div class="form-group">
-                  <label>Nội dung</label>
-                  <textarea rows="5">Chúng tôi tin rằng ẩm thực chay không chỉ là sự lựa chọn về dinh dưỡng – đó là một lối sống. Tại Grevia, mỗi món ăn là kết quả của sự kết hợp tinh tế giữa nguyên liệu tự nhiên và kỹ thuật nấu ăn sáng tạo, mang lại hương vị đậm đà và giàu dưỡng chất.</textarea>
-                </div>
-              </div>
-              <div class="section-actions">
-                <button class="btn-secondary" onclick="moveSection('s2','up')"><i class="ti ti-arrow-up"></i> Lên</button>
-                <button class="btn-secondary" onclick="moveSection('s2','down')"><i class="ti ti-arrow-down"></i> Xuống</button>
-                <button class="btn-danger" onclick="removeSection('s2')"><i class="ti ti-trash"></i> Xóa</button>
-              </div>
-            </div>
+            <input type="file" id="storyFile" accept="image/*" style="display:none" onchange="previewImage(this,'storyPreview')">
           </div>
-
-          <!-- Section 3 -->
-          <div class="section-item" draggable="true" data-id="s3">
-            <div class="section-item-header" onclick="toggleSection('s3')">
-              <i class="ti ti-grip-vertical drag-handle"></i>
-              <span class="section-title-text">🏆 Giải thưởng & Chứng nhận</span>
-              <span class="badge badge-warning" style="font-size:10px">Ẩn</span>
-              <button class="section-toggle" id="toggle-s3"><i class="ti ti-chevron-down"></i></button>
-            </div>
-            <div class="section-content" id="content-s3">
-              <div class="form-grid">
-                <div class="form-group">
-                  <label>Tiêu đề phần</label>
-                  <input type="text" value="Giải thưởng & Chứng nhận">
-                </div>
-                <div class="form-group">
-                  <label>Nội dung</label>
-                  <textarea rows="5">Top 10 nhà hàng chay được yêu thích nhất TP.HCM (2022, 2023). Chứng nhận VSATTP Bộ Y tế. Được các chuyên gia dinh dưỡng khuyên dùng.</textarea>
-                </div>
-              </div>
-              <div class="section-actions">
-                <button class="btn-secondary" onclick="moveSection('s3','up')"><i class="ti ti-arrow-up"></i> Lên</button>
-                <button class="btn-secondary" onclick="moveSection('s3','down')"><i class="ti ti-arrow-down"></i> Xuống</button>
-                <button class="btn-danger" onclick="removeSection('s3')"><i class="ti ti-trash"></i> Xóa</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section 4 -->
-          <div class="section-item" draggable="true" data-id="s4">
-            <div class="section-item-header" onclick="toggleSection('s4')">
-              <i class="ti ti-grip-vertical drag-handle"></i>
-              <span class="section-title-text">👥 Đội ngũ</span>
-              <span class="badge badge-success" style="font-size:10px">Hiển thị</span>
-              <button class="section-toggle" id="toggle-s4"><i class="ti ti-chevron-down"></i></button>
-            </div>
-            <div class="section-content" id="content-s4">
-              <div class="form-grid">
-                <div class="form-group">
-                  <label>Tiêu đề phần</label>
-                  <input type="text" value="Đội ngũ của chúng tôi">
-                </div>
-                <div class="form-group">
-                  <label>Nội dung</label>
-                  <textarea rows="5">Đội ngũ Grevia bao gồm các đầu bếp tâm huyết được đào tạo chuyên sâu về ẩm thực thuần chay, cùng đội ngũ phục vụ tận tâm và chuyên nghiệp. Chúng tôi luôn đặt sức khỏe và trải nghiệm của khách hàng lên hàng đầu.</textarea>
-                </div>
-              </div>
-              <div class="section-actions">
-                <button class="btn-secondary" onclick="moveSection('s4','up')"><i class="ti ti-arrow-up"></i> Lên</button>
-                <button class="btn-secondary" onclick="moveSection('s4','down')"><i class="ti ti-arrow-down"></i> Xuống</button>
-                <button class="btn-danger" onclick="removeSection('s4')"><i class="ti ti-trash"></i> Xóa</button>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB 3: HÌNH ẢNH -->
-  <div class="tab-panel" id="tab-hinhanh">
-    <div class="layout-2col">
-      <div>
-        <!-- Banner chính -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title"><i class="ti ti-photo"></i> Ảnh banner trang Giới thiệu</div>
-          </div>
-          <div class="card-body">
-            <div class="upload-zone" onclick="triggerUpload('banner')">
-              <i class="ti ti-cloud-upload"></i>
-              <p>Kéo thả hoặc <strong style="color:var(--green-600)">chọn file</strong> để tải lên</p>
-              <span>PNG, JPG tối đa 5MB. Tỉ lệ khuyến nghị 16:5 (1920×600px)</span>
-            </div>
-            <input type="file" id="input-banner" style="display:none" accept="image/*" onchange="handleBannerUpload(event)">
-            <div id="banner-preview" style="margin-top:12px;display:none;">
-              <img id="banner-img" style="width:100%;border-radius:10px;max-height:200px;object-fit:cover;" alt="Banner preview">
-            </div>
-          </div>
-        </div>
-
-        <!-- Thư viện ảnh -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title"><i class="ti ti-layout-grid"></i> Thư viện ảnh nhà hàng</div>
-            <button class="btn-primary" onclick="triggerUpload('gallery')"><i class="ti ti-plus" style="font-size:14px"></i> Thêm ảnh</button>
-          </div>
-          <div class="card-body">
-            <input type="file" id="input-gallery" style="display:none" accept="image/*" multiple onchange="handleGalleryUpload(event)">
-            <div class="image-preview-grid" id="galleryGrid">
-              <!-- Placeholder thumbnails -->
-              <div class="img-thumb-wrap">
-                <div class="img-thumb" style="background:var(--green-100);display:flex;align-items:center;justify-content:center;">
-                  <i class="ti ti-photo" style="font-size:28px;color:var(--green-400)"></i>
-                </div>
-                <button class="img-remove" onclick="removeGalleryImg(this)" title="Xóa"><i class="ti ti-x"></i></button>
-              </div>
-              <div class="img-thumb-wrap">
-                <div class="img-thumb" style="background:var(--green-50);display:flex;align-items:center;justify-content:center;">
-                  <i class="ti ti-photo" style="font-size:28px;color:var(--green-200)"></i>
-                </div>
-                <button class="img-remove" onclick="removeGalleryImg(this)" title="Xóa"><i class="ti ti-x"></i></button>
-              </div>
-              <div class="img-thumb-wrap" style="border:2px dashed var(--gray-200);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;min-height:90px;" onclick="triggerUpload('gallery')">
-                <i class="ti ti-plus" style="font-size:24px;color:var(--gray-300)"></i>
-              </div>
-            </div>
-            <p class="form-hint" style="margin-top:8px">Tối đa 20 ảnh. Ảnh sẽ hiển thị ở phần thư viện trên trang Giới thiệu.</p>
-          </div>
-        </div>
-
-        <!-- Ảnh logo -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title"><i class="ti ti-brand-abstract"></i> Logo nhà hàng</div>
-          </div>
-          <div class="card-body">
-            <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
-              <div style="width:100px;height:100px;background:var(--green-800);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                <img src="logoGrevie.png" alt="Logo" style="width:70px;height:70px;object-fit:contain;" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-                <span style="color:#fff;font-size:24px;font-weight:700;display:none">G</span>
-              </div>
-              <div style="flex:1;min-width:200px;">
-                <p style="font-size:13px;color:var(--gray-700);margin-bottom:8px;">Logo hiện tại: <strong>logoGrevie.png</strong></p>
-                <p class="form-hint">Khuyến nghị PNG nền trong suốt, tối thiểu 200×200px</p>
-                <button class="btn-secondary" style="margin-top:10px;" onclick="triggerUpload('logo')"><i class="ti ti-upload" style="font-size:14px"></i> Đổi logo</button>
-                <input type="file" id="input-logo" style="display:none" accept="image/png,image/svg+xml">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Hướng dẫn -->
-      <div>
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title"><i class="ti ti-bulb"></i> Hướng dẫn</div>
-          </div>
-          <div class="card-body">
-            <div style="display:flex;flex-direction:column;gap:14px;">
-              <div style="display:flex;gap:10px;align-items:flex-start;">
-                <div style="width:28px;height:28px;background:var(--green-50);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                  <i class="ti ti-photo" style="color:var(--green-600);font-size:14px"></i>
-                </div>
-                <div>
-                  <p style="font-size:13px;font-weight:500;color:var(--gray-700)">Ảnh banner</p>
-                  <p class="form-hint">Nên chọn ảnh có độ phân giải cao, tỉ lệ 16:5, thể hiện không gian nhà hàng đẹp nhất.</p>
-                </div>
-              </div>
-              <div style="display:flex;gap:10px;align-items:flex-start;">
-                <div style="width:28px;height:28px;background:var(--blue-50);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                  <i class="ti ti-layout-grid" style="color:var(--blue-600);font-size:14px"></i>
-                </div>
-                <div>
-                  <p style="font-size:13px;font-weight:500;color:var(--gray-700)">Thư viện ảnh</p>
-                  <p class="form-hint">Bổ sung ảnh thực tế: không gian, món ăn, đội ngũ để trang Giới thiệu sống động hơn.</p>
-                </div>
-              </div>
-              <div style="display:flex;gap:10px;align-items:flex-start;">
-                <div style="width:28px;height:28px;background:var(--amber-50);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                  <i class="ti ti-file-type-png" style="color:var(--amber-600);font-size:14px"></i>
-                </div>
-                <div>
-                  <p style="font-size:13px;font-weight:500;color:var(--gray-700)">Định dạng ảnh</p>
-                  <p class="form-hint">JPG cho ảnh thông thường, PNG cho logo/icon cần nền trong suốt. Tối đa 5MB/ảnh.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title"><i class="ti ti-device-mobile"></i> Mobile preview</div>
-          </div>
-          <div class="card-body" style="display:flex;justify-content:center;">
-            <div style="width:200px;border:2px solid var(--gray-200);border-radius:18px;overflow:hidden;padding:8px;background:#fff;">
-              <div style="background:var(--green-800);height:80px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
-                <span style="color:#fff;font-size:13px;font-weight:600;">Giới thiệu</span>
-              </div>
-              <div style="background:var(--gray-100);height:48px;border-radius:8px;margin-bottom:6px;"></div>
-              <div style="background:var(--gray-100);height:36px;border-radius:8px;margin-bottom:6px;"></div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-                <div style="background:var(--green-50);height:50px;border-radius:8px;"></div>
-                <div style="background:var(--green-50);height:50px;border-radius:8px;"></div>
-              </div>
-            </div>
+          <div class="form-group">
+            <label class="form-label">Video giới thiệu (URL)</label>
+            <input type="url" class="form-input" placeholder="https://youtube.com/..." style="margin-bottom:8px">
+            <label class="form-label" style="margin-top:8px">Trích dẫn nổi bật</label>
+            <textarea class="form-textarea" rows="3" placeholder="Câu trích dẫn từ người sáng lập hoặc đánh giá nổi bật...">"Ăn chay không phải từ bỏ – đó là lựa chọn yêu thương bản thân và thế giới."</textarea>
+            <label class="form-label" style="margin-top:8px">Tác giả trích dẫn</label>
+            <input type="text" class="form-input" value="Nguyễn Minh Anh – Người sáng lập Grevia">
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- TAB 4: XEM TRƯỚC -->
-  <div class="tab-panel" id="tab-xemtruoc">
+  <!-- TAB 3: GIÁ TRỊ CỐT LÕI -->
+  <div class="section-panel" id="tab-values">
     <div class="card">
       <div class="card-header">
-        <div class="card-title"><i class="ti ti-eye"></i> Xem trước nội dung trang Giới thiệu</div>
-        <div style="display:flex;gap:8px;">
-          <button class="btn-secondary" onclick="switchDevice('desktop')" id="btn-desktop"><i class="ti ti-device-laptop"></i> Desktop</button>
-          <button class="btn-secondary" onclick="switchDevice('mobile')" id="btn-mobile"><i class="ti ti-device-mobile"></i> Mobile</button>
+        <div class="card-title"><i class="ti ti-star"></i> Giá trị cốt lõi</div>
+        <button class="btn-primary" style="padding:6px 12px;font-size:12px" onclick="addValue()"><i class="ti ti-plus"></i> Thêm giá trị</button>
+      </div>
+      <div class="card-body">
+        <p style="font-size:12.5px;color:var(--gray-500);margin-bottom:16px">Các giá trị hiển thị dạng thẻ trên trang giới thiệu. Kéo để sắp xếp thứ tự.</p>
+        <div id="valuesList" style="display:flex;flex-direction:column;gap:12px;">
+          <!-- Value items injected by JS -->
         </div>
       </div>
-      <div class="card-body" style="padding:20px;background:#f0f0f0;display:flex;justify-content:center;">
-        <div id="preview-container" style="width:100%;max-width:900px;transition:max-width .3s;">
-          <div class="preview-panel">
-            <div class="preview-header">
-              <div class="preview-dot" style="background:#ff5f57"></div>
-              <div class="preview-dot" style="background:#febc2e"></div>
-              <div class="preview-dot" style="background:#28c840"></div>
-              <span style="margin-left:8px;">grevia.vn/gioi-thieu</span>
-            </div>
-            <div class="preview-body">
-              <div class="preview-restaurant">
-                <div style="font-size:28px;font-weight:700;letter-spacing:2px;margin-bottom:4px">🌿 GREVIA</div>
-                <h2 id="prev-name">Nhà hàng chay Grevia</h2>
-                <p id="prev-slogan">Ẩm thực chay – Sống xanh, sống khỏe</p>
-              </div>
+    </div>
 
-              <!-- Stats -->
-              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px;">
-                <div style="background:#fff;border:1px solid var(--gray-200);border-radius:8px;padding:12px;text-align:center;">
-                  <div style="font-size:18px;font-weight:700;color:var(--green-600)" id="prev-stat1">50.000+</div>
-                  <div style="font-size:11px;color:var(--gray-400)">Khách hàng</div>
-                </div>
-                <div style="background:#fff;border:1px solid var(--gray-200);border-radius:8px;padding:12px;text-align:center;">
-                  <div style="font-size:18px;font-weight:700;color:var(--green-600)" id="prev-stat2">150+</div>
-                  <div style="font-size:11px;color:var(--gray-400)">Món ăn</div>
-                </div>
-                <div style="background:#fff;border:1px solid var(--gray-200);border-radius:8px;padding:12px;text-align:center;">
-                  <div style="font-size:18px;font-weight:700;color:var(--green-600)" id="prev-stat3">7+</div>
-                  <div style="font-size:11px;color:var(--gray-400)">Năm kinh nghiệm</div>
-                </div>
-                <div style="background:#fff;border:1px solid var(--gray-200);border-radius:8px;padding:12px;text-align:center;">
-                  <div style="font-size:18px;font-weight:700;color:var(--green-600)" id="prev-stat4">4.8★</div>
-                  <div style="font-size:11px;color:var(--gray-400)">Đánh giá</div>
-                </div>
-              </div>
-
-              <div class="preview-section-card">
-                <h4>📖 Về chúng tôi</h4>
-                <p id="prev-shortdesc">Grevia là nhà hàng chay theo phong cách hiện đại, mang đến những món ăn thuần chay được chế biến tinh tế từ nguyên liệu tự nhiên...</p>
-              </div>
-              <div class="preview-section-card">
-                <h4>💚 Tầm nhìn</h4>
-                <p id="prev-vision">Trở thành thương hiệu nhà hàng chay hàng đầu Việt Nam...</p>
-              </div>
-              <div class="preview-section-card">
-                <h4>🎯 Sứ mệnh</h4>
-                <p id="prev-mission">Mang đến những bữa ăn thuần chay ngon lành, an toàn và giàu dinh dưỡng...</p>
-              </div>
-              <div class="preview-section-card">
-                <h4>📍 Thông tin liên hệ</h4>
-                <p id="prev-addr">123 Đường Lý Thường Kiệt, Q.10, TP. HCM • 10:00 – 22:00</p>
-              </div>
-            </div>
-          </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><i class="ti ti-chart-bar"></i> Số liệu ấn tượng</div>
+      </div>
+      <div class="card-body">
+        <p style="font-size:12.5px;color:var(--gray-500);margin-bottom:16px">Hiển thị dưới dạng banner thống kê trên trang giới thiệu.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px" id="statsGrid">
+          <!-- Stat items -->
         </div>
       </div>
     </div>
   </div>
-</main>
 
-<!-- MODAL THÊM SECTION -->
-<div class="modal-backdrop" id="modalAddSection">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title">Thêm phần nội dung mới</div>
-      <button class="modal-close" onclick="closeModal('modalAddSection')"><i class="ti ti-x"></i></button>
-    </div>
-    <div class="modal-body">
-      <div class="form-grid">
-        <div class="form-group">
-          <label>Tiêu đề phần</label>
-          <input type="text" id="newSectionTitle" placeholder="Ví dụ: Không gian nhà hàng">
-        </div>
-        <div class="form-group">
-          <label>Nội dung</label>
-          <textarea id="newSectionContent" rows="4" placeholder="Nhập nội dung cho phần này..."></textarea>
-        </div>
-        <div class="form-group">
-          <label>Trạng thái</label>
-          <select id="newSectionStatus">
-            <option value="show">Hiển thị</option>
-            <option value="hide">Ẩn</option>
+  <!-- TAB 4: GALLERY -->
+  <div class="section-panel" id="tab-gallery">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><i class="ti ti-photo"></i> Thư viện ảnh giới thiệu</div>
+        <div style="display:flex;gap:8px">
+          <select class="form-select" style="width:auto;padding:6px 10px;font-size:12px">
+            <option>Tất cả ảnh</option>
+            <option>Không gian</option>
+            <option>Món ăn</option>
+            <option>Đội ngũ</option>
           </select>
+          <button class="btn-primary" style="padding:6px 12px;font-size:12px" onclick="triggerUpload('galleryFile')"><i class="ti ti-upload"></i> Tải ảnh lên</button>
         </div>
       </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-secondary" onclick="closeModal('modalAddSection')">Hủy</button>
-      <button class="btn-primary" onclick="confirmAddSection()"><i class="ti ti-plus"></i> Thêm phần</button>
+      <div class="card-body">
+        <input type="file" id="galleryFile" accept="image/*" multiple style="display:none" onchange="addGalleryImages(this)">
+        <div class="gallery-grid" id="galleryGrid">
+          <!-- Gallery items injected by JS -->
+        </div>
+        <p style="font-size:12px;color:var(--gray-400);margin-top:12px"><i class="ti ti-info-circle" style="font-size:12px"></i> Hỗ trợ JPG, PNG, WEBP. Tối đa 5MB/ảnh. Nhấn vào ảnh để xóa.</p>
+      </div>
     </div>
   </div>
-</div>
+
+</main>
 
 <!-- TOAST -->
 <div class="toast" id="toast"><i class="ti ti-circle-check"></i><span id="toastMsg">Thao tác thành công!</span></div>
@@ -919,200 +602,227 @@ function closeSidebar(){
 }
 
 // ===== TOAST =====
-function showToast(msg,type='success'){
+function showToast(msg, type='success'){
   const t=document.getElementById('toast');
   document.getElementById('toastMsg').textContent=msg;
-  t.style.background=type==='error'?'#dc2626':'var(--green-800)';
+  t.style.background = type==='error' ? '#991b1b' : 'var(--green-800)';
   t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),2800);
 }
 
 // ===== TABS =====
-function switchTab(name){
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
-    const tabs=['thongtin','noidung','hinhanh','xemtruoc'];
-    b.classList.toggle('active',tabs[i]===name);
-  });
-  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
-  if(name==='xemtruoc') updatePreview();
+function switchTab(btn, panelId){
+  document.querySelectorAll('.section-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.section-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
 }
 
-// ===== SECTION TOGGLE =====
-function toggleSection(id){
-  const c=document.getElementById('content-'+id);
-  const t=document.getElementById('toggle-'+id);
-  const isOpen=c.classList.contains('open');
-  c.classList.toggle('open',!isOpen);
-  t.classList.toggle('open',!isOpen);
-}
-
-// ===== SECTION MOVE =====
-function moveSection(id,dir){
-  const list=document.getElementById('sectionList');
-  const item=list.querySelector('[data-id="'+id+'"]');
-  if(dir==='up'&&item.previousElementSibling){
-    list.insertBefore(item,item.previousElementSibling);
-  } else if(dir==='down'&&item.nextElementSibling){
-    list.insertBefore(item.nextElementSibling,item);
-  }
-  showToast('Đã di chuyển phần nội dung!');
-}
-
-// ===== REMOVE SECTION =====
-function removeSection(id){
-  if(!confirm('Bạn có chắc muốn xóa phần nội dung này?')) return;
-  const item=document.getElementById('sectionList').querySelector('[data-id="'+id+'"]');
-  item.style.opacity='0';item.style.transform='translateX(-20px)';item.style.transition='all .3s';
-  setTimeout(()=>item.remove(),300);
-  showToast('Đã xóa phần nội dung!');
-}
-
-// ===== ADD SECTION =====
-function addSection(){
-  document.getElementById('newSectionTitle').value='';
-  document.getElementById('newSectionContent').value='';
-  document.getElementById('modalAddSection').classList.add('open');
-}
-function confirmAddSection(){
-  const title=document.getElementById('newSectionTitle').value.trim();
-  const content=document.getElementById('newSectionContent').value.trim();
-  const status=document.getElementById('newSectionStatus').value;
-  if(!title){showToast('Vui lòng nhập tiêu đề!','error');return;}
-  const id='s'+Date.now();
-  const html=`
-  <div class="section-item" draggable="true" data-id="${id}" style="opacity:0;transform:translateY(-10px);transition:all .3s">
-    <div class="section-item-header" onclick="toggleSection('${id}')">
-      <i class="ti ti-grip-vertical drag-handle"></i>
-      <span class="section-title-text">📝 ${title}</span>
-      <span class="badge ${status==='show'?'badge-success':'badge-warning'}" style="font-size:10px">${status==='show'?'Hiển thị':'Ẩn'}</span>
-      <button class="section-toggle" id="toggle-${id}"><i class="ti ti-chevron-down"></i></button>
-    </div>
-    <div class="section-content" id="content-${id}">
-      <div class="form-grid">
-        <div class="form-group"><label>Tiêu đề phần</label><input type="text" value="${title}"></div>
-        <div class="form-group"><label>Nội dung</label><textarea rows="4">${content}</textarea></div>
-      </div>
-      <div class="section-actions">
-        <button class="btn-secondary" onclick="moveSection('${id}','up')"><i class="ti ti-arrow-up"></i> Lên</button>
-        <button class="btn-secondary" onclick="moveSection('${id}','down')"><i class="ti ti-arrow-down"></i> Xuống</button>
-        <button class="btn-danger" onclick="removeSection('${id}')"><i class="ti ti-trash"></i> Xóa</button>
-      </div>
-    </div>
-  </div>`;
-  document.getElementById('sectionList').insertAdjacentHTML('beforeend',html);
-  const newItem=document.getElementById('sectionList').lastElementChild;
-  setTimeout(()=>{newItem.style.opacity='1';newItem.style.transform='';},50);
-  closeModal('modalAddSection');
-  showToast('Đã thêm phần nội dung mới!');
-}
-
-// ===== MODAL =====
-function closeModal(id){document.getElementById(id).classList.remove('open');}
-document.querySelectorAll('.modal-backdrop').forEach(m=>{
-  m.addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
-});
-
-// ===== UPLOAD =====
-function triggerUpload(type){document.getElementById('input-'+type).click();}
-function handleBannerUpload(e){
-  const file=e.target.files[0];
-  if(!file) return;
-  const reader=new FileReader();
-  reader.onload=r=>{
-    document.getElementById('banner-img').src=r.target.result;
-    document.getElementById('banner-preview').style.display='block';
+// ===== LIVE PREVIEW =====
+function setupLivePreview(){
+  const map={
+    'restaurantName':'previewName',
+    'slogan':'previewSlogan',
+    'shortDesc':'previewDesc'
   };
-  reader.readAsDataURL(file);
-  showToast('Đã tải lên ảnh banner!');
-}
-function handleGalleryUpload(e){
-  const files=Array.from(e.target.files);
-  const grid=document.getElementById('galleryGrid');
-  const addBtn=grid.querySelector('[onclick="triggerUpload(\'gallery\')"]');
-  files.forEach(file=>{
-    const reader=new FileReader();
-    reader.onload=r=>{
-      const wrap=document.createElement('div');
-      wrap.className='img-thumb-wrap';
-      wrap.innerHTML=`<img class="img-thumb" src="${r.target.result}" alt="">
-        <button class="img-remove" onclick="removeGalleryImg(this)" title="Xóa"><i class="ti ti-x"></i></button>`;
-      grid.insertBefore(wrap,addBtn);
-    };
-    reader.readAsDataURL(file);
+  Object.keys(map).forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.addEventListener('input',()=>{
+      document.getElementById(map[id]).textContent=el.value;
+    });
   });
-  showToast(`Đã thêm ${files.length} ảnh vào thư viện!`);
-}
-function removeGalleryImg(btn){
-  btn.closest('.img-thumb-wrap').remove();
-  showToast('Đã xóa ảnh!');
+  document.getElementById('foundYear').addEventListener('input',function(){
+    document.getElementById('previewYear').textContent='Từ năm '+this.value;
+  });
+  document.getElementById('branches').addEventListener('input',function(){
+    document.getElementById('previewBranch').textContent=this.value+' chi nhánh';
+  });
 }
 
-// ===== PREVIEW =====
-function updatePreview(){
-  const get=id=>document.getElementById(id);
-  get('prev-name').textContent=get('restaurantName')?.value||'Nhà hàng chay Grevia';
-  get('prev-slogan').textContent=get('restaurantSlogan')?.value||'';
-  get('prev-shortdesc').textContent=(get('shortDesc')?.value||'').slice(0,120)+'...';
-  get('prev-vision').textContent=(get('vision')?.value||'').slice(0,100)+'...';
-  get('prev-mission').textContent=(get('mission')?.value||'').slice(0,100)+'...';
-  get('prev-addr').textContent=(get('address')?.value||'')+' • '+(get('openTime')?.value||'');
-  get('prev-stat1').textContent=get('stat1')?.value||'—';
-  get('prev-stat2').textContent=get('stat2')?.value||'—';
-  get('prev-stat3').textContent=get('stat3')?.value||'—';
-  get('prev-stat4').textContent=get('stat4')?.value||'—';
+// ===== CHAR COUNT =====
+function countChars(el, counterId, max){
+  const len=el.value.length;
+  const counter=document.getElementById(counterId);
+  counter.textContent=len+'/'+max+' ký tự';
+  counter.classList.toggle('warn', len>max);
 }
-function previewPage(){switchTab('xemtruoc');}
 
-// ===== DEVICE SWITCH =====
-function switchDevice(d){
-  const c=document.getElementById('preview-container');
-  c.style.maxWidth=d==='mobile'?'400px':'900px';
-  document.getElementById('btn-desktop').style.background=d==='desktop'?'var(--green-50)':'';
-  document.getElementById('btn-mobile').style.background=d==='mobile'?'var(--green-50)':'';
+// ===== IMAGE UPLOAD =====
+function triggerUpload(id){ document.getElementById(id).click(); }
+function previewImage(input, previewId, wrapId){
+  if(!input.files||!input.files[0]) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    document.getElementById(previewId).src=e.target.result;
+    if(wrapId){
+      const wrap=document.getElementById(wrapId);
+      wrap.classList.add('has-img');
+      // also update mini preview
+      if(previewId==='bannerPreview') document.getElementById('previewBannerMini').src=e.target.result;
+    }
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+// ===== RTE =====
+function fmt(cmd){ document.execCommand(cmd,false,null); }
+
+// ===== WORD COUNT =====
+function updateWordCount(){
+  const editor=document.getElementById('storyEditor');
+  if(!editor) return;
+  const text=editor.innerText||'';
+  const words=text.trim().split(/\s+/).filter(w=>w.length>0).length;
+  document.getElementById('statWords').textContent=words;
 }
 
 // ===== SAVE =====
-function saveAll(){
-  const btn=document.querySelector('.btn-primary[onclick="saveAll()"]');
-  btn.innerHTML='<i class="ti ti-loader" style="font-size:15px;animation:spin .7s linear infinite"></i> Đang lưu...';
+function savePage(){
+  const btn=document.querySelector('.btn-primary[onclick="savePage()"]');
+  const orig=btn.innerHTML;
+  btn.innerHTML='<i class="ti ti-loader-2" style="animation:spin .8s linear infinite"></i> Đang lưu...';
   btn.disabled=true;
-  document.getElementById('lastUpdated').textContent=new Date().toLocaleString('vi-VN');
   setTimeout(()=>{
-    btn.innerHTML='<i class="ti ti-device-floppy" style="font-size:15px"></i> Lưu thay đổi';
+    btn.innerHTML=orig;
     btn.disabled=false;
-    showToast('Đã lưu nội dung trang Giới thiệu thành công!');
-  },1000);
+    document.getElementById('statUpdated').textContent='Vừa xong';
+    showToast('Đã lưu thay đổi thành công!');
+  },1200);
 }
 
-// ===== DRAG & DROP =====
-(()=>{
-  const list=document.getElementById('sectionList');
-  let dragged=null;
-  list.addEventListener('dragstart',e=>{
-    dragged=e.target.closest('.section-item');
-    if(dragged) setTimeout(()=>dragged.style.opacity='.4',0);
-  });
-  list.addEventListener('dragend',()=>{if(dragged){dragged.style.opacity='1';dragged=null;}});
-  list.addEventListener('dragover',e=>{
-    e.preventDefault();
-    const target=e.target.closest('.section-item');
-    if(target&&target!==dragged){
-      const rect=target.getBoundingClientRect();
-      const mid=rect.top+rect.height/2;
-      if(e.clientY<mid) list.insertBefore(dragged,target);
-      else list.insertBefore(dragged,target.nextSibling);
-    }
-  });
-})();
+function previewPage(){
+  showToast('Đang mở xem trước trang...');
+}
 
-// ===== SPIN KEYFRAME =====
+// ===== VALUES LIST =====
+const defaultValues=[
+  {icon:'ti-leaf',title:'Thuần Chay',desc:'Toàn bộ nguyên liệu 100% thực vật, không sử dụng bất kỳ sản phẩm động vật nào.',color:'green'},
+  {icon:'ti-heart',title:'Lành Mạnh',desc:'Chế biến theo tiêu chuẩn dinh dưỡng, không chất bảo quản, không hương liệu nhân tạo.',color:'red'},
+  {icon:'ti-world',title:'Bền Vững',desc:'Sử dụng bao bì thân thiện môi trường, ưu tiên nguyên liệu địa phương theo mùa.',color:'blue'},
+  {icon:'ti-users',title:'Cộng Đồng',desc:'Chia sẻ lối sống xanh, kết nối những người yêu ẩm thực lành mạnh và thiên nhiên.',color:'amber'},
+];
+
+function renderValues(){
+  const list=document.getElementById('valuesList');
+  list.innerHTML='';
+  defaultValues.forEach((v,i)=>{
+    list.innerHTML+=`
+    <div style="display:flex;align-items:flex-start;gap:14px;padding:14px;border:1px solid var(--gray-200);border-radius:10px;background:#fff;transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 2px 8px rgba(0,0,0,.06)'" onmouseout="this.style.boxShadow='none'">
+      <div style="width:40px;height:40px;background:var(--green-50);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer" onclick="changeIcon(${i})" title="Đổi icon">
+        <i class="ti ${v.icon}" style="font-size:20px;color:var(--green-600)"></i>
+      </div>
+      <div style="flex:1;display:grid;grid-template-columns:1fr 2fr;gap:10px;align-items:center">
+        <input type="text" class="form-input" value="${v.title}" placeholder="Tiêu đề" oninput="defaultValues[${i}].title=this.value">
+        <input type="text" class="form-input" value="${v.desc}" placeholder="Mô tả ngắn" oninput="defaultValues[${i}].desc=this.value">
+      </div>
+      <button style="background:none;border:none;cursor:pointer;color:var(--gray-300);font-size:16px;flex-shrink:0;transition:color .15s" onmouseover="this.style.color='var(--red-400)'" onmouseout="this.style.color='var(--gray-300)'" onclick="removeValue(${i})" title="Xóa">
+        <i class="ti ti-trash"></i>
+      </button>
+    </div>`;
+  });
+}
+
+function addValue(){
+  defaultValues.push({icon:'ti-star',title:'Giá trị mới',desc:'Mô tả giá trị...',color:'green'});
+  renderValues();
+}
+
+function removeValue(i){
+  if(defaultValues.length<=1){showToast('Cần có ít nhất 1 giá trị!','error');return;}
+  defaultValues.splice(i,1);
+  renderValues();
+  showToast('Đã xóa giá trị.');
+}
+
+// ===== STATS GRID =====
+const defaultStats=[
+  {num:'2018',label:'Năm thành lập'},
+  {num:'60+',label:'Món ăn chay'},
+  {num:'3',label:'Chi nhánh'},
+  {num:'5000+',label:'Thực khách/tháng'},
+];
+function renderStats(){
+  const grid=document.getElementById('statsGrid');
+  grid.innerHTML='';
+  defaultStats.forEach((s,i)=>{
+    grid.innerHTML+=`
+    <div style="border:1px solid var(--gray-200);border-radius:10px;padding:14px;background:var(--gray-50);display:flex;gap:10px;align-items:center">
+      <div style="flex:1">
+        <input type="text" class="form-input" value="${s.num}" placeholder="Số liệu" style="font-weight:700;font-size:16px;margin-bottom:6px" oninput="defaultStats[${i}].num=this.value">
+        <input type="text" class="form-input" value="${s.label}" placeholder="Nhãn" style="font-size:12px" oninput="defaultStats[${i}].label=this.value">
+      </div>
+      <button style="background:none;border:none;cursor:pointer;color:var(--gray-300);font-size:15px;transition:color .15s" onmouseover="this.style.color='var(--red-400)'" onmouseout="this.style.color='var(--gray-300)'" onclick="removeStat(${i})"><i class="ti ti-x"></i></button>
+    </div>`;
+  });
+  grid.innerHTML+=`<div style="border:2px dashed var(--gray-200);border-radius:10px;padding:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--gray-400);font-size:13px;gap:6px;transition:all .2s" onclick="addStat()" onmouseover="this.style.borderColor='var(--green-400)';this.style.color='var(--green-600)'" onmouseout="this.style.borderColor='var(--gray-200)';this.style.color='var(--gray-400)'"><i class="ti ti-plus" style="font-size:18px"></i> Thêm số liệu</div>`;
+}
+
+function addStat(){
+  defaultStats.push({num:'0',label:'Nhãn mới'});
+  renderStats();
+}
+function removeStat(i){
+  defaultStats.splice(i,1);
+  renderStats();
+}
+
+// ===== GALLERY =====
+const galleryImages=[
+  'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=300&q=70',
+  'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&q=70',
+  'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=300&q=70',
+  'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&q=70',
+  'https://images.unsplash.com/photo-1543352634-99a5d50ae78e?w=300&q=70',
+  'https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=300&q=70',
+];
+
+function renderGallery(){
+  const grid=document.getElementById('galleryGrid');
+  grid.innerHTML='';
+  galleryImages.forEach((src,i)=>{
+    grid.innerHTML+=`
+    <div class="gallery-item">
+      <img src="${src}" alt="Gallery ${i+1}" loading="lazy">
+      <button class="remove-btn" onclick="removeGalleryImg(${i})" title="Xóa ảnh"><i class="ti ti-x" style="font-size:10px"></i></button>
+    </div>`;
+  });
+  grid.innerHTML+=`<div class="gallery-add" onclick="triggerUpload('galleryFile')"><i class="ti ti-plus"></i><span>Thêm ảnh</span></div>`;
+}
+
+function removeGalleryImg(i){
+  galleryImages.splice(i,1);
+  renderGallery();
+  document.getElementById('statUpdated').textContent='Vừa xong';
+  showToast('Đã xóa ảnh khỏi gallery.');
+}
+
+function addGalleryImages(input){
+  if(!input.files) return;
+  Array.from(input.files).forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=e=>{
+      galleryImages.push(e.target.result);
+      renderGallery();
+    };
+    reader.readAsDataURL(file);
+  });
+  showToast(`Đã thêm ${input.files.length} ảnh vào gallery.`);
+  input.value='';
+}
+
+// ===== SPIN ANIM =====
 const style=document.createElement('style');
 style.textContent='@keyframes spin{to{transform:rotate(360deg)}}';
 document.head.appendChild(style);
 
 // ===== INIT =====
-document.getElementById('lastUpdated').textContent=new Date().toLocaleString('vi-VN');
+setupLivePreview();
+renderValues();
+renderStats();
+renderGallery();
+countChars(document.getElementById('shortDesc'),'cntShort',160);
+document.getElementById('storyEditor').addEventListener('input', updateWordCount);
+updateWordCount();
 </script>
 </body>
 </html>
