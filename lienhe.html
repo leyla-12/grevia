@@ -7,256 +7,224 @@
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
-/* ===== RESET & BASE ===== */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Be Vietnam Pro', sans-serif; background: #f4f6f4; color: #111827; font-size: 14px; min-height: 100vh; }
-a { text-decoration: none; color: inherit; }
-
-/* ===== COLOR TOKENS ===== */
-:root {
-  --green-50:#f0faf4; --green-100:#d5f0e0; --green-200:#a6ddb9;
-  --green-400:#4caf78; --green-600:#2e7d52; --green-700:#1e5c3a; --green-800:#144029;
-  --amber-50:#fffbeb; --amber-400:#f59e0b; --amber-600:#d97706;
-  --red-50:#fef2f2; --red-400:#f87171; --red-600:#dc2626;
-  --blue-50:#eff6ff; --blue-400:#60a5fa; --blue-600:#2563eb;
-  --gray-50:#f9fafb; --gray-100:#f3f4f6; --gray-200:#e5e7eb;
-  --gray-300:#d1d5db; --gray-400:#9ca3af; --gray-500:#6b7280;
-  --gray-600:#4b5563; --gray-700:#374151; --gray-900:#111827;
-  --sidebar-w:240px; --header-h:60px;
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Be Vietnam Pro',sans-serif;background:#f4f6f4;color:#111827;font-size:14px;min-height:100vh;}
+a{text-decoration:none;color:inherit;}
+:root{
+  --green-50:#f0faf4;--green-100:#d5f0e0;--green-200:#a6ddb9;
+  --green-400:#4caf78;--green-600:#2e7d52;--green-700:#1e5c3a;--green-800:#144029;
+  --amber-50:#fffbeb;--amber-400:#f59e0b;--amber-600:#d97706;
+  --red-50:#fef2f2;--red-400:#f87171;--red-600:#dc2626;
+  --blue-50:#eff6ff;--blue-400:#60a5fa;--blue-600:#2563eb;
+  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;
+  --gray-300:#d1d5db;--gray-400:#9ca3af;--gray-500:#6b7280;
+  --gray-600:#4b5563;--gray-700:#374151;--gray-900:#111827;
+  --sidebar-w:240px;--header-h:60px;
 }
 
-/* ===== SIDEBAR ===== */
-.sidebar {
-  position: fixed; top: 0; left: 0; width: var(--sidebar-w); height: 100vh;
-  background: var(--green-800); display: flex; flex-direction: column;
-  z-index: 100; transition: transform 0.3s ease; overflow-y: auto;
+/* SIDEBAR */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;background:var(--green-800);display:flex;flex-direction:column;z-index:100;transition:transform .3s ease;overflow-y:auto;}
+.sidebar-logo{padding:18px 16px 14px;border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0;}
+.logo-mark{display:flex;align-items:center;gap:10px;}
+.logo-icon{width:38px;height:38px;border-radius:10px;overflow:hidden;flex-shrink:0;background:#fff;display:flex;align-items:center;justify-content:center;}
+.logo-icon img{width:100%;height:100%;object-fit:cover;display:block;}
+.logo-text .brand{font-size:17px;font-weight:700;color:#fff;}
+.logo-text .sub{font-size:11px;color:rgba(255,255,255,.45);}
+.nav-section{padding:10px 10px 6px;flex:1;}
+.nav-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.3);padding:12px 8px 5px;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;color:rgba(255,255,255,.62);font-size:13.5px;font-weight:400;transition:all .18s;margin-bottom:2px;}
+.nav-item:hover{background:rgba(255,255,255,.08);color:#fff;}
+.nav-item.active{background:var(--green-600);color:#fff;font-weight:500;}
+.nav-item i{font-size:17px;flex-shrink:0;}
+.nav-badge{margin-left:auto;background:var(--amber-400);color:#fff;font-size:10px;font-weight:600;padding:2px 6px;border-radius:10px;min-width:18px;text-align:center;}
+.sidebar-footer{padding:10px;border-top:1px solid rgba(255,255,255,.08);flex-shrink:0;}
+.admin-card{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;background:rgba(255,255,255,.07);}
+.admin-avatar{width:32px;height:32px;background:var(--green-400);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;flex-shrink:0;}
+.admin-info .name{font-size:12px;font-weight:500;color:#fff;}
+.admin-info .role{font-size:11px;color:rgba(255,255,255,.4);}
+.logout-btn{margin-left:auto;background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;font-size:16px;display:flex;align-items:center;transition:color .15s;}
+.logout-btn:hover{color:rgba(255,255,255,.8);}
+
+/* HEADER */
+.header{position:fixed;top:0;left:var(--sidebar-w);right:0;height:var(--header-h);background:#fff;border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 24px;gap:14px;z-index:90;transition:left .3s ease;}
+.hamburger{display:none;background:none;border:none;cursor:pointer;font-size:22px;color:var(--gray-600);padding:4px;}
+.breadcrumb{display:flex;align-items:center;gap:6px;color:var(--gray-400);font-size:13px;}
+.breadcrumb .sep{font-size:11px;}
+.breadcrumb .current{color:var(--gray-900);font-weight:600;}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:8px;}
+.icon-btn{width:36px;height:36px;border-radius:8px;background:none;border:1px solid var(--gray-200);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--gray-500);font-size:17px;transition:all .15s;position:relative;}
+.icon-btn:hover{background:var(--gray-50);color:var(--gray-700);}
+.notif-dot{position:absolute;top:7px;right:7px;width:6px;height:6px;background:var(--red-600);border-radius:50%;border:1.5px solid #fff;}
+.header-avatar{width:34px;height:34px;background:var(--green-600);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;cursor:pointer;}
+
+/* MAIN */
+.main{margin-left:var(--sidebar-w);margin-top:var(--header-h);padding:26px 24px;}
+.page-header{margin-bottom:22px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.page-header-left h1{font-size:20px;font-weight:700;color:var(--gray-900);}
+.page-header-left p{font-size:13px;color:var(--gray-400);margin-top:3px;}
+
+/* STAT STRIP */
+.stat-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;margin-bottom:22px;}
+.stat-mini{background:#fff;border:1px solid var(--gray-200);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:12px;}
+.stat-mini-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.smi-a .stat-mini-icon{background:var(--green-50);color:var(--green-600);}
+.smi-b .stat-mini-icon{background:var(--amber-50);color:var(--amber-600);}
+.smi-c .stat-mini-icon{background:var(--blue-50);color:var(--blue-600);}
+.smi-d .stat-mini-icon{background:var(--gray-100);color:var(--gray-500);}
+.stat-mini-val{font-size:20px;font-weight:700;color:var(--gray-900);line-height:1;}
+.stat-mini-lbl{font-size:11px;color:var(--gray-400);margin-top:2px;}
+
+/* LAYOUT 2 CỘT */
+.two-col{display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start;}
+
+/* CARD */
+.card{background:#fff;border:1px solid var(--gray-200);border-radius:12px;}
+.card-header{padding:14px 18px;border-bottom:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.card-title{font-size:14px;font-weight:600;color:var(--gray-900);display:flex;align-items:center;gap:8px;}
+.card-title i{font-size:16px;color:var(--green-600);}
+
+/* FILTER TABS */
+.filter-tabs{display:flex;gap:6px;padding:12px 16px;border-bottom:1px solid var(--gray-100);overflow-x:auto;scrollbar-width:none;}
+.filter-tabs::-webkit-scrollbar{display:none;}
+.filter-tab{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--gray-200);background:#fff;color:var(--gray-600);white-space:nowrap;transition:all .15s;font-family:inherit;}
+.filter-tab:hover:not(.active){border-color:var(--green-400);color:var(--green-600);}
+.filter-tab.active{background:var(--green-600);border-color:var(--green-600);color:#fff;}
+
+/* TOOLBAR */
+.toolbar{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--gray-100);flex-wrap:wrap;}
+.search-box{display:flex;align-items:center;gap:8px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;padding:7px 12px;flex:1;min-width:140px;}
+.search-box i{color:var(--gray-400);font-size:15px;flex-shrink:0;}
+.search-box input{border:none;outline:none;font-size:13px;font-family:inherit;background:transparent;color:var(--gray-900);width:100%;}
+.form-sel{padding:7px 10px;border:1px solid var(--gray-200);border-radius:8px;font-size:13px;font-family:inherit;color:var(--gray-700);background:#fff;outline:none;cursor:pointer;flex-shrink:0;}
+
+/* MESSAGE LIST */
+.msg-list{min-height:200px;}
+.msg-row{display:flex;align-items:stretch;gap:0;padding:0;border-bottom:1px solid var(--gray-100);cursor:pointer;transition:background .12s;}
+.msg-row:last-child{border-bottom:none;}
+.msg-row:hover{background:var(--gray-50);}
+.msg-row.selected{background:var(--green-50);}
+.msg-row.unread .msg-row-name{font-weight:700;color:var(--gray-900);}
+.msg-unread-dot{width:7px;height:7px;background:var(--amber-400);border-radius:50%;flex-shrink:0;margin-top:5px;}
+.msg-row-inner{display:flex;align-items:center;gap:12px;padding:11px 16px;width:100%;}
+.msg-row-left{flex:1;min-width:0;}
+.msg-row-name{font-size:13px;color:var(--gray-900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.msg-row-email{font-size:11px;color:var(--gray-400);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.msg-row-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;}
+.msg-row-date{font-size:11px;color:var(--gray-400);white-space:nowrap;}
+.msg-row-actions{display:flex;gap:4px;}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px;white-space:nowrap;}
+.badge-success{background:var(--green-100);color:var(--green-700);}
+.badge-warning{background:var(--amber-50);color:var(--amber-600);}
+.badge-gray{background:var(--gray-100);color:var(--gray-500);}
+.badge-blue{background:var(--blue-50);color:var(--blue-600);}
+
+/* TOPIC CHIP */
+.topic-chip{display:inline-flex;align-items:center;font-size:11px;font-weight:500;padding:2px 8px;border-radius:10px;white-space:nowrap;}
+.tc-booking{background:var(--amber-50);color:var(--amber-600);}
+.tc-menu{background:var(--blue-50);color:var(--blue-600);}
+.tc-feedback{background:var(--green-100);color:var(--green-700);}
+.tc-other{background:var(--gray-100);color:var(--gray-500);}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:8px;border:none;cursor:pointer;font-size:13px;font-weight:500;font-family:inherit;transition:all .15s;}
+.btn-primary{background:var(--green-600);color:#fff;}
+.btn-primary:hover{background:var(--green-700);}
+.btn-outline{background:#fff;color:var(--gray-700);border:1px solid var(--gray-200);}
+.btn-outline:hover{background:var(--gray-50);}
+.btn-sm{padding:6px 14px;font-size:12px;}
+.btn-xs{font-size:11px;padding:4px 9px;border-radius:6px;border:1px solid;cursor:pointer;font-family:inherit;font-weight:500;transition:all .15s;white-space:nowrap;}
+.btn-green{background:var(--green-50);border-color:var(--green-200);color:var(--green-700);}
+.btn-green:hover{background:var(--green-100);}
+.btn-red{background:var(--red-50);border-color:#fca5a5;color:var(--red-600);}
+.btn-red:hover{background:#fee2e2;}
+.btn-gray{background:var(--gray-50);border-color:var(--gray-200);color:var(--gray-600);}
+.btn-gray:hover{background:var(--gray-100);}
+
+/* PAGINATION */
+.pagination{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-top:1px solid var(--gray-100);flex-wrap:wrap;gap:8px;}
+.pagination-info{font-size:12px;color:var(--gray-400);}
+.pagination-btns{display:flex;gap:4px;}
+.page-btn{width:28px;height:28px;border-radius:6px;border:1px solid var(--gray-200);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;font-weight:500;color:var(--gray-600);transition:all .15s;font-family:inherit;}
+.page-btn:hover{background:var(--gray-50);}
+.page-btn.active{background:var(--green-600);border-color:var(--green-600);color:#fff;}
+.page-btn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* DETAIL PANEL */
+.detail-sticky{position:sticky;top:calc(var(--header-h) + 26px);}
+.detail-empty{padding:40px 20px;text-align:center;color:var(--gray-400);}
+.detail-empty i{font-size:36px;display:block;margin-bottom:10px;color:var(--gray-300);}
+.detail-empty p{font-size:13px;}
+
+/* MSG DETAIL */
+.msg-detail-header{padding:16px 18px;border-bottom:1px solid var(--gray-100);}
+.msg-avatar{width:40px;height:40px;border-radius:50%;background:var(--green-100);color:var(--green-700);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;flex-shrink:0;}
+.msg-sender-name{font-size:14px;font-weight:600;color:var(--gray-900);}
+.msg-sender-meta{font-size:11px;color:var(--gray-400);margin-top:1px;}
+.msg-subject{font-size:13px;font-weight:600;color:var(--gray-900);margin:10px 0 6px;}
+.msg-body-text{font-size:13px;color:var(--gray-700);line-height:1.7;padding:14px 18px;border-bottom:1px solid var(--gray-100);}
+.msg-reply-area{padding:14px 18px;}
+.reply-label{font-size:11px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.4px;margin-bottom:7px;}
+.reply-textarea{width:100%;padding:9px 12px;border:1px solid var(--gray-200);border-radius:8px;font-size:13px;color:var(--gray-900);background:#fff;font-family:inherit;outline:none;transition:border-color .15s;resize:vertical;min-height:88px;}
+.reply-textarea:focus{border-color:var(--green-400);}
+.reply-btns{display:flex;gap:7px;margin-top:9px;flex-wrap:wrap;}
+
+/* INFO CARD */
+.info-row{display:flex;align-items:flex-start;gap:12px;padding:11px 18px;border-bottom:1px solid var(--gray-100);}
+.info-row:last-child{border-bottom:none;}
+.info-icon{width:32px;height:32px;border-radius:8px;background:var(--green-50);color:var(--green-600);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.info-label{font-size:11px;color:var(--gray-400);font-weight:500;}
+.info-value{font-size:13px;color:var(--gray-900);font-weight:500;margin-top:1px;}
+.info-value a{color:var(--green-600);}
+.info-value a:hover{text-decoration:underline;}
+
+/* MAP */
+.map-box{margin:14px 18px;border-radius:10px;height:160px;background:var(--green-50);border:1px solid var(--green-200);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--green-600);font-size:13px;font-weight:500;cursor:pointer;transition:background .15s;}
+.map-box:hover{background:var(--green-100);}
+.map-box i{font-size:30px;}
+
+/* MODAL */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:200;display:none;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;}
+.modal-backdrop.open{display:flex;}
+.modal{background:#fff;border-radius:14px;width:100%;max-width:520px;margin:auto;}
+.modal-header{padding:16px 20px;border-bottom:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1;}
+.modal-title{font-size:15px;font-weight:600;color:var(--gray-900);display:flex;align-items:center;gap:8px;}
+.modal-title i{color:var(--green-600);}
+.modal-close{width:28px;height:28px;border-radius:6px;background:var(--gray-100);border:none;cursor:pointer;font-size:14px;color:var(--gray-500);display:flex;align-items:center;justify-content:center;}
+.modal-body{padding:20px;max-height:75vh;overflow-y:auto;}
+.modal-footer{padding:14px 20px;border-top:1px solid var(--gray-100);display:flex;justify-content:flex-end;gap:10px;}
+.form-group{margin-bottom:14px;}
+.form-label{display:block;font-size:12px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px;}
+.form-control{width:100%;padding:9px 12px;border:1px solid var(--gray-200);border-radius:8px;font-size:13px;color:var(--gray-900);background:#fff;font-family:inherit;outline:none;transition:border-color .15s;}
+.form-control:focus{border-color:var(--green-400);}
+textarea.form-control{resize:vertical;min-height:80px;}
+.form-row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+
+/* OVERLAY & TOAST */
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:99;}
+.sidebar-overlay.open{display:block;}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--green-800);color:#fff;padding:11px 16px;border-radius:10px;font-size:13px;display:flex;align-items:center;gap:9px;z-index:999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;max-width:300px;}
+.toast.show{opacity:1;transform:translateY(0);}
+.toast i{font-size:16px;color:var(--green-200);}
+
+/* RESPONSIVE */
+@media(max-width:1060px){
+  .two-col{grid-template-columns:1fr;}
+  .detail-sticky{position:static;}
 }
-.sidebar-logo { padding: 18px 16px 14px; border-bottom: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; }
-.logo-mark { display: flex; align-items: center; gap: 10px; }
-.logo-icon {
-  width:38px; height:38px; border-radius:10px; overflow:hidden; flex-shrink:0;
-  background:#fff; display:flex; align-items:center; justify-content:center;
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%);}
+  .sidebar.open{transform:translateX(0);}
+  .hamburger{display:flex;}
+  .header{left:0;}
+  .main{margin-left:0;padding:16px;}
+  .stat-strip{grid-template-columns:1fr 1fr;}
+  .form-row2{grid-template-columns:1fr;}
+  .hide-sm{display:none;}
 }
-.logo-icon img { width:100%; height:100%; object-fit:cover; display:block; }
-.logo-text .brand { font-size: 17px; font-weight: 700; color: #fff; }
-.logo-text .sub   { font-size: 11px; color: rgba(255,255,255,0.45); }
-.nav-section { padding: 10px 10px 6px; flex: 1; }
-.nav-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.3); padding: 12px 8px 5px; }
-.nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 8px; color: rgba(255,255,255,0.62); font-size: 13.5px; font-weight: 400; transition: all 0.18s; margin-bottom: 2px; cursor: pointer; }
-.nav-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
-.nav-item.active { background: var(--green-600); color: #fff; font-weight: 500; }
-.nav-item i { font-size: 17px; flex-shrink: 0; }
-.nav-badge { margin-left: auto; background: var(--amber-400); color: #fff; font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 10px; min-width: 18px; text-align: center; }
-.sidebar-footer { padding: 10px; border-top: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; }
-.admin-card { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; background: rgba(255,255,255,0.07); }
-.admin-avatar { width: 32px; height: 32px; background: var(--green-400); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: #fff; flex-shrink: 0; }
-.admin-info .name { font-size: 12px; font-weight: 500; color: #fff; }
-.admin-info .role { font-size: 11px; color: rgba(255,255,255,0.4); }
-.logout-btn { margin-left: auto; background: none; border: none; color: rgba(255,255,255,0.35); cursor: pointer; font-size: 16px; display: flex; align-items: center; transition: color 0.15s; }
-.logout-btn:hover { color: rgba(255,255,255,0.8); }
-
-/* ===== HEADER ===== */
-.header { position: fixed; top: 0; left: var(--sidebar-w); right: 0; height: var(--header-h); background: #fff; border-bottom: 1px solid var(--gray-200); display: flex; align-items: center; padding: 0 24px; gap: 14px; z-index: 90; transition: left 0.3s ease; }
-.hamburger { display: none; background: none; border: none; cursor: pointer; font-size: 22px; color: var(--gray-600); padding: 4px; }
-.breadcrumb { display: flex; align-items: center; gap: 6px; color: var(--gray-400); font-size: 13px; }
-.breadcrumb .sep { font-size: 11px; }
-.breadcrumb .current { color: var(--gray-900); font-weight: 600; }
-.header-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
-.icon-btn { width: 36px; height: 36px; border-radius: 8px; background: none; border: 1px solid var(--gray-200); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--gray-500); font-size: 17px; transition: all 0.15s; position: relative; }
-.icon-btn:hover { background: var(--gray-50); color: var(--gray-700); }
-.notif-dot { position: absolute; top: 7px; right: 7px; width: 6px; height: 6px; background: var(--red-600); border-radius: 50%; border: 1.5px solid #fff; }
-.header-avatar { width: 34px; height: 34px; background: var(--green-600); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: #fff; cursor: pointer; }
-
-/* ===== MAIN ===== */
-.main { margin-left: var(--sidebar-w); margin-top: var(--header-h); padding: 26px 24px; }
-.page-header { margin-bottom: 22px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-.page-header-left h1 { font-size: 20px; font-weight: 700; color: var(--gray-900); }
-.page-header-left p  { font-size: 13px; color: var(--gray-400); margin-top: 3px; }
-
-/* ===== STAT STRIP ===== */
-.stat-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap: 14px; margin-bottom: 22px; }
-.stat-mini { background: #fff; border: 1px solid var(--gray-200); border-radius: 10px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
-.stat-mini-icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
-.smi-total   .stat-mini-icon { background: var(--green-50);  color: var(--green-600); }
-.smi-new     .stat-mini-icon { background: var(--amber-50);  color: var(--amber-600); }
-.smi-replied .stat-mini-icon { background: var(--blue-50);   color: var(--blue-600);  }
-.smi-closed  .stat-mini-icon { background: var(--gray-100);  color: var(--gray-500);  }
-.stat-mini-val  { font-size: 20px; font-weight: 700; color: var(--gray-900); line-height: 1; }
-.stat-mini-lbl  { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
-
-/* ===== CONTENT GRID ===== */
-.content-grid { display: grid; grid-template-columns: minmax(0,1fr) 300px; gap: 20px; align-items: start; min-width: 0; }
-
-/* ===== CARD ===== */
-.card { background: #fff; border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden; }
-.card-header { padding: 14px 18px; border-bottom: 1px solid var(--gray-100); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.card-title { font-size: 14px; font-weight: 600; color: var(--gray-900); display: flex; align-items: center; gap: 8px; }
-.card-title i { font-size: 16px; color: var(--green-600); }
-
-/* ===== TOOLBAR ===== */
-.toolbar { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--gray-100); flex-wrap: wrap; min-width: 0; }
-.search-box { display: flex; align-items: center; gap: 8px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 8px; padding: 7px 12px; flex: 1 1 140px; min-width: 0; }
-.search-box i { color: var(--gray-400); font-size: 16px; flex-shrink: 0; }
-.search-box input { border: none; outline: none; font-size: 13px; font-family: inherit; background: transparent; color: var(--gray-900); width: 100%; }
-.form-select { padding: 7px 10px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 13px; font-family: inherit; color: var(--gray-700); background: #fff; outline: none; cursor: pointer; flex-shrink: 0; max-width: 160px; }
-.form-select:focus { border-color: var(--green-400); }
-
-/* ===== FILTER TABS ===== */
-.filter-tabs { display: flex; gap: 6px; padding: 12px 16px; border-bottom: 1px solid var(--gray-100); overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-.filter-tabs::-webkit-scrollbar { display: none; }
-.filter-tab { padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; border: 1px solid var(--gray-200); background: #fff; color: var(--gray-600); white-space: nowrap; transition: all 0.15s; font-family: inherit; }
-.filter-tab:hover:not(.active) { border-color: var(--green-400); color: var(--green-600); }
-.filter-tab.active { background: var(--green-600); border-color: var(--green-600); color: #fff; }
-
-/* ===== TABLE ===== */
-.data-table { width: 100%; border-collapse: collapse; }
-.data-table th { font-size: 11px; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.5px; text-align: left; padding: 9px 14px; background: var(--gray-50); border-bottom: 1px solid var(--gray-100); white-space: nowrap; }
-.data-table td { padding: 11px 14px; border-bottom: 1px solid var(--gray-100); font-size: 13px; color: var(--gray-700); vertical-align: middle; }
-.data-table tr:last-child td { border-bottom: none; }
-.data-table tbody tr:hover { background: var(--gray-50); cursor: pointer; }
-.td-id { color: var(--gray-400); font-size: 12px; font-weight: 500; white-space: nowrap; }
-.col-id { width: 50px; }
-.col-sender { min-width: 160px; }
-.col-topic { width: 100px; }
-.col-date { width: 100px; white-space: nowrap; }
-.col-status { width: 120px; }
-.col-action { width: 82px; }
-.sender-name { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; max-width: 200px; }
-.sender-email { color: var(--gray-400); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; max-width: 200px; }
-
-/* ===== BADGES ===== */
-.badge { display: inline-flex; align-items: center; font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
-.badge-success { background: var(--green-100); color: var(--green-700); }
-.badge-warning { background: var(--amber-50);  color: var(--amber-600); }
-.badge-gray    { background: var(--gray-100);  color: var(--gray-500);  }
-.badge-blue    { background: var(--blue-50);   color: var(--blue-600);  }
-.badge-red     { background: var(--red-50);    color: var(--red-600);   }
-
-/* ===== BUTTONS ===== */
-.btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; border-radius: 8px; border: none; cursor: pointer; font-size: 13px; font-weight: 500; font-family: inherit; transition: all 0.15s; }
-.btn-primary { background: var(--green-600); color: #fff; }
-.btn-primary:hover { background: var(--green-700); }
-.btn-outline { background: #fff; color: var(--gray-700); border: 1px solid var(--gray-200); }
-.btn-outline:hover { background: var(--gray-50); }
-.btn-xs { font-size: 11px; padding: 4px 10px; border-radius: 6px; border: 1px solid; cursor: pointer; font-family: inherit; font-weight: 500; transition: all 0.15s; white-space: nowrap; }
-.btn-green { background: var(--green-50);  border-color: var(--green-200); color: var(--green-700); }
-.btn-green:hover { background: var(--green-100); }
-.btn-red   { background: var(--red-50);    border-color: #fca5a5; color: var(--red-600); }
-.btn-red:hover   { background: #fee2e2; }
-.btn-gray  { background: var(--gray-50);   border-color: var(--gray-200); color: var(--gray-600); }
-.btn-gray:hover  { background: var(--gray-100); }
-.action-btns { display: flex; gap: 5px; flex-wrap: wrap; }
-
-/* ===== PAGINATION ===== */
-.pagination { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; border-top: 1px solid var(--gray-100); flex-wrap: wrap; gap: 10px; }
-.pagination-info { font-size: 12px; color: var(--gray-400); }
-.pagination-btns { display: flex; gap: 5px; }
-.page-btn { width: 30px; height: 30px; border-radius: 6px; border: 1px solid var(--gray-200); background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px; font-weight: 500; color: var(--gray-600); transition: all 0.15s; font-family: inherit; }
-.page-btn:hover { background: var(--gray-50); }
-.page-btn.active { background: var(--green-600); border-color: var(--green-600); color: #fff; }
-.page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-
-/* ===== DETAIL PANEL (right column) ===== */
-.detail-panel { position: sticky; top: calc(var(--header-h) + 26px); }
-.detail-empty { padding: 40px 20px; text-align: center; color: var(--gray-400); }
-.detail-empty i { font-size: 36px; display: block; margin-bottom: 10px; color: var(--gray-300); }
-.detail-empty p { font-size: 13px; }
-
-.msg-header { padding: 16px 18px; border-bottom: 1px solid var(--gray-100); }
-.msg-sender { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.msg-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--green-100); color: var(--green-700); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
-.msg-sender-info .name { font-size: 14px; font-weight: 600; color: var(--gray-900); }
-.msg-sender-info .meta { font-size: 11px; color: var(--gray-400); }
-.msg-subject { font-size: 13px; font-weight: 600; color: var(--gray-900); margin-bottom: 4px; }
-.msg-topic-badge { font-size: 11px; }
-
-.msg-body { padding: 16px 18px; border-bottom: 1px solid var(--gray-100); }
-.msg-text { font-size: 13px; color: var(--gray-700); line-height: 1.7; }
-
-.msg-reply { padding: 14px 18px; }
-.reply-label { font-size: 12px; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 8px; }
-.reply-textarea { width: 100%; padding: 9px 12px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 13px; color: var(--gray-900); background: #fff; font-family: inherit; outline: none; transition: border-color 0.15s; resize: vertical; min-height: 90px; }
-.reply-textarea:focus { border-color: var(--green-400); }
-.reply-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-
-/* ===== CONTACT INFO CARD ===== */
-.info-section { padding: 14px 18px; }
-.info-row { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--gray-100); }
-.info-row:last-child { border-bottom: none; }
-.info-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--green-50); color: var(--green-600); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
-.info-content .label { font-size: 11px; color: var(--gray-400); font-weight: 500; }
-.info-content .value { font-size: 13px; color: var(--gray-900); font-weight: 500; margin-top: 1px; }
-.info-content .value a { color: var(--green-600); }
-.info-content .value a:hover { text-decoration: underline; }
-
-/* ===== FORM (edit info) ===== */
-.form-group { margin-bottom: 14px; }
-.form-label { display: block; font-size: 12px; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 5px; }
-.form-control { width: 100%; padding: 9px 12px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 13px; color: var(--gray-900); background: #fff; font-family: inherit; outline: none; transition: border-color 0.15s; }
-.form-control:focus { border-color: var(--green-400); }
-textarea.form-control { resize: vertical; min-height: 80px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-
-/* ===== MODAL ===== */
-.modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
-.modal-backdrop.open { display: flex; }
-.modal { background: #fff; border-radius: 14px; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; }
-.modal-header { padding: 16px 20px; border-bottom: 1px solid var(--gray-100); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; background: #fff; z-index: 1; }
-.modal-title { font-size: 15px; font-weight: 600; color: var(--gray-900); display: flex; align-items: center; gap: 8px; }
-.modal-title i { color: var(--green-600); }
-.modal-close { width: 28px; height: 28px; border-radius: 6px; background: var(--gray-100); border: none; cursor: pointer; font-size: 14px; color: var(--gray-500); display: flex; align-items: center; justify-content: center; }
-.modal-body { padding: 20px; }
-.modal-footer { padding: 14px 20px; border-top: 1px solid var(--gray-100); display: flex; justify-content: flex-end; gap: 10px; }
-
-/* ===== MAP PLACEHOLDER ===== */
-.map-placeholder {
-  width: 100%; height: 180px; background: var(--green-50);
-  border: 1px solid var(--green-200); border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  flex-direction: column; gap: 8px; color: var(--green-600);
-  font-size: 13px; font-weight: 500; cursor: pointer;
-  transition: background 0.15s;
-}
-.map-placeholder:hover { background: var(--green-100); }
-.map-placeholder i { font-size: 32px; }
-
-/* ===== SECTION DIVIDER ===== */
-.section-divider { padding: 10px 18px 4px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--gray-400); background: var(--gray-50); border-bottom: 1px solid var(--gray-100); }
-
-/* ===== OVERLAY & TOAST ===== */
-.sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 99; }
-.sidebar-overlay.open { display: block; }
-.toast { position: fixed; bottom: 24px; right: 24px; background: var(--green-800); color: #fff; padding: 11px 16px; border-radius: 10px; font-size: 13px; display: flex; align-items: center; gap: 9px; z-index: 999; opacity: 0; transform: translateY(10px); transition: all 0.3s; pointer-events: none; max-width: 300px; }
-.toast.show { opacity: 1; transform: translateY(0); }
-.toast i { font-size: 16px; color: var(--green-200); }
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 1100px) {
-  .content-grid { grid-template-columns: minmax(0,1fr) 260px; gap: 14px; }
-  .sender-name { max-width: 140px; }
-  .sender-email { max-width: 140px; }
-}
-@media (max-width: 960px) {
-  .content-grid { grid-template-columns: 1fr; }
-  .detail-panel { position: static; }
-  .sender-name, .sender-email { max-width: 260px; }
-}
-@media (max-width: 768px) {
-  .sidebar { transform: translateX(-100%); }
-  .sidebar.open { transform: translateX(0); }
-  .hamburger { display: flex; }
-  .header { left: 0; }
-  .main { margin-left: 0; padding: 16px; }
-  .stat-strip { grid-template-columns: 1fr 1fr; }
-  .hide-mobile { display: none; }
-  .toolbar { gap: 8px; }
-  .form-row { grid-template-columns: 1fr; }
-  .sender-name, .sender-email { max-width: 160px; }
-}
-@media (max-width: 480px) {
-  .stat-strip { grid-template-columns: 1fr 1fr; }
-  .col-id { display: none; }
-  .sender-name, .sender-email { max-width: 120px; }
+@media(max-width:480px){
+  .stat-strip{grid-template-columns:1fr 1fr;}
 }
 </style>
 </head>
@@ -264,17 +232,12 @@ textarea.form-control { resize: vertical; min-height: 80px; }
 
 <div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
 
-<!-- ===== SIDEBAR ===== -->
+<!-- SIDEBAR -->
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-logo">
     <div class="logo-mark">
-      <div class="logo-icon">
-        <img src="logoGrevia.png" alt="Logo">
-      </div>
-      <div class="logo-text">
-        <div class="brand">Grevia</div>
-        <div class="sub">Nhà hàng chay</div>
-      </div>
+      <div class="logo-icon"><img src="logoGrevia.png" alt="Logo"></div>
+      <div class="logo-text"><div class="brand">Grevia</div><div class="sub">Nhà hàng chay</div></div>
     </div>
   </div>
   <div class="nav-section">
@@ -293,16 +256,13 @@ textarea.form-control { resize: vertical; min-height: 80px; }
   <div class="sidebar-footer">
     <div class="admin-card">
       <div class="admin-avatar">AD</div>
-      <div class="admin-info">
-        <div class="name">Admin Grevia</div>
-        <div class="role">Quản trị viên</div>
-      </div>
+      <div class="admin-info"><div class="name">Admin Grevia</div><div class="role">Quản trị viên</div></div>
       <button class="logout-btn" onclick="showToast('Đã đăng xuất!')" title="Đăng xuất"><i class="ti ti-logout"></i></button>
     </div>
   </div>
 </nav>
 
-<!-- ===== HEADER ===== -->
+<!-- HEADER -->
 <header class="header">
   <button class="hamburger" onclick="toggleSidebar()"><i class="ti ti-menu-2"></i></button>
   <div class="breadcrumb">
@@ -311,193 +271,149 @@ textarea.form-control { resize: vertical; min-height: 80px; }
     <span class="current">Liên hệ</span>
   </div>
   <div class="header-right">
-    <a href="datban.html" class="icon-btn" title="Đặt bàn chờ xử lý">
-      <i class="ti ti-bell"></i><span class="notif-dot"></span>
-    </a>
+    <a href="datban.html" class="icon-btn" title="Đặt bàn chờ xử lý"><i class="ti ti-bell"></i><span class="notif-dot"></span></a>
     <a href="caidat.html" class="icon-btn" title="Cài đặt"><i class="ti ti-settings"></i></a>
     <a href="caidat.html" class="header-avatar" title="Tài khoản">AD</a>
   </div>
 </header>
 
-<!-- ===== MAIN ===== */
+<!-- MAIN -->
 <main class="main">
   <div class="page-header">
     <div class="page-header-left">
       <h1>Liên hệ</h1>
-      <p>Quản lý thông tin liên hệ nhà hàng và tin nhắn từ khách hàng.</p>
+      <p>Quản lý tin nhắn khách hàng và thông tin liên hệ nhà hàng.</p>
     </div>
-    <button class="btn btn-primary" onclick="openEditInfoModal()">
-      <i class="ti ti-edit"></i> Cập nhật thông tin
-    </button>
+    <button class="btn btn-primary" onclick="openEditInfo()"><i class="ti ti-edit"></i> Cập nhật thông tin</button>
   </div>
 
-  <!-- Stat strip -->
+  <!-- Stat -->
   <div class="stat-strip">
-    <div class="stat-mini smi-total">
+    <div class="stat-mini smi-a">
       <div class="stat-mini-icon"><i class="ti ti-mail"></i></div>
-      <div><div class="stat-mini-val" id="statTotal">24</div><div class="stat-mini-lbl">Tổng tin nhắn</div></div>
+      <div><div class="stat-mini-val" id="statTotal">0</div><div class="stat-mini-lbl">Tổng tin nhắn</div></div>
     </div>
-    <div class="stat-mini smi-new">
+    <div class="stat-mini smi-b">
       <div class="stat-mini-icon"><i class="ti ti-mail-opened"></i></div>
-      <div><div class="stat-mini-val" id="statNew">7</div><div class="stat-mini-lbl">Chưa đọc</div></div>
+      <div><div class="stat-mini-val" id="statUnread">0</div><div class="stat-mini-lbl">Chưa đọc</div></div>
     </div>
-    <div class="stat-mini smi-replied">
+    <div class="stat-mini smi-c">
       <div class="stat-mini-icon"><i class="ti ti-send"></i></div>
-      <div><div class="stat-mini-val" id="statReplied">14</div><div class="stat-mini-lbl">Đã phản hồi</div></div>
+      <div><div class="stat-mini-val" id="statReplied">0</div><div class="stat-mini-lbl">Đã phản hồi</div></div>
     </div>
-    <div class="stat-mini smi-closed">
+    <div class="stat-mini smi-d">
       <div class="stat-mini-icon"><i class="ti ti-circle-check"></i></div>
-      <div><div class="stat-mini-val" id="statClosed">3</div><div class="stat-mini-lbl">Đã đóng</div></div>
+      <div><div class="stat-mini-val" id="statClosed">0</div><div class="stat-mini-lbl">Đã đóng</div></div>
     </div>
   </div>
 
-  <div class="content-grid">
+  <div class="two-col">
 
-    <!-- LEFT: Messages list -->
+    <!-- CỘT TRÁI: danh sách tin nhắn -->
     <div>
       <div class="card">
         <!-- Filter tabs -->
         <div class="filter-tabs">
-          <button class="filter-tab active" onclick="setFilter('all',this)">Tất cả (<span id="cntAll">24</span>)</button>
-          <button class="filter-tab" onclick="setFilter('new',this)">Chưa đọc (<span id="cntNew">7</span>)</button>
-          <button class="filter-tab" onclick="setFilter('replied',this)">Đã phản hồi (<span id="cntReplied">14</span>)</button>
-          <button class="filter-tab" onclick="setFilter('closed',this)">Đã đóng (<span id="cntClosed">3</span>)</button>
+          <button class="filter-tab active" onclick="setFilter('all',this)">Tất cả (<span id="cntAll">0</span>)</button>
+          <button class="filter-tab" onclick="setFilter('new',this)">Chưa đọc (<span id="cntNew">0</span>)</button>
+          <button class="filter-tab" onclick="setFilter('replied',this)">Đã phản hồi (<span id="cntReplied">0</span>)</button>
+          <button class="filter-tab" onclick="setFilter('closed',this)">Đã đóng (<span id="cntClosed">0</span>)</button>
         </div>
-
         <!-- Toolbar -->
         <div class="toolbar">
           <div class="search-box">
             <i class="ti ti-search"></i>
-            <input type="text" id="searchInput" placeholder="Tìm tên, email, nội dung..." oninput="renderTable()">
+            <input type="text" id="searchInput" placeholder="Tìm tên, email, nội dung..." oninput="renderList()">
           </div>
-          <select class="form-select" id="topicFilter" onchange="renderTable()">
+          <select class="form-sel" id="topicSel" onchange="renderList()">
             <option value="">Tất cả chủ đề</option>
             <option value="booking">Đặt bàn</option>
             <option value="menu">Thực đơn</option>
             <option value="feedback">Phản hồi</option>
             <option value="other">Khác</option>
           </select>
-          <button class="btn-xs btn-gray" onclick="clearFilters()"><i class="ti ti-refresh" style="font-size:13px"></i> Xóa lọc</button>
+          <button class="btn-xs btn-gray" onclick="clearFilters()"><i class="ti ti-refresh" style="font-size:12px"></i></button>
         </div>
-
-        <!-- Table -->
-        <div style="overflow-x:auto">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th class="col-id">#</th>
-                <th class="col-sender">Người gửi</th>
-                <th class="col-topic hide-mobile">Chủ đề</th>
-                <th class="col-date hide-mobile">Ngày gửi</th>
-                <th class="col-status">Trạng thái</th>
-                <th class="col-action">Thao tác</th>
-              </tr>
-            </thead>
-            <tbody id="tableBody"></tbody>
-          </table>
-        </div>
-
+        <!-- List -->
+        <div class="msg-list" id="msgList"></div>
+        <!-- Pagination -->
         <div class="pagination">
-          <div class="pagination-info" id="pageInfo">Hiển thị 1–8 / 24</div>
+          <div class="pagination-info" id="pageInfo">0 kết quả</div>
           <div class="pagination-btns" id="pageBtns"></div>
         </div>
       </div>
     </div>
 
-    <!-- RIGHT: Detail panel + Contact info -->
-    <div class="detail-panel">
+    <!-- CỘT PHẢI: chi tiết + thông tin nhà hàng -->
+    <div class="detail-sticky">
 
-      <!-- Message detail -->
-      <div class="card" id="msgDetailCard">
-        <div class="detail-empty" id="detailEmpty">
+      <!-- Chi tiết tin nhắn -->
+      <div class="card" id="detailCard" style="margin-bottom:20px;">
+        <div id="detailEmpty" class="detail-empty">
           <i class="ti ti-message-2"></i>
-          <p>Chọn một tin nhắn để xem chi tiết và phản hồi</p>
+          <p>Chọn tin nhắn để xem chi tiết</p>
         </div>
         <div id="detailContent" style="display:none">
-          <div class="msg-header">
-            <div class="msg-sender">
-              <div class="msg-avatar" id="dAvatar">N</div>
-              <div class="msg-sender-info">
-                <div class="name" id="dName">—</div>
-                <div class="meta" id="dMeta">—</div>
+          <div class="msg-detail-header">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="msg-avatar" id="dAvatar">?</div>
+              <div>
+                <div class="msg-sender-name" id="dName">—</div>
+                <div class="msg-sender-meta" id="dMeta">—</div>
               </div>
             </div>
             <div class="msg-subject" id="dSubject">—</div>
-            <div style="margin-top:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-              <span id="dTopicBadge"></span>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+              <span id="dTopicChip"></span>
               <span id="dStatusBadge"></span>
             </div>
           </div>
-          <div class="msg-body">
-            <div class="msg-text" id="dBody">—</div>
-          </div>
-          <div class="msg-reply">
+          <div class="msg-body-text" id="dBody">—</div>
+          <div class="msg-reply-area">
             <div class="reply-label">Phản hồi</div>
-            <textarea class="reply-textarea" id="replyText" placeholder="Nhập nội dung phản hồi..."></textarea>
-            <div class="reply-actions">
-              <button class="btn btn-primary" style="padding:7px 14px;font-size:12px" onclick="sendReply()"><i class="ti ti-send"></i> Gửi phản hồi</button>
-              <button class="btn btn-outline" style="padding:7px 14px;font-size:12px" onclick="closeMsg()"><i class="ti ti-circle-check"></i> Đóng</button>
-              <button class="btn" style="padding:7px 14px;font-size:12px;background:var(--red-50);color:var(--red-600);border:1px solid #fca5a5" onclick="deleteMsg()"><i class="ti ti-trash"></i> Xóa</button>
+            <textarea class="reply-textarea" id="replyTxt" placeholder="Nhập nội dung phản hồi..."></textarea>
+            <div class="reply-btns">
+              <button class="btn btn-primary btn-sm" onclick="doReply()"><i class="ti ti-send"></i> Gửi</button>
+              <button class="btn btn-outline btn-sm" onclick="doClose()"><i class="ti ti-circle-check"></i> Đóng</button>
+              <button class="btn btn-sm" style="background:var(--red-50);color:var(--red-600);border:1px solid #fca5a5;" onclick="doDelete()"><i class="ti ti-trash"></i> Xóa</button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Restaurant contact info -->
-      <div class="card" style="margin-top:20px">
+      <!-- Thông tin nhà hàng -->
+      <div class="card">
         <div class="card-header">
           <div class="card-title"><i class="ti ti-building-store"></i> Thông tin nhà hàng</div>
-          <button class="btn-xs btn-green" onclick="openEditInfoModal()"><i class="ti ti-edit" style="font-size:12px"></i> Sửa</button>
+          <button class="btn-xs btn-green" onclick="openEditInfo()"><i class="ti ti-edit" style="font-size:11px"></i> Sửa</button>
         </div>
-
-        <div class="map-placeholder" onclick="showToast('Mở bản đồ Google Maps...')" style="margin:14px 18px 0;margin-bottom:0">
+        <div class="map-box" onclick="showToast('Mở Google Maps...')">
           <i class="ti ti-map-2"></i>
           <span>Xem vị trí trên Google Maps</span>
         </div>
-
-        <div class="info-section">
-          <div class="info-row">
-            <div class="info-icon"><i class="ti ti-map-pin"></i></div>
-            <div class="info-content">
-              <div class="label">Địa chỉ</div>
-              <div class="value" id="infoAddress">123 Đường Láng, Đống Đa, Hà Nội</div>
-            </div>
-          </div>
-          <div class="info-row">
-            <div class="info-icon"><i class="ti ti-phone"></i></div>
-            <div class="info-content">
-              <div class="label">Điện thoại</div>
-              <div class="value"><a href="tel:02435678901" id="infoPhone">024 3567 8901</a></div>
-            </div>
-          </div>
-          <div class="info-row">
-            <div class="info-icon"><i class="ti ti-mail"></i></div>
-            <div class="info-content">
-              <div class="label">Email</div>
-              <div class="value"><a href="mailto:hello@grevia.vn" id="infoEmail">hello@grevia.vn</a></div>
-            </div>
-          </div>
-          <div class="info-row">
-            <div class="info-icon"><i class="ti ti-clock"></i></div>
-            <div class="info-content">
-              <div class="label">Giờ mở cửa</div>
-              <div class="value" id="infoHours">Thứ 2 – CN: 10:00 – 21:30</div>
-            </div>
-          </div>
-          <div class="info-row">
-            <div class="info-icon"><i class="ti ti-brand-facebook"></i></div>
-            <div class="info-content">
-              <div class="label">Facebook</div>
-              <div class="value"><a href="#" id="infoFb">facebook.com/GreviaVN</a></div>
-            </div>
-          </div>
-          <div class="info-row">
-            <div class="info-icon"><i class="ti ti-brand-instagram"></i></div>
-            <div class="info-content">
-              <div class="label">Instagram</div>
-              <div class="value"><a href="#" id="infoIg">@grevia.vn</a></div>
-            </div>
-          </div>
+        <div class="info-row">
+          <div class="info-icon"><i class="ti ti-map-pin"></i></div>
+          <div><div class="info-label">Địa chỉ</div><div class="info-value" id="iAddress">123 Đường Láng, Đống Đa, Hà Nội</div></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon"><i class="ti ti-phone"></i></div>
+          <div><div class="info-label">Điện thoại</div><div class="info-value"><a href="#" id="iPhone">024 3567 8901</a></div></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon"><i class="ti ti-mail"></i></div>
+          <div><div class="info-label">Email</div><div class="info-value"><a href="#" id="iEmail">hello@grevia.vn</a></div></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon"><i class="ti ti-clock"></i></div>
+          <div><div class="info-label">Giờ mở cửa</div><div class="info-value" id="iHours">Thứ 2 – CN: 10:00 – 21:30</div></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon"><i class="ti ti-brand-facebook"></i></div>
+          <div><div class="info-label">Facebook</div><div class="info-value"><a href="#" id="iFb">facebook.com/GreviaVN</a></div></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon"><i class="ti ti-brand-instagram"></i></div>
+          <div><div class="info-label">Instagram</div><div class="info-value"><a href="#" id="iIg">@grevia.vn</a></div></div>
         </div>
       </div>
 
@@ -505,7 +421,7 @@ textarea.form-control { resize: vertical; min-height: 80px; }
   </div>
 </main>
 
-<!-- ===== MODAL: EDIT CONTACT INFO ===== -->
+<!-- MODAL: SỬA THÔNG TIN -->
 <div class="modal-backdrop" id="editInfoModal">
   <div class="modal">
     <div class="modal-header">
@@ -515,40 +431,36 @@ textarea.form-control { resize: vertical; min-height: 80px; }
     <div class="modal-body">
       <div class="form-group">
         <label class="form-label">Địa chỉ</label>
-        <input type="text" class="form-control" id="editAddress" placeholder="123 Đường Láng, Đống Đa, Hà Nội">
+        <input type="text" class="form-control" id="eAddress">
       </div>
-      <div class="form-row">
+      <div class="form-row2">
         <div class="form-group">
-          <label class="form-label">Số điện thoại</label>
-          <input type="text" class="form-control" id="editPhone" placeholder="024 3567 8901">
+          <label class="form-label">Điện thoại</label>
+          <input type="text" class="form-control" id="ePhone">
         </div>
         <div class="form-group">
           <label class="form-label">Email</label>
-          <input type="email" class="form-control" id="editEmail" placeholder="hello@grevia.vn">
+          <input type="email" class="form-control" id="eEmail">
         </div>
       </div>
       <div class="form-group">
         <label class="form-label">Giờ mở cửa</label>
-        <input type="text" class="form-control" id="editHours" placeholder="Thứ 2 – CN: 10:00 – 21:30">
+        <input type="text" class="form-control" id="eHours">
       </div>
-      <div class="form-row">
+      <div class="form-row2">
         <div class="form-group">
           <label class="form-label">Facebook</label>
-          <input type="text" class="form-control" id="editFb" placeholder="facebook.com/GreviaVN">
+          <input type="text" class="form-control" id="eFb">
         </div>
         <div class="form-group">
           <label class="form-label">Instagram</label>
-          <input type="text" class="form-control" id="editIg" placeholder="@grevia.vn">
+          <input type="text" class="form-control" id="eIg">
         </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Link Google Maps</label>
-        <input type="text" class="form-control" id="editMap" placeholder="https://maps.google.com/...">
       </div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-outline" onclick="closeModal('editInfoModal')">Hủy</button>
-      <button class="btn btn-primary" onclick="saveContactInfo()"><i class="ti ti-check"></i> Lưu thay đổi</button>
+      <button class="btn btn-primary" onclick="saveInfo()"><i class="ti ti-check"></i> Lưu</button>
     </div>
   </div>
 </div>
@@ -556,259 +468,254 @@ textarea.form-control { resize: vertical; min-height: 80px; }
 <div class="toast" id="toastEl"><i class="ti ti-circle-check"></i><span id="toastMsg">Thành công!</span></div>
 
 <script>
-/* ===== DATA ===== */
-let messages = [
-  { id:'#M01', name:'Nguyễn Thị Lan',  email:'lan.nt@gmail.com',    phone:'0912 111 222', date:'2026-05-25', topic:'booking',  subject:'Hỏi về đặt bàn ngày lễ', body:'Xin chào nhà hàng, tôi muốn hỏi về việc đặt bàn cho ngày 1/6 nhân dịp sinh nhật con. Nhà tôi có 8 người, cần phòng riêng nếu có. Xin liên hệ lại qua số điện thoại hoặc email. Cảm ơn!', status:'new'     },
-  { id:'#M02', name:'Trần Văn Hùng',   email:'hung.tv@yahoo.com',   phone:'0933 222 333', date:'2026-05-24', topic:'menu',     subject:'Hỏi về thực đơn chay đặc biệt', body:'Nhà hàng có thực đơn chay theo yêu cầu không? Gia đình tôi gồm người ăn chay trường và người ăn chay thứ. Nhờ tư vấn các món phù hợp. Xin cảm ơn nhiều!', status:'replied'  },
-  { id:'#M03', name:'Lê Minh Phương',  email:'phuong.lm@gmail.com', phone:'0901 333 444', date:'2026-05-24', topic:'feedback', subject:'Phản hồi về buổi ăn tối', body:'Tôi vừa có buổi ăn tối tại nhà hàng hôm qua, nhìn chung rất hài lòng về chất lượng món ăn và thái độ phục vụ. Tuy nhiên thời gian chờ hơi lâu, khoảng 25 phút mới có món. Mong nhà hàng cải thiện nhé!', status:'replied'  },
-  { id:'#M04', name:'Phạm Thu Hà',     email:'ha.pt@gmail.com',     phone:'0944 444 555', date:'2026-05-23', topic:'booking',  subject:'Đặt tiệc 20 người', body:'Chào nhà hàng, tôi cần đặt tiệc cho 20 người vào ngày 15/6/2026. Đây là buổi họp mặt công ty. Nhà hàng có thể phục vụ được không? Cần thực đơn tiệc và báo giá. Liên lạc: 0944 444 555.', status:'new'     },
-  { id:'#M05', name:'Hoàng Đức Mạnh',  email:'manh.hd@gmail.com',   phone:'0955 555 666', date:'2026-05-23', topic:'other',    subject:'Hỏi về nhượng quyền', body:'Xin chào, tôi có quan tâm đến việc nhượng quyền thương hiệu Grevia tại thành phố Hồ Chí Minh. Nhà hàng có kế hoạch mở rộng vào phía Nam không? Tôi có thể gặp trực tiếp để trao đổi.', status:'new'     },
-  { id:'#M06', name:'Vũ Thị Ngọc',     email:'ngoc.vt@gmail.com',   phone:'0966 666 777', date:'2026-05-22', topic:'feedback', subject:'Góp ý về không gian', body:'Nhà hàng rất sạch sẽ và đẹp, tuy nhiên âm nhạc hơi to vào buổi tối khiến khó nói chuyện. Nếu có thể giảm âm lượng xuống một chút thì sẽ tốt hơn nhiều. Nhìn chung tôi rất thích không gian xanh ở đây!', status:'replied'  },
-  { id:'#M07', name:'Bùi Văn Sơn',     email:'son.bv@gmail.com',    phone:'0977 777 888', date:'2026-05-22', topic:'menu',     subject:'Hỏi về giá thực đơn', body:'Nhà hàng có thể gửi thực đơn và bảng giá hiện tại không? Tôi đang lên kế hoạch cho bữa tiệc gia đình khoảng 15 người vào cuối tháng 6. Xin cảm ơn!', status:'replied'  },
-  { id:'#M08', name:'Ngô Thị Hoa',     email:'hoa.nt@gmail.com',    phone:'0988 888 999', date:'2026-05-21', topic:'booking',  subject:'Hỏi giờ mở cửa ngày lễ', body:'Nhà hàng có mở cửa vào ngày 1/6 (Quốc tế Thiếu nhi) không? Nếu có thì giờ phục vụ là mấy giờ? Tôi muốn đưa gia đình đến ăn trong dịp này.', status:'new'     },
-  { id:'#M09', name:'Đinh Thanh Tùng', email:'tung.dt@gmail.com',   phone:'0911 999 000', date:'2026-05-21', topic:'feedback', subject:'Khen ngợi nhân viên', body:'Tôi muốn khen bạn nhân viên phục vụ tên Hương, rất nhiệt tình và chu đáo. Nhờ bạn ấy mà buổi kỷ niệm của gia đình tôi thêm trọn vẹn. Mong nhà hàng ghi nhận và khen thưởng bạn ấy!', status:'replied'  },
-  { id:'#M10', name:'Trương Quốc Bình',email:'binh.tq@gmail.com',   phone:'0922 000 111', date:'2026-05-20', topic:'other',    subject:'Hợp tác truyền thông', body:'Xin chào, tôi là blogger ẩm thực với 50k followers trên Instagram. Tôi muốn hợp tác review nhà hàng. Vui lòng liên hệ lại để thảo luận thêm.', status:'closed'  },
-  { id:'#M11', name:'Lý Thị Kim Anh',  email:'kimanh.lt@gmail.com', phone:'0933 111 222', date:'2026-05-20', topic:'booking',  subject:'Đặt bàn kỷ niệm ngày cưới', body:'Tôi muốn đặt bàn cho 2 người vào tối 28/5, nhân dịp kỷ niệm ngày cưới. Có thể trang trí bàn hoa và nến không? Và nhà hàng có phục vụ bánh kem không ạ?', status:'new'     },
-  { id:'#M12', name:'Mai Văn Dũng',    email:'dung.mv@gmail.com',   phone:'0944 222 333', date:'2026-05-19', topic:'menu',     subject:'Hỏi về thực đơn chay trường', body:'Nhà hàng có phân biệt rõ thực đơn chay trường (không hành tỏi) không? Tôi cần biết để giới thiệu cho phật tử trong chùa đến ăn.', status:'closed'  },
-  { id:'#M13', name:'Hà Phương Linh',  email:'linh.hp@gmail.com',   phone:'0955 333 444', date:'2026-05-19', topic:'feedback', subject:'Góp ý về dịch vụ', body:'Nhìn chung rất hài lòng, nhưng nhà vệ sinh hơi cần dọn thêm vào giờ cao điểm. Mong nhà hàng lưu ý. Các món ăn ngon, sẽ quay lại!', status:'replied'  },
-  { id:'#M14', name:'Cao Bá Quang',    email:'quang.cb@gmail.com',  phone:'0966 444 555', date:'2026-05-18', topic:'other',    subject:'Xin thực tập', body:'Em là sinh viên năm 3 ngành Quản trị nhà hàng, muốn xin thực tập tại nhà hàng 2 tháng hè. Em có thể liên hệ với ai để nộp hồ sơ?', status:'new'     },
+/* === DATA === */
+const TOPIC_LABEL = {booking:'Đặt bàn', menu:'Thực đơn', feedback:'Phản hồi', other:'Khác'};
+const TOPIC_CLASS = {booking:'tc-booking', menu:'tc-menu', feedback:'tc-feedback', other:'tc-other'};
+
+let msgs = [
+  {id:1,  name:'Nguyễn Thị Lan',   email:'lan.nt@gmail.com',    phone:'0912 111 222', date:'2026-05-25', topic:'booking',  subject:'Hỏi về đặt bàn ngày lễ',         body:'Xin chào nhà hàng, tôi muốn hỏi về việc đặt bàn cho ngày 1/6 nhân dịp sinh nhật con. Nhà tôi có 8 người, cần phòng riêng nếu có. Xin liên hệ lại qua số điện thoại hoặc email. Cảm ơn!', status:'new'},
+  {id:2,  name:'Trần Văn Hùng',    email:'hung.tv@yahoo.com',   phone:'0933 222 333', date:'2026-05-24', topic:'menu',     subject:'Hỏi về thực đơn chay đặc biệt',   body:'Nhà hàng có thực đơn chay theo yêu cầu không? Gia đình tôi gồm người ăn chay trường và người ăn chay thứ. Nhờ tư vấn các món phù hợp.', status:'replied'},
+  {id:3,  name:'Lê Minh Phương',   email:'phuong.lm@gmail.com', phone:'0901 333 444', date:'2026-05-24', topic:'feedback', subject:'Phản hồi về buổi ăn tối',         body:'Tôi vừa có buổi ăn tối tại nhà hàng hôm qua, rất hài lòng về chất lượng món ăn. Tuy nhiên thời gian chờ hơi lâu, khoảng 25 phút mới có món.', status:'replied'},
+  {id:4,  name:'Phạm Thu Hà',      email:'ha.pt@gmail.com',     phone:'0944 444 555', date:'2026-05-23', topic:'booking',  subject:'Đặt tiệc 20 người',               body:'Chào nhà hàng, tôi cần đặt tiệc cho 20 người vào ngày 15/6/2026. Đây là buổi họp mặt công ty. Nhà hàng có thể phục vụ được không? Cần thực đơn tiệc và báo giá.', status:'new'},
+  {id:5,  name:'Hoàng Đức Mạnh',   email:'manh.hd@gmail.com',   phone:'0955 555 666', date:'2026-05-23', topic:'other',    subject:'Hỏi về nhượng quyền',            body:'Xin chào, tôi có quan tâm đến việc nhượng quyền thương hiệu Grevia tại TP.HCM. Nhà hàng có kế hoạch mở rộng vào phía Nam không?', status:'new'},
+  {id:6,  name:'Vũ Thị Ngọc',      email:'ngoc.vt@gmail.com',   phone:'0966 666 777', date:'2026-05-22', topic:'feedback', subject:'Góp ý về không gian',             body:'Nhà hàng rất đẹp, tuy nhiên âm nhạc hơi to vào buổi tối khiến khó nói chuyện. Nếu có thể giảm âm lượng xuống một chút thì sẽ tốt hơn nhiều.', status:'replied'},
+  {id:7,  name:'Bùi Văn Sơn',      email:'son.bv@gmail.com',    phone:'0977 777 888', date:'2026-05-22', topic:'menu',     subject:'Hỏi về giá thực đơn',            body:'Nhà hàng có thể gửi thực đơn và bảng giá hiện tại không? Tôi đang lên kế hoạch cho bữa tiệc gia đình khoảng 15 người vào cuối tháng 6.', status:'replied'},
+  {id:8,  name:'Ngô Thị Hoa',      email:'hoa.nt@gmail.com',    phone:'0988 888 999', date:'2026-05-21', topic:'booking',  subject:'Hỏi giờ mở cửa ngày lễ',         body:'Nhà hàng có mở cửa vào ngày 1/6 không? Nếu có thì giờ phục vụ là mấy giờ? Tôi muốn đưa gia đình đến ăn trong dịp này.', status:'new'},
+  {id:9,  name:'Đinh Thanh Tùng',  email:'tung.dt@gmail.com',   phone:'0911 999 000', date:'2026-05-21', topic:'feedback', subject:'Khen ngợi nhân viên',             body:'Tôi muốn khen bạn nhân viên phục vụ tên Hương, rất nhiệt tình và chu đáo. Mong nhà hàng ghi nhận và khen thưởng bạn ấy!', status:'replied'},
+  {id:10, name:'Trương Quốc Bình', email:'binh.tq@gmail.com',   phone:'0922 000 111', date:'2026-05-20', topic:'other',    subject:'Hợp tác truyền thông',           body:'Xin chào, tôi là blogger ẩm thực với 50k followers. Tôi muốn hợp tác review nhà hàng. Vui lòng liên hệ lại.', status:'closed'},
+  {id:11, name:'Lý Thị Kim Anh',   email:'kimanh.lt@gmail.com', phone:'0933 111 222', date:'2026-05-20', topic:'booking',  subject:'Đặt bàn kỷ niệm ngày cưới',      body:'Tôi muốn đặt bàn cho 2 người vào tối 28/5, nhân dịp kỷ niệm ngày cưới. Có thể trang trí bàn hoa và nến không?', status:'new'},
+  {id:12, name:'Mai Văn Dũng',     email:'dung.mv@gmail.com',   phone:'0944 222 333', date:'2026-05-19', topic:'menu',     subject:'Hỏi về thực đơn chay trường',    body:'Nhà hàng có phân biệt rõ thực đơn chay trường (không hành tỏi) không? Tôi cần biết để giới thiệu cho phật tử trong chùa.', status:'closed'},
 ];
 
 let currentFilter = 'all';
 let currentPage   = 1;
-const perPage     = 8;
-let selectedMsgId = null;
+const PER_PAGE    = 8;
+let selectedId    = null;
 
-const topicLabels = { booking:'Đặt bàn', menu:'Thực đơn', feedback:'Phản hồi', other:'Khác' };
-const topicColors = { booking:'badge-warning', menu:'badge-blue', feedback:'badge-success', other:'badge-gray' };
-
-/* ===== FILTER ===== */
-function getFiltered() {
-  let data = messages;
-  const search = document.getElementById('searchInput').value.trim().toLowerCase();
-  const topic  = document.getElementById('topicFilter').value;
-  if (currentFilter !== 'all') data = data.filter(m => m.status === currentFilter);
-  if (search) data = data.filter(m =>
-    m.name.toLowerCase().includes(search) ||
-    m.email.toLowerCase().includes(search) ||
-    m.subject.toLowerCase().includes(search) ||
-    m.body.toLowerCase().includes(search)
-  );
-  if (topic) data = data.filter(m => m.topic === topic);
-  return data;
+/* === HELPERS === */
+function fmtDate(d) {
+  var p = d.split('-'); return p[2]+'/'+p[1]+'/'+p[0];
 }
-
-function setFilter(f, btn) {
-  currentFilter = f;
-  currentPage   = 1;
-  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  renderTable();
-}
-
-function clearFilters() {
-  document.getElementById('searchInput').value = '';
-  document.getElementById('topicFilter').value = '';
-  currentFilter = 'all';
-  currentPage   = 1;
-  document.querySelectorAll('.filter-tab').forEach((t,i) => t.classList.toggle('active', i===0));
-  renderTable();
-}
-
-/* ===== STATUS BADGE ===== */
 function statusBadge(s) {
-  if (s === 'new')     return '<span class="badge badge-warning">Chưa đọc</span>';
-  if (s === 'replied') return '<span class="badge badge-success">Đã phản hồi</span>';
+  if (s==='new')     return '<span class="badge badge-warning">Chưa đọc</span>';
+  if (s==='replied') return '<span class="badge badge-success">Đã phản hồi</span>';
   return '<span class="badge badge-gray">Đã đóng</span>';
 }
+function initials(name) {
+  var w = name.trim().split(' ');
+  return (w.length>=2 ? w[w.length-2][0]+w[w.length-1][0] : name.slice(0,2)).toUpperCase();
+}
 
-/* ===== RENDER TABLE ===== */
-function renderTable() {
-  const data  = getFiltered();
-  const total = data.length;
-  const pages = Math.max(1, Math.ceil(total / perPage));
+/* === FILTER === */
+function getFiltered() {
+  var data = msgs.slice();
+  var s = document.getElementById('searchInput').value.trim().toLowerCase();
+  var t = document.getElementById('topicSel').value;
+  if (currentFilter !== 'all') data = data.filter(function(m){ return m.status===currentFilter; });
+  if (t) data = data.filter(function(m){ return m.topic===t; });
+  if (s) data = data.filter(function(m){
+    return m.name.toLowerCase().indexOf(s)>=0 ||
+           m.email.toLowerCase().indexOf(s)>=0 ||
+           m.subject.toLowerCase().indexOf(s)>=0 ||
+           m.body.toLowerCase().indexOf(s)>=0;
+  });
+  return data;
+}
+function setFilter(f, btn) {
+  currentFilter = f; currentPage = 1;
+  document.querySelectorAll('.filter-tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  renderList();
+}
+function clearFilters() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('topicSel').value = '';
+  currentFilter = 'all'; currentPage = 1;
+  document.querySelectorAll('.filter-tab').forEach(function(t,i){ t.classList.toggle('active',i===0); });
+  renderList();
+}
+
+/* === RENDER LIST === */
+function renderList() {
+  var data  = getFiltered();
+  var total = data.length;
+  var pages = Math.max(1, Math.ceil(total/PER_PAGE));
   if (currentPage > pages) currentPage = pages;
-  const slice = data.slice((currentPage-1)*perPage, currentPage*perPage);
+  var slice = data.slice((currentPage-1)*PER_PAGE, currentPage*PER_PAGE);
 
-  const tbody = document.getElementById('tableBody');
-  tbody.innerHTML = slice.length === 0
-    ? `<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--gray-400)">
-        <i class="ti ti-message-off" style="font-size:28px;display:block;margin-bottom:8px"></i>
-        Không tìm thấy tin nhắn nào</td></tr>`
-    : slice.map(m => {
-        const isSelected = m.id === selectedMsgId;
-        return `<tr onclick="selectMsg('${m.id}')" style="${isSelected?'background:var(--green-50);':''}" >
-          <td class="td-id col-id">${m.id}</td>
-          <td class="col-sender">
-            <span class="sender-name">${m.name}${m.status==='new' ? ' <span style=\"display:inline-block;width:7px;height:7px;background:var(--amber-400);border-radius:50%;margin-left:4px;vertical-align:middle\"></span>' : ''}</span>
-            <span class="sender-email">${m.email}</span>
-          </td>
-          <td class="col-topic hide-mobile"><span class="badge ${topicColors[m.topic]}">${topicLabels[m.topic]}</span></td>
-          <td class="col-date hide-mobile" style="color:var(--gray-500);font-size:12px">${fmtDate(m.date)}</td>
-          <td class="col-status">${statusBadge(m.status)}</td>
-          <td class="col-action">
-            <div class="action-btns">
-              <button class="btn-xs btn-green" onclick="event.stopPropagation();selectMsg('${m.id}')"><i class="ti ti-eye" style="font-size:12px"></i></button>
-              <button class="btn-xs btn-red"   onclick="event.stopPropagation();deleteById('${m.id}')"><i class="ti ti-trash" style="font-size:12px"></i></button>
-            </div>
-          </td>
-        </tr>`;
-      }).join('');
-
-  // counts
-  const newC     = messages.filter(m=>m.status==='new').length;
-  const repC     = messages.filter(m=>m.status==='replied').length;
-  const closedC  = messages.filter(m=>m.status==='closed').length;
-  document.getElementById('cntAll').textContent     = messages.length;
-  document.getElementById('cntNew').textContent     = newC;
-  document.getElementById('cntReplied').textContent = repC;
-  document.getElementById('cntClosed').textContent  = closedC;
-  document.getElementById('statTotal').textContent  = messages.length;
-  document.getElementById('statNew').textContent    = newC;
-  document.getElementById('statReplied').textContent= repC;
-  document.getElementById('statClosed').textContent = closedC;
-
-  // pagination
-  const from = total===0 ? 0 : (currentPage-1)*perPage+1;
-  const to   = Math.min(currentPage*perPage, total);
-  document.getElementById('pageInfo').textContent = `Hiển thị ${from}–${to} / ${total} kết quả`;
-
-  const pb = document.getElementById('pageBtns');
-  pb.innerHTML = '';
-  const prev = document.createElement('button');
-  prev.className = 'page-btn';
-  prev.innerHTML = '<i class="ti ti-chevron-left" style="font-size:13px"></i>';
-  prev.disabled  = currentPage === 1;
-  prev.onclick   = () => { currentPage--; renderTable(); };
-  pb.appendChild(prev);
-  for (let i=1; i<=pages; i++) {
-    if (pages > 5 && i > 2 && i < pages-1 && Math.abs(i-currentPage) > 1) {
-      if (i===3) { const d=document.createElement('span'); d.textContent='…'; d.style.cssText='padding:0 4px;color:var(--gray-400);font-size:13px;align-self:center'; pb.appendChild(d); }
-      continue;
+  var html = '';
+  if (slice.length === 0) {
+    html = '<div style="text-align:center;padding:36px 20px;color:var(--gray-400)">'
+         + '<i class="ti ti-message-off" style="font-size:28px;display:block;margin-bottom:8px"></i>'
+         + 'Không tìm thấy tin nhắn nào</div>';
+  } else {
+    for (var i=0; i<slice.length; i++) {
+      var m = slice[i];
+      var sel = m.id === selectedId ? ' selected' : '';
+      var unreadCls = m.status==='new' ? ' unread' : '';
+      var dot = m.status==='new'
+        ? '<span style="width:7px;height:7px;background:var(--amber-400);border-radius:50%;flex-shrink:0;display:inline-block;margin-top:3px"></span>'
+        : '<span style="width:7px;height:7px;flex-shrink:0;display:inline-block;"></span>';
+      html += '<div class="msg-row'+sel+unreadCls+'" onclick="selectMsg('+m.id+')">';
+      html += '<div class="msg-row-inner">';
+      html += dot;
+      html += '<div class="msg-row-left">';
+      html += '<div class="msg-row-name">'+m.name+'</div>';
+      html += '<div class="msg-row-email">'+m.subject+'</div>';
+      html += '</div>';
+      html += '<div class="msg-row-right">';
+      html += '<div class="msg-row-date">'+fmtDate(m.date)+'</div>';
+      html += '<div style="display:flex;gap:4px;align-items:center">';
+      html += '<span class="topic-chip '+TOPIC_CLASS[m.topic]+'">'+TOPIC_LABEL[m.topic]+'</span>';
+      html += '</div>';
+      html += '<div class="msg-row-actions">';
+      html += '<button class="btn-xs btn-red" onclick="event.stopPropagation();delMsg('+m.id+')" title="Xóa"><i class="ti ti-trash" style="font-size:11px"></i></button>';
+      html += '</div>';
+      html += '</div>';
+      html += '</div></div>';
     }
-    const btn = document.createElement('button');
-    btn.className = 'page-btn' + (i===currentPage?' active':'');
-    btn.textContent = i;
-    btn.onclick = ((p)=>()=>{ currentPage=p; renderTable(); })(i);
-    pb.appendChild(btn);
   }
-  const next = document.createElement('button');
-  next.className = 'page-btn';
-  next.innerHTML = '<i class="ti ti-chevron-right" style="font-size:13px"></i>';
-  next.disabled  = currentPage === pages;
-  next.onclick   = () => { currentPage++; renderTable(); };
-  pb.appendChild(next);
+  document.getElementById('msgList').innerHTML = html;
+
+  /* counts */
+  var nr=0, rep=0, cl=0;
+  msgs.forEach(function(m){
+    if(m.status==='new') nr++;
+    else if(m.status==='replied') rep++;
+    else cl++;
+  });
+  document.getElementById('statTotal').textContent   = msgs.length;
+  document.getElementById('statUnread').textContent  = nr;
+  document.getElementById('statReplied').textContent = rep;
+  document.getElementById('statClosed').textContent  = cl;
+  document.getElementById('cntAll').textContent      = msgs.length;
+  document.getElementById('cntNew').textContent      = nr;
+  document.getElementById('cntReplied').textContent  = rep;
+  document.getElementById('cntClosed').textContent   = cl;
+
+  /* pagination */
+  var from = total===0 ? 0 : (currentPage-1)*PER_PAGE+1;
+  var to   = Math.min(currentPage*PER_PAGE, total);
+  document.getElementById('pageInfo').textContent = 'Hiển thị '+from+'–'+to+' / '+total+' kết quả';
+
+  var pb = document.getElementById('pageBtns');
+  pb.innerHTML = '';
+  var prev = document.createElement('button');
+  prev.className = 'page-btn'; prev.disabled = currentPage===1;
+  prev.innerHTML = '<i class="ti ti-chevron-left" style="font-size:12px"></i>';
+  prev.onclick = function(){ currentPage--; renderList(); };
+  pb.appendChild(prev);
+  for (var p=1; p<=pages; p++) {
+    (function(pg){
+      var btn = document.createElement('button');
+      btn.className = 'page-btn'+(pg===currentPage?' active':'');
+      btn.textContent = pg;
+      btn.onclick = function(){ currentPage=pg; renderList(); };
+      pb.appendChild(btn);
+    })(p);
+  }
+  var nxt = document.createElement('button');
+  nxt.className = 'page-btn'; nxt.disabled = currentPage===pages;
+  nxt.innerHTML = '<i class="ti ti-chevron-right" style="font-size:12px"></i>';
+  nxt.onclick = function(){ currentPage++; renderList(); };
+  pb.appendChild(nxt);
 }
 
-function fmtDate(d) {
-  const [y,m,day] = d.split('-');
-  return day+'/'+m+'/'+y;
-}
-
-/* ===== SELECT MSG ===== */
+/* === SELECT MSG === */
 function selectMsg(id) {
-  const m = messages.find(x=>x.id===id);
+  var m = null;
+  for (var i=0; i<msgs.length; i++) { if(msgs[i].id===id){ m=msgs[i]; break; } }
   if (!m) return;
-  selectedMsgId = id;
-  if (m.status === 'new') m.status = 'replied'; // mark as read
+  selectedId = id;
+  if (m.status==='new') { m.status='replied'; }
 
   document.getElementById('detailEmpty').style.display   = 'none';
   document.getElementById('detailContent').style.display = '';
 
-  const initials = m.name.split(' ').map(w=>w[0]).slice(-2).join('').toUpperCase();
-  document.getElementById('dAvatar').textContent    = initials;
-  document.getElementById('dName').textContent      = m.name;
-  document.getElementById('dMeta').textContent      = m.email + ' · ' + m.phone + ' · ' + fmtDate(m.date);
-  document.getElementById('dSubject').textContent   = m.subject;
-  document.getElementById('dTopicBadge').innerHTML  = `<span class="badge ${topicColors[m.topic]}">${topicLabels[m.topic]}</span>`;
+  document.getElementById('dAvatar').textContent  = initials(m.name);
+  document.getElementById('dName').textContent    = m.name;
+  document.getElementById('dMeta').textContent    = m.email + ' · ' + m.phone + ' · ' + fmtDate(m.date);
+  document.getElementById('dSubject').textContent = m.subject;
+  document.getElementById('dTopicChip').innerHTML = '<span class="topic-chip '+TOPIC_CLASS[m.topic]+'">'+TOPIC_LABEL[m.topic]+'</span>';
   document.getElementById('dStatusBadge').innerHTML = statusBadge(m.status);
-  document.getElementById('dBody').textContent      = m.body;
-  document.getElementById('replyText').value        = '';
+  document.getElementById('dBody').textContent    = m.body;
+  document.getElementById('replyTxt').value       = '';
 
-  renderTable();
+  renderList();
 
-  // On mobile, scroll to detail
-  if (window.innerWidth <= 1024) {
-    document.getElementById('msgDetailCard').scrollIntoView({ behavior:'smooth', block:'start' });
+  if (window.innerWidth <= 1060) {
+    document.getElementById('detailCard').scrollIntoView({behavior:'smooth', block:'start'});
   }
 }
 
-function sendReply() {
-  const text = document.getElementById('replyText').value.trim();
-  if (!text) { showToast('Vui lòng nhập nội dung phản hồi!'); return; }
-  const m = messages.find(x=>x.id===selectedMsgId);
-  if (m) { m.status = 'replied'; }
-  document.getElementById('replyText').value = '';
+/* === ACTIONS === */
+function doReply() {
+  var txt = document.getElementById('replyTxt').value.trim();
+  if (!txt) { showToast('Vui lòng nhập nội dung phản hồi!'); return; }
+  var m = null;
+  for (var i=0; i<msgs.length; i++) { if(msgs[i].id===selectedId){ m=msgs[i]; break; } }
+  if (m) { m.status='replied'; }
+  document.getElementById('replyTxt').value = '';
   document.getElementById('dStatusBadge').innerHTML = statusBadge('replied');
   showToast('Đã gửi phản hồi thành công!');
-  renderTable();
+  renderList();
 }
-
-function closeMsg() {
-  const m = messages.find(x=>x.id===selectedMsgId);
-  if (m) { m.status = 'closed'; }
+function doClose() {
+  var m = null;
+  for (var i=0; i<msgs.length; i++) { if(msgs[i].id===selectedId){ m=msgs[i]; break; } }
+  if (m) { m.status='closed'; }
   document.getElementById('dStatusBadge').innerHTML = statusBadge('closed');
   showToast('Đã đóng tin nhắn.');
-  renderTable();
+  renderList();
 }
-
-function deleteMsg() {
-  deleteById(selectedMsgId);
-  document.getElementById('detailEmpty').style.display   = '';
-  document.getElementById('detailContent').style.display = 'none';
-  selectedMsgId = null;
-}
-
-function deleteById(id) {
-  messages = messages.filter(x=>x.id!==id);
-  if (selectedMsgId === id) {
+function doDelete() { delMsg(selectedId); }
+function delMsg(id) {
+  msgs = msgs.filter(function(m){ return m.id!==id; });
+  if (selectedId===id) {
+    selectedId = null;
     document.getElementById('detailEmpty').style.display   = '';
     document.getElementById('detailContent').style.display = 'none';
-    selectedMsgId = null;
   }
-  renderTable();
+  renderList();
   showToast('Đã xóa tin nhắn.');
 }
 
-/* ===== CONTACT INFO ===== */
-function openEditInfoModal() {
-  document.getElementById('editAddress').value = document.getElementById('infoAddress').textContent;
-  document.getElementById('editPhone').value   = document.getElementById('infoPhone').textContent;
-  document.getElementById('editEmail').value   = document.getElementById('infoEmail').textContent;
-  document.getElementById('editHours').value   = document.getElementById('infoHours').textContent;
-  document.getElementById('editFb').value      = document.getElementById('infoFb').textContent;
-  document.getElementById('editIg').value      = document.getElementById('infoIg').textContent;
+/* === EDIT INFO === */
+function openEditInfo() {
+  document.getElementById('eAddress').value = document.getElementById('iAddress').textContent;
+  document.getElementById('ePhone').value   = document.getElementById('iPhone').textContent;
+  document.getElementById('eEmail').value   = document.getElementById('iEmail').textContent;
+  document.getElementById('eHours').value   = document.getElementById('iHours').textContent;
+  document.getElementById('eFb').value      = document.getElementById('iFb').textContent;
+  document.getElementById('eIg').value      = document.getElementById('iIg').textContent;
   openModal('editInfoModal');
 }
-
-function saveContactInfo() {
-  const addr  = document.getElementById('editAddress').value.trim();
-  const phone = document.getElementById('editPhone').value.trim();
-  const email = document.getElementById('editEmail').value.trim();
-  const hours = document.getElementById('editHours').value.trim();
-  const fb    = document.getElementById('editFb').value.trim();
-  const ig    = document.getElementById('editIg').value.trim();
-  if (!addr || !phone || !email) { showToast('Vui lòng điền đầy đủ thông tin!'); return; }
-  document.getElementById('infoAddress').textContent = addr;
-  document.getElementById('infoPhone').textContent   = phone;
-  document.getElementById('infoPhone').href          = 'tel:' + phone.replace(/\s/g,'');
-  document.getElementById('infoEmail').textContent   = email;
-  document.getElementById('infoEmail').href          = 'mailto:' + email;
-  document.getElementById('infoHours').textContent   = hours;
-  document.getElementById('infoFb').textContent      = fb;
-  document.getElementById('infoIg').textContent      = ig;
+function saveInfo() {
+  var addr  = document.getElementById('eAddress').value.trim();
+  var phone = document.getElementById('ePhone').value.trim();
+  var email = document.getElementById('eEmail').value.trim();
+  var hours = document.getElementById('eHours').value.trim();
+  var fb    = document.getElementById('eFb').value.trim();
+  var ig    = document.getElementById('eIg').value.trim();
+  if (!addr||!phone||!email) { showToast('Vui lòng điền đầy đủ!'); return; }
+  document.getElementById('iAddress').textContent = addr;
+  document.getElementById('iPhone').textContent   = phone;
+  document.getElementById('iEmail').textContent   = email;
+  document.getElementById('iHours').textContent   = hours;
+  document.getElementById('iFb').textContent      = fb;
+  document.getElementById('iIg').textContent      = ig;
   closeModal('editInfoModal');
   showToast('Đã cập nhật thông tin liên hệ!');
 }
 
-/* ===== MODAL UTILS ===== */
+/* === MODAL === */
 function openModal(id)  { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-document.querySelectorAll('.modal-backdrop').forEach(m => {
-  m.addEventListener('click', e => { if (e.target===m) m.classList.remove('open'); });
+document.querySelectorAll('.modal-backdrop').forEach(function(m){
+  m.addEventListener('click', function(e){ if(e.target===m) m.classList.remove('open'); });
 });
 
-/* ===== SIDEBAR ===== */
+/* === SIDEBAR === */
 function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('open');
   document.getElementById('overlay').classList.toggle('open');
@@ -818,16 +725,16 @@ function closeSidebar() {
   document.getElementById('overlay').classList.remove('open');
 }
 
-/* ===== TOAST ===== */
+/* === TOAST === */
 function showToast(msg) {
-  const el = document.getElementById('toastEl');
+  var el = document.getElementById('toastEl');
   document.getElementById('toastMsg').textContent = msg;
   el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), 2800);
+  setTimeout(function(){ el.classList.remove('show'); }, 2800);
 }
 
-/* ===== INIT ===== */
-renderTable();
+/* === INIT === */
+renderList();
 </script>
 </body>
 </html>
